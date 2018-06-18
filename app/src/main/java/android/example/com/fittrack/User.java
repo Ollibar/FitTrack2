@@ -59,17 +59,12 @@ public class User extends AppCompatActivity
 
     private void createList() {
         //DB Curser
-        Cursor data = benutzerData.getData();
+        Cursor data = benutzerData.getTableData( "Benutzer" );
         ArrayList<String> listData_name = new ArrayList<>(  );
-
         //hole daten
         while(data.moveToNext()){
             listData_name.add( data.getString(1)+ "   "+ data.getInt(2)+" Jahre" +"   " + data.getInt(3) + " Kg");
-
-
         }
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_user_item_3,listData_name);
         //Configure the list view
         list = (ListView) findViewById(R.id._userlist);

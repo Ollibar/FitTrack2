@@ -60,12 +60,13 @@ public class MainActivity extends AppCompatActivity
 
         //hier müssen wir die datenübergeben bzw. eine neue activity erschaffen für den
         //benutzer
-        Benutzer benutzer= benutzerData.createBenutzer("king",60
-                ,20);
+        Benutzer benutzer= benutzerData.createBenutzer("king",60,20);
         Log.d(LOG,"folgender Eintrag in der Datenbank");
         Log.d(LOG,"Inhalt: "+benutzer.toString());
 
-
+        benutzer= benutzerData.createBenutzer("kong",60,20);
+        benutzer= benutzerData.createBenutzer("ding",60,20);
+        benutzer= benutzerData.createBenutzer("dong",60,20);
         Log.d(LOG, "Die Datenquelle wird geschlossen.");
         benutzerData.close();
     }

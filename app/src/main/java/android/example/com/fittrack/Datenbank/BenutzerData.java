@@ -82,11 +82,14 @@ public class BenutzerData {
         Log.d(LOG,"Inhalt wird gelöscht: "+benutzer.toString());
     }
 
-    public Cursor getData(){
+    public Cursor getTableData(String table){
      open();
-     String query = "SELECT * FROM Benutzer;";
+     String query = "SELECT * FROM "+ table +";";
      Cursor data = database.rawQuery( query,null );
+    // close();
      return data;
     }
 
-}
+    }
+
+
