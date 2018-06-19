@@ -15,8 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,7 +55,38 @@ public class User extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener( this );
 
         benutzerData = new BenutzerData( this );
+
         createList();
+
+        list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+                String name = benutzerData.getUserNamebyID( position+1 );
+                int age = benutzerData.getUserAgebyID( position+1 );
+                int weight = benutzerData.getUserWeightbyID( position+1 );
+                //openUserForm(zahl);
+
+                Toast.makeText(getApplicationContext(),
+                        "Click ListItem Number " + position+ "  name: "+ name +" alter " +age +"gewicht "+weight, Toast.LENGTH_LONG)
+                        .show();
+
+
+
+
+
+            }
+        } );
+
+    }
+
+    private void openUserForm(long id){
+
+        Toast.makeText( getApplicationContext(),"Test",Toast.LENGTH_LONG );
+
+
 
     }
 

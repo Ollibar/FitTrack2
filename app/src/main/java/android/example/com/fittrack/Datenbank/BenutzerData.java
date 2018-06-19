@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.example.com.fittrack.TabellenObjekte.Benutzer;
 import android.util.Log;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
 
 public class BenutzerData {
 
@@ -86,8 +90,50 @@ public class BenutzerData {
      open();
      String query = "SELECT * FROM "+ table +";";
      Cursor data = database.rawQuery( query,null );
-    // close();
+
      return data;
+    }
+
+    public String getUserNamebyID (long id){
+
+        String username;
+
+        open();
+        String query = "SELECT * FROM Benutzer WHERE _id=="+id+";";
+        Cursor data = database.rawQuery( query,null );
+        data.moveToFirst();
+        username = data.getString( data.getColumnIndex( "Benutzername" ) );
+        data.close();
+
+
+
+        return username;
+
+
+    }
+    public int getUserAgebyID(long id){
+        int age;
+        String query = "SELECT * FROM Benutzer WHERE _id=="+id+";";
+        Cursor data = database.rawQuery( query,null );
+        data.moveToFirst();
+        age = Integer.parseInt( data.getString( data.getColumnIndex( "_Alter" ) ) );
+        data.close();
+        return age;
+    }
+    public int getUserWeightbyID(long id){
+        int gewicht;
+        String query = "SELECT * FROM Benutzer WHERE _id=="+id+";";
+        Cursor data = database.rawQuery( query,null );
+        data.moveToFirst();
+        gewicht = Integer.parseInt( data.getString( data.getColumnIndex( "Gewicht" ) ) );
+        data.close();
+        return gewicht;
+    }
+    public Cursor query (String query){
+        Cursor data = database.rawQuery( query,null );
+        data.close();
+        return data;
+
     }
 
     }

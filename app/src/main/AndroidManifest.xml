@@ -60,9 +60,17 @@
             android:label="Benutzer verwalten"
             android:parentActivityName=".User" />
         <activity
+            android:name=".form_target"
+            android:label="Benutzer verwalten"
+            android:parentActivityName=".Target" />
+        <activity
             android:name=".form_station"
             android:label="Gerät verwalten"
             android:parentActivityName=".Station" />
+        <activity
+            android:name=".form_training"
+            android:label="Gerät verwalten"
+            android:parentActivityName=".Training" />
         <activity
             android:name=".Statistics"
             android:label="@string/title_activity_statistics"

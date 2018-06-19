@@ -1,9 +1,10 @@
 package android.example.com.fittrack;
 
+import android.content.Context;
 import android.content.Intent;
+import android.example.com.fittrack.Datenbank.BenutzerData;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -112,5 +113,8 @@ public class Station extends AppCompatActivity
     public void insertNewStation(View view) {
         Intent i = new Intent(this,form_station.class);
         startActivity( i );
+    }
+
+    public void erzeugeTestStation(View view) {
     }
 }

@@ -1,5 +1,6 @@
 package android.example.com.fittrack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -80,17 +81,24 @@ public class Statistics extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        if (id == R.id.nav_home) {
+            Intent i = new Intent(this,MainActivity.class);
+            startActivity( i );
+        } else if (id == R.id.nav_user) {
+            Intent i = new Intent(this,User.class);
+            startActivity( i );
+        } else if (id == R.id.nav_station) {
+            Intent i = new Intent(this,Station.class);
+            startActivity( i );
+        } else if (id == R.id.nav_training) {
+            Intent i = new Intent(this,Training.class);
+            startActivity( i );
+        } else if (id == R.id.nav_target) {
+            Intent i = new Intent(this,Target.class);
+            startActivity( i );
+        } else if (id == R.id.nav_statistics) {
+            Intent i = new Intent(this,Statistics.class);
+            startActivity( i );
 
         }
 

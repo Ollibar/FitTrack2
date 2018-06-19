@@ -16,9 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static String activeUser = null;
+
 
     private static final String LOG = MainActivity.class.getSimpleName();
     private BenutzerData benutzerData;
@@ -51,6 +55,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void updateUser (String username){
+        activeUser = username;
+        TextView tV = (TextView) findViewById( R.id.nav_user_name );
+        tV.setText( username );
+    }
 
     @Override
     public void onBackPressed() {
@@ -105,7 +114,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_target) {
             Intent i = new Intent(this,Target.class);
             startActivity( i );
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_statistics) {
             Intent i = new Intent(this,Statistics.class);
             startActivity( i );
 
@@ -128,6 +137,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void erzeugeTestStation(View view) {
+
 
 
     }

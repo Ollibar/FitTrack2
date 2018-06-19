@@ -28,8 +28,7 @@ public class Target extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
-                        .setAction( "Action", null ).show();
+                openTargetForm();
             }
         } );
 
@@ -41,6 +40,11 @@ public class Target extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+    }
+
+    private void openTargetForm() {
+        Intent i = new Intent(this,form_target.class);
+        startActivity( i );
     }
 
     @Override
