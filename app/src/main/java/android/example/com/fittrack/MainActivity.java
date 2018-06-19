@@ -48,28 +48,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
-        // Einfügen von Beispieldaten
-        //erzeugeTestNutzer();
+
     }
 
-    private void erzeugeTestNutzer() {
-        benutzerData = new BenutzerData(this);
-
-        Log.d(LOG, "Die Datenquelle wird geöffnet.");
-        benutzerData.open();
-
-        //hier müssen wir die datenübergeben bzw. eine neue activity erschaffen für den
-        //benutzer
-        Benutzer benutzer= benutzerData.createBenutzer("king",60,20);
-        Log.d(LOG,"folgender Eintrag in der Datenbank");
-        Log.d(LOG,"Inhalt: "+benutzer.toString());
-
-        benutzer= benutzerData.createBenutzer("kong",60,20);
-        benutzer= benutzerData.createBenutzer("ding",60,20);
-        benutzer= benutzerData.createBenutzer("dong",60,20);
-        Log.d(LOG, "Die Datenquelle wird geschlossen.");
-        benutzerData.close();
-    }
 
     @Override
     public void onBackPressed() {
@@ -125,11 +106,29 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this,Target.class);
             startActivity( i );
         } else if (id == R.id.nav_send) {
+            Intent i = new Intent(this,Statistics.class);
+            startActivity( i );
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
+    }
+
+    public void erzeugeTestNutzer(View view) {
+        benutzerData = new BenutzerData(this);
+
+        benutzerData.open();
+        Benutzer benutzer= benutzerData.createBenutzer("king",60,20);
+        benutzer= benutzerData.createBenutzer("kong",60,20);
+        benutzer= benutzerData.createBenutzer("ding",60,20);
+        benutzer= benutzerData.createBenutzer("dong",60,20);
+        benutzerData.close();
+    }
+
+    public void erzeugeTestStation(View view) {
+
+
     }
 }

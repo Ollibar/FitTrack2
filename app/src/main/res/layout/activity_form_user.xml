@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".form_user">
+
+    <EditText
+        android:id="@+id/form_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Benutzername" />
+
+    <EditText
+        android:id="@+id/form_user_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alter"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/form_user_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gewicht"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        android:onClick="insertUserIntoDB"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abbrechen" />
+
+</LinearLayout>
+

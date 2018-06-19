@@ -90,4 +90,5 @@ public class Training {
                 +geschwindigkeit+" Datum: "+datum;
         return s;
     }
+
 }

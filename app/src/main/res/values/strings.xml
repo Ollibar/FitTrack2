@@ -10,4 +10,5 @@
     <string name="title_activity_station">Station</string>
     <string name="title_activity_training">Training</string>
     <string name="title_activity_target">Target</string>
+    <string name="title_activity_statistics">statistics</string>
 </resources>

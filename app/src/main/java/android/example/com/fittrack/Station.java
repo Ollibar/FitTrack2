@@ -28,8 +28,7 @@ public class Station extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
-                        .setAction( "Action", null ).show();
+                insertNewStation(  );
             }
         } );
 
@@ -41,6 +40,11 @@ public class Station extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+    }
+
+    private void insertNewStation() {
+        Intent i = new Intent(this,form_station.class);
+        startActivity( i );
     }
 
     @Override
@@ -103,5 +107,10 @@ public class Station extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
+    }
+
+    public void insertNewStation(View view) {
+        Intent i = new Intent(this,form_station.class);
+        startActivity( i );
     }
 }

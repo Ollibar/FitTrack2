@@ -1,8 +1,5 @@
 package android.example.com.fittrack;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.example.com.fittrack.Datenbank.BenutzerData;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,22 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-
-public class User extends AppCompatActivity
+public class Statistics extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private BenutzerData benutzerData;
-    private ListView list;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_user );
+        setContentView( R.layout.activity_statistics );
         Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
 
@@ -38,7 +27,8 @@ public class User extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openUserForm();
+                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
             }
         } );
 
@@ -50,29 +40,6 @@ public class User extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
-
-        benutzerData = new BenutzerData( this );
-        createList();
-
-    }
-
-    private void openUserForm() {
-        Intent i = new Intent(this,form_user.class);
-        startActivity( i );
-    }
-
-    private void createList() {
-        //DB Curser
-        Cursor data = benutzerData.getTableData( "Benutzer" );
-        ArrayList<String> listData_name = new ArrayList<>(  );
-        //hole daten
-        while(data.moveToNext()){
-            listData_name.add( data.getString(1)+ "   "+ data.getInt(3)+" Jahre" +"   " + data.getInt(2) + " Kg");
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_user_item_3,listData_name);
-        //Configure the list view
-        list = (ListView) findViewById(R.id._userlist);
-        list.setAdapter( adapter );
     }
 
     @Override
@@ -88,7 +55,7 @@ public class User extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.user, menu );
+        getMenuInflater().inflate( R.menu.statistics, menu );
         return true;
     }
 
@@ -113,21 +80,16 @@ public class User extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            Intent i = new Intent(this,MainActivity.class);
-            startActivity( i );
-        } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
-            startActivity( i );
-        } else if (id == R.id.nav_station) {
-            Intent i = new Intent(this,Station.class);
-            startActivity( i );
-        } else if (id == R.id.nav_training) {
-            Intent i = new Intent(this,Training.class);
-            startActivity( i );
-        } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
-            startActivity( i );
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
         } else if (id == R.id.nav_send) {
 
         }
