@@ -11,6 +11,11 @@ public class ModelStation {
 		this.station_name = station_name;
 		this.station_typ = station_typ;
 	}
+	public ModelStation(String station_name,int station_typ) {
+		//this.station_id = station_id;
+		this.station_name = station_name;
+		this.station_typ = station_typ;
+	}
 	public void setStation_id(int station_id) {
 		this.station_id = station_id;
 	}

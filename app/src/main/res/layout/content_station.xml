@@ -12,5 +12,8 @@
     <ListView
         android:id="@+id/stationlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:divider="#000000"
+        android:dividerHeight="2dp"/>
 </LinearLayout>

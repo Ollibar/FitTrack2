@@ -7,6 +7,12 @@ public class ModelBenutzer {
 	int benutzer_gewicht;
 
 	public ModelBenutzer() {}
+    public ModelBenutzer(String benutzer_name,int benutzer_alter,int benutzer_gewicht) {
+
+        this.benutzer_name = benutzer_name;
+        this.benutzer_alter = benutzer_alter;
+        this.benutzer_gewicht = benutzer_gewicht;
+    }
 	public ModelBenutzer(int benutzer_id,String benutzer_name,int benutzer_alter,int benutzer_gewicht) {
 		this.benutzer_id = benutzer_id;
 		this.benutzer_name = benutzer_name;

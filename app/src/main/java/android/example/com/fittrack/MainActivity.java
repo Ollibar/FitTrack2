@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.example.com.fittrack.Datenbank.BenutzerData;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
+import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.TabellenObjekte.Benutzer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -55,17 +56,23 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
-        insertTestData();
+       // insertTestData();
 
 
     }
-
+//Test
     private void insertTestData() {
-        ModelBenutzer user = new ModelBenutzer(1,"peter",20,120);
-        db.createBenutzer( user );
+        //ModelBenutzer user = new ModelBenutzer( "King",20,120);
+       // db.createBenutzer( user );
+        ModelStation station =new ModelStation( "Hantelbank",1 );
+        db.createStation( station );
+        station =new ModelStation( "Beinpresse",1 );
+        db.createStation( station );
+        station =new ModelStation( "Brustpresse",1 );
+        db.createStation( station );
 
     }
-
+//test
     public void updateUser (String username){
         activeUser = username;
         TextView tV = (TextView) findViewById( R.id.nav_user_name );

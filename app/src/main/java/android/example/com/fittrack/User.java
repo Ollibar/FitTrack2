@@ -3,6 +3,8 @@ package android.example.com.fittrack;
 import android.content.Intent;
 import android.database.Cursor;
 import android.example.com.fittrack.Datenbank.BenutzerData;
+import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +30,8 @@ public class User extends AppCompatActivity
 
     private BenutzerData benutzerData;
     private ListView list;
+
+    DatabaseHelper db = new DatabaseHelper( this );
 
 
     @Override
@@ -96,6 +100,7 @@ public class User extends AppCompatActivity
     }
 
     private void createList() {
+
         //DB Curser
         Cursor data = benutzerData.getTableData( "Benutzer" );
         ArrayList<String> listData_name = new ArrayList<>(  );
@@ -103,7 +108,14 @@ public class User extends AppCompatActivity
         while(data.moveToNext()){
             listData_name.add( data.getString(1)+ "   "+ data.getInt(3)+" Jahre" +"   " + data.getInt(2) + " Kg");
         }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_user_item_3,listData_name);
+
+        ArrayList<ModelBenutzer> listData = new ArrayList<>(  );
+        listData = db.getAllBenutzer();
+
+        ArrayAdapter<ModelBenutzer> arrayAdapter = new ArrayAdapter<>( this, R.layout.list_user_item, listData );
+
         //Configure the list view
         list = (ListView) findViewById(R.id._userlist);
         list.setAdapter( adapter );

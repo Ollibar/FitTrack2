@@ -3,6 +3,8 @@ package android.example.com.fittrack;
 import android.content.Context;
 import android.content.Intent;
 import android.example.com.fittrack.Datenbank.BenutzerData;
+import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelStation;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -14,9 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import ListAdapter.StationListAdapter;
 
 public class Station extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    DatabaseHelper db = new DatabaseHelper( this );
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,21 @@ public class Station extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+
+        erzeugeStationListe();
+    }
+
+    private void erzeugeStationListe() {
+        ArrayList<ModelStation> stationList = new ArrayList<ModelStation>();
+        stationList = db.getAllStation();
+        lv = findViewById(R.id.stationlist);
+        StationListAdapter sla =new StationListAdapter( getApplicationContext(),stationList );
+
+        lv.setAdapter( sla );
+
+
+
+
     }
 
     private void insertNewStation() {

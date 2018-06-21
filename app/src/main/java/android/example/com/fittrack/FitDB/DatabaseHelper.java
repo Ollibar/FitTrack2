@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	")";
 
 	private static final String CREATE_TABLE_STATION = "CREATE TABLE station (" + 
-	"station_id INTEGER PRIMARY KEY," + 
+	"station_id INTEGER PRIMARY KEY," +
 	"station_name VARCHAR," + 
 	"station_typ INTEGER	" + 
 	")";
@@ -107,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("benutzer_id", benutzer.getBenutzer_id());
+		//values.put("benutzer_id", benutzer.getBenutzer_id());
 		values.put("benutzer_name", benutzer.getBenutzer_name());
 		values.put("benutzer_alter", benutzer.getBenutzer_alter());
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
@@ -311,7 +311,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("station_id", station.getStation_id());
 		values.put("station_name", station.getStation_name());
 		values.put("station_typ", station.getStation_typ());
 		return db.insertOrThrow("station", null, values);
