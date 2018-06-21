@@ -2,6 +2,8 @@ package android.example.com.fittrack;
 
 import android.content.Intent;
 import android.example.com.fittrack.Datenbank.BenutzerData;
+import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.TabellenObjekte.Benutzer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String LOG = MainActivity.class.getSimpleName();
     private BenutzerData benutzerData;
+    private DatabaseHelper db = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
+        insertTestData();
+
+
+    }
+
+    private void insertTestData() {
+        ModelBenutzer user = new ModelBenutzer(1,"peter",20,120);
+        db.createBenutzer( user );
 
     }
 
