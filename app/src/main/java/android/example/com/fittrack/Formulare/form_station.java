@@ -31,5 +31,6 @@ public class form_station extends AppCompatActivity {
 
         ModelStation station =new ModelStation( statName,typvalue );
         db.createStation( station );
+        //test
     }
 }
