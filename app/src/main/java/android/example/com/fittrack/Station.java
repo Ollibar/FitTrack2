@@ -1,6 +1,5 @@
 package android.example.com.fittrack;
 
-import android.content.Context;
 import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelStation;
@@ -15,13 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ListAdapter.StationListAdapter;
+import android.example.com.fittrack.ListAdapter.StationListAdapter;
 
 public class Station extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

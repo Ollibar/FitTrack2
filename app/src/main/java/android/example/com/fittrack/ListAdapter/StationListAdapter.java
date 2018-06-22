@@ -2,7 +2,7 @@
 
 // angelehnt an http://www.vogella.com/tutorials/AndroidListView/article.html#adapterown
 
-package ListAdapter;
+package android.example.com.fittrack.ListAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

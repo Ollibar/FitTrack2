@@ -5,7 +5,6 @@ import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +18,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ListAdapter.TrainZielListAdapter;
+import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
 
 public class Target extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

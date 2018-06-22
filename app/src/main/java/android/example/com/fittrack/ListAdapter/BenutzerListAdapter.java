@@ -1,4 +1,4 @@
-package ListAdapter;
+package android.example.com.fittrack.ListAdapter;
 
 
 import android.content.Context;
