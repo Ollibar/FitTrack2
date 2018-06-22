@@ -2,10 +2,9 @@ package android.example.com.fittrack;
 
 
 import android.content.Intent;
-import android.example.com.fittrack.Datenbank.BenutzerData;
+
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
-import android.example.com.fittrack.TabellenObjekte.Benutzer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;

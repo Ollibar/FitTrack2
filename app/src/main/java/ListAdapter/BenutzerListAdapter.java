@@ -55,7 +55,7 @@ public class BenutzerListAdapter extends BaseAdapter {
 
 
 
-//test  
+//test
         return row;
     }
 }

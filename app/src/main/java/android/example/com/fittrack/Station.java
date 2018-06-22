@@ -2,7 +2,6 @@ package android.example.com.fittrack;
 
 import android.content.Context;
 import android.content.Intent;
-import android.example.com.fittrack.Datenbank.BenutzerData;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.os.Bundle;
