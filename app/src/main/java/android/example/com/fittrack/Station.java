@@ -57,14 +57,11 @@ public class Station extends AppCompatActivity
     }
 
     private void erzeugeStationListe() {
-        ArrayList<ModelStation> stationList = new ArrayList<ModelStation>();
-        stationList = db.getAllStation();
+        ArrayList<ModelStation> stationList = db.getAllStation();
         lv = findViewById(R.id.stationlist);
         StationListAdapter sla =new StationListAdapter( getApplicationContext(),stationList );
 
         lv.setAdapter( sla );
-
-
 
 
     }

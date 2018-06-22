@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	")";
 
 	private static final String CREATE_TABLE_TRAIN_ZIEL = "CREATE TABLE train_ziel (" + 
-	"train_ziel_id INTEGER," + 
+	"train_ziel_id INTEGER PRIMARY KEY," +
 	"train_ziel_benutzer_id INTEGER," + 
 	"train_ziel_station_id INTEGER," + 
 	"train_ziel_soll_geschwindigkeit INTEGER," + 
@@ -148,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public ArrayList<ModelBenutzer> getAllBenutzer() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		ArrayList<ModelBenutzer> benutzerList = new ArrayList<ModelBenutzer>();
+		ArrayList<ModelBenutzer> benutzerList = new ArrayList<>();
 		String selectQuery = "SELECT * FROM benutzer";
 		Cursor c = db.rawQuery(selectQuery, null);
 		if (c.moveToFirst()) {

@@ -24,72 +24,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import ListAdapter.UserAdapter;
 
 public class User extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private BenutzerData benutzerData;
-    private ListView list;
 
-    DatabaseHelper db = new DatabaseHelper( this );
+
+    private DatabaseHelper db = new DatabaseHelper( this );
+    private ListView listView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_user );
-        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
-        setSupportActionBar( toolbar );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById( R.id.fab );
-        fab.setOnClickListener( new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openUserForm();
             }
-        } );
+        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
-        drawer.addDrawerListener( toggle );
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
-        navigationView.setNavigationItemSelectedListener( this );
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        benutzerData = new BenutzerData( this );
-
-        createList();
-
-        list.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-
-                String name = benutzerData.getUserNamebyID( position+1 );
-                int age = benutzerData.getUserAgebyID( position+1 );
-                int weight = benutzerData.getUserWeightbyID( position+1 );
-                //openUserForm(zahl);
-
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position+ "  name: "+ name +" alter " +age +"gewicht "+weight, Toast.LENGTH_LONG)
-                        .show();
-
-
-
-
-
-            }
-        } );
-
-    }
-
-    private void openUserForm(long id){
-
-        Toast.makeText( getApplicationContext(),"Test",Toast.LENGTH_LONG );
-
+        showAllListBenutzer();
 
 
     }
@@ -99,26 +71,12 @@ public class User extends AppCompatActivity
         startActivity( i );
     }
 
-    private void createList() {
+    public void showAllListBenutzer(){
 
-        //DB Curser
-        Cursor data = benutzerData.getTableData( "Benutzer" );
-        ArrayList<String> listData_name = new ArrayList<>(  );
-        //hole daten
-        while(data.moveToNext()){
-            listData_name.add( data.getString(1)+ "   "+ data.getInt(3)+" Jahre" +"   " + data.getInt(2) + " Kg");
-        }
+        UserAdapter adapter =new UserAdapter(this,db.getAllBenutzer());
+        listView = (ListView)findViewById(R.id._userlist);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_user_item_3,listData_name);
-
-        ArrayList<ModelBenutzer> listData = new ArrayList<>(  );
-        listData = db.getAllBenutzer();
-
-        ArrayAdapter<ModelBenutzer> arrayAdapter = new ArrayAdapter<>( this, R.layout.list_user_item, listData );
-
-        //Configure the list view
-        list = (ListView) findViewById(R.id._userlist);
-        list.setAdapter( adapter );
+        listView.setAdapter(adapter);
     }
 
     @Override
