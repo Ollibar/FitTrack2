@@ -62,15 +62,8 @@ public class MainActivity extends AppCompatActivity
     }
 //Test
     private void insertTestData() {
-        //ModelBenutzer user = new ModelBenutzer( "King",20,120);
-       // db.createBenutzer( user );
-        ModelStation station =new ModelStation( "Hantelbank",1 );
-        db.createStation( station );
-        station =new ModelStation( "Beinpresse",1 );
-        db.createStation( station );
-        station =new ModelStation( "Brustpresse",1 );
-        db.createStation( station );
-
+        String query="";
+        db.sqlquery( query );
     }
 //test
     public void updateUser (String username){

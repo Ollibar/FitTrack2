@@ -449,4 +449,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return count;
 	}
 
+	public void sqlquery(String q){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.rawQuery( q,null );
+
+	}
+
 }
