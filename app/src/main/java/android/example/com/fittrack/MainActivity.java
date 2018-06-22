@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity
 
 
     private static final String LOG = MainActivity.class.getSimpleName();
-    private BenutzerData benutzerData;
     private DatabaseHelper db = new DatabaseHelper(this);
 
     @Override
@@ -56,20 +55,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
-       // insertTestData();
 
 
-    }
-//Test
-    private void insertTestData() {
-        String query="";
-        db.sqlquery( query );
-    }
-//test
-    public void updateUser (String username){
-        activeUser = username;
-        TextView tV = (TextView) findViewById( R.id.nav_user_name );
-        tV.setText( username );
+
     }
 
     @Override
@@ -136,20 +124,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     public void erzeugeTestNutzer(View view) {
-        benutzerData = new BenutzerData(this);
-
-        benutzerData.open();
-        Benutzer benutzer= benutzerData.createBenutzer("king",60,20);
-        benutzer= benutzerData.createBenutzer("kong",60,20);
-        benutzer= benutzerData.createBenutzer("ding",60,20);
-        benutzer= benutzerData.createBenutzer("dong",60,20);
-        benutzerData.close();
-    }
-
-    public void erzeugeTestStation(View view) {
-
-
-
+        ModelBenutzer user =new ModelBenutzer( "karl",20,30 );
+        db.createBenutzer( user );
     }
 }

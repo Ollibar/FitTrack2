@@ -26,7 +26,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ListAdapter.UserAdapter;
+import ListAdapter.BenutzerListAdapter;
+
 
 public class User extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,11 +73,11 @@ public class User extends AppCompatActivity
     }
 
     public void showAllListBenutzer(){
+        ArrayList<ModelBenutzer> benutzerList =db.getAllBenutzer();
+        listView = findViewById(R.id._userlist );
+        BenutzerListAdapter bla = new BenutzerListAdapter( getApplicationContext(),benutzerList );
 
-        UserAdapter adapter =new UserAdapter(this,db.getAllBenutzer());
-        listView = (ListView)findViewById(R.id._userlist);
-
-        listView.setAdapter(adapter);
+        listView.setAdapter(bla);
     }
 
     @Override

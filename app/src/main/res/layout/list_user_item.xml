@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tV_Name"
+        android:id="@+id/tV_list_benutzer_name"
         android:layout_width="81dp"
         android:layout_height="53dp"
-        android:layout_alignBottom="@+id/tV_Alter"
+        android:layout_alignBottom="@+id/tV_list_benutzer_alter"
         android:layout_alignParentStart="true"
         android:layout_marginStart="68dp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tV_Alter"
+        android:id="@+id/tV_list_benutzer_alter"
         android:layout_width="76dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
@@ -32,10 +32,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tV_Gewicht"
+        android:id="@+id/tV_list_benutzer_gewicht"
         android:layout_width="79dp"
         android:layout_height="35dp"
-        android:layout_alignBottom="@+id/tV_Name"
+        android:layout_alignBottom="@+id/tV_list_benutzer_name"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="38dp"
         android:layout_weight="1"
@@ -45,10 +45,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tV_userID"
+        android:id="@+id/tV_list_benutzer_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tV_Gewicht"
+        android:layout_alignBaseline="@+id/tV_list_benutzer_gewicht"
         android:layout_alignParentStart="true"
         android:layout_marginStart="42dp"
         android:text="@string/userIDTextView"

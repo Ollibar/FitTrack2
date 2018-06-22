@@ -47,7 +47,7 @@ public class BenutzerListAdapter extends BaseAdapter {
         TextView txAlter =(TextView) row.findViewById( R.id.tV_list_benutzer_alter );
         TextView txGewicht =(TextView) row.findViewById( R.id.tV_list_benutzer_gewicht );
 
-        txID.setText( benutzerArrayList.get( position ).getBenutzer_id() );
+       txID.setText( Integer.toString(position) );
         txName.setText( benutzerArrayList.get( position ).getBenutzer_name() );
         txAlter.setText( benutzerArrayList.get(position).getBenutzer_alter() +" Jahre" );
         txGewicht.setText( benutzerArrayList.get( position ).getBenutzer_gewicht()+" Kg" );
