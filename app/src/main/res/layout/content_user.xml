@@ -9,6 +9,16 @@
     tools:context=".User"
     tools:showIn="@layout/app_bar_user">
 
+    <TextView
+        android:id="@+id/textViewUserSpruch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        tools:text="@string/userSpruch" />
+
     <ListView
         android:id="@+id/_userlist"
         android:layout_width="match_parent"

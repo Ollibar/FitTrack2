@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle">Willkommen</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_user">User</string>
@@ -15,4 +15,8 @@
     <string name="userAlterListView">Alter</string>
     <string name="userGewichtListView">Gewicht</string>
     <string name="userIDTextView">ID</string>
+    <string name="userSpruch">„Sorge dich gut um deinen Körper. Es ist der einzige Ort, den du zum Leben hast.“ (Jim Rohn)</string>
+    <string name="buttonUserSpeichern">Speichern</string>
+    <string name="buttonUserUpdate">Update</string>
+    <string name="buttonUserDelete">Löschen</string>
 </resources>

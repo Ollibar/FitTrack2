@@ -107,7 +107,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		//values.put("benutzer_id", benutzer.getBenutzer_id());
 		values.put("benutzer_name", benutzer.getBenutzer_name());
 		values.put("benutzer_alter", benutzer.getBenutzer_alter());
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
@@ -117,11 +116,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public int updateBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("benutzer_id", benutzer.getBenutzer_id());
 		values.put("benutzer_name", benutzer.getBenutzer_name());
 		values.put("benutzer_alter", benutzer.getBenutzer_alter());
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
-		return db.update("benutzer", values, "benutzer_id = ?", new String[] {String.valueOf(benutzer.getBenutzer_id())});
+		return db.update("benutzer", values, "benutzer_name = ?", new String[] {benutzer.getBenutzer_name()});
 	}
 
 	public int deleteBenutzer(ModelBenutzer benutzer) {
@@ -172,7 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createTraining(ModelTraining training) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("training_id", training.getTraining_id());
+		//values.put("training_id", training.getTraining_id());
 		values.put("training_datum", String.valueOf( training.getTraining_datum() ) );
 		values.put("training_benutzer_id", training.getTraining_benutzer_id());
 		values.put("training_station_id", training.getTraining_station_id());
