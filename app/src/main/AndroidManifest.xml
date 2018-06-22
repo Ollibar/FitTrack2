@@ -56,19 +56,19 @@
                 android:value="android.example.com.fittrack.MainActivity" />
         </activity>
         <activity
-            android:name=".form_user"
+            android:name=".Formulare.form_user"
             android:label="Benutzer verwalten"
             android:parentActivityName=".User" />
         <activity
-            android:name=".form_target"
+            android:name=".Formulare.form_target"
             android:label="Benutzer verwalten"
             android:parentActivityName=".Target" />
         <activity
-            android:name=".form_station"
+            android:name=".Formulare.form_station"
             android:label="Gerät verwalten"
             android:parentActivityName=".Station" />
         <activity
-            android:name=".form_training"
+            android:name=".Formulare.form_training"
             android:label="Gerät verwalten"
             android:parentActivityName=".Training" />
         <activity

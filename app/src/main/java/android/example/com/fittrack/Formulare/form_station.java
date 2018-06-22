@@ -1,7 +1,8 @@
-package android.example.com.fittrack;
+package android.example.com.fittrack.Formulare;
 
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelStation;
+import android.example.com.fittrack.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

@@ -1,10 +1,12 @@
-package android.example.com.fittrack;
+package android.example.com.fittrack.Formulare;
 
 
 import android.content.Intent;
 
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
+import android.example.com.fittrack.R;
+import android.example.com.fittrack.User;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;

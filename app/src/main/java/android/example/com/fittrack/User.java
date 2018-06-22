@@ -3,6 +3,7 @@ package android.example.com.fittrack;
 import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
+import android.example.com.fittrack.Formulare.form_user;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
