@@ -24,17 +24,11 @@
             android:title="Auswertung" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <Button
+        android:id="@+id/testStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Testdaten einfügen"
+        android:onClick="testdatenIntoDB"/>
 
 </menu>

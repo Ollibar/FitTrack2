@@ -100,8 +100,6 @@ public class Training extends AppCompatActivity
         } else if (id == R.id.nav_target) {
             Intent i = new Intent(this,Target.class);
             startActivity( i );
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );

@@ -88,6 +88,7 @@ public class User extends AppCompatActivity
                         Toast.makeText(User.this,"Benutzer "+benutzerList.get(position).getBenutzer_name()+
                                 " wurde Erfolgreich gelöscht. Was für ein Lappen :D",
                                 Toast.LENGTH_LONG).show();
+                        showAllListBenutzer();
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -155,12 +156,18 @@ public class User extends AppCompatActivity
         } else if (id == R.id.nav_target) {
             Intent i = new Intent(this,Target.class);
             startActivity( i );
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
+    }
+
+    public void testdatenEinfügen(Menu item){
+        try {
+            MainActivity.class.getMethod("testdatenEinfügen",null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 }

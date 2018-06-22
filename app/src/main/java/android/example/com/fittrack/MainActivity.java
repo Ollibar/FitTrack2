@@ -122,8 +122,26 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void erzeugeTestNutzer(View view) {
-        ModelBenutzer user =new ModelBenutzer( "karl",20,30 );
+
+
+    public void testdatenEinfügen(MenuItem item) {
+        // Benutzer
+        ModelBenutzer user =new ModelBenutzer( "Betty Kane",25,65 );
         db.createBenutzer( user );
+        user =new ModelBenutzer( "Arthur Curry",39,90 );
+        db.createBenutzer( user );
+        user =new ModelBenutzer( "Scott Lang",31,70 );
+        db.createBenutzer( user );
+
+        //Stationen
+        ModelStation station = new ModelStation("Brustpresse",1  );
+        db.createStation( station );
+        station = new ModelStation("Klimmzugmaschine",1  );
+        db.createStation( station );
+        station = new ModelStation("Laufband",2  );
+        db.createStation( station );
+        station = new ModelStation("Crosstrainer",2  );
+        db.createStation( station );
+
     }
 }

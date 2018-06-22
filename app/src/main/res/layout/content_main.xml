@@ -22,11 +22,6 @@
         android:text="Testuser into DB"
         android:onClick="erzeugeTestNutzer"/>
 
-    <Button
-        android:id="@+id/testStation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Teststation into DB"
-        android:onClick="erzeugeTestStation"/>
+
 
 </LinearLayout>
