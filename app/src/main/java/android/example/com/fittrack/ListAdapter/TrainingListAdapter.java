@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+//push  
+
 import java.util.ArrayList;
 
 public class TrainingListAdapter extends BaseAdapter {
