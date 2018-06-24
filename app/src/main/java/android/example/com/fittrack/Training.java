@@ -1,7 +1,10 @@
 package android.example.com.fittrack;
 
 import android.content.Intent;
+import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelTraining;
 import android.example.com.fittrack.Formulare.form_training;
+import android.example.com.fittrack.ListAdapter.TrainingListAdapter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -13,9 +16,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class Training extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    DatabaseHelper db = new DatabaseHelper( this );
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,16 @@ public class Training extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+
+        erzeugeTrainingListe();
+    }
+
+    private void erzeugeTrainingListe() {
+        ArrayList<ModelTraining> trainingList=db.getAllTraining();
+        lv=findViewById( R.id.listView_trainig );
+        TrainingListAdapter tla = new TrainingListAdapter(getApplicationContext(),trainingList);
+
+        lv.setAdapter(tla);
     }
 
     private void insertNeTraining() {
@@ -89,7 +107,7 @@ public class Training extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -98,7 +116,7 @@ public class Training extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         }
 

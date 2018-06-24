@@ -19,8 +19,8 @@
         android:id="@+id/testUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Testuser into DB"
-        android:onClick="erzeugeTestNutzer"/>
+        android:text="Testknopf"
+        android:onClick="test"/>
 
 
 

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -143,6 +145,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelBenutzerFromCursor(c);
 	}
+	public ModelBenutzer getBenutzer(String name) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM benutzer Where benutzer_name =\"" + name + "\";";
+		Cursor c = db.rawQuery( selectQuery, null );
+		if (c != null) c.moveToFirst();
+		return getModelBenutzerFromCursor( c );
+	}
 
 	public ArrayList<ModelBenutzer> getAllBenutzer() {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -157,6 +166,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return benutzerList;
 	}
+	public String[] getAllBenutzerNamen(){
+
+	    ArrayList<ModelBenutzer> benutzerAL =new ArrayList<>();
+		benutzerAL=getAllBenutzer();
+        String[] stringarray = new String[benutzerAL.size()];
+
+		for(int k=0; k<benutzerAL.size(); k++){
+			stringarray[k] = benutzerAL.get( k ).getBenutzer_name();
+		}
+
+
+        return stringarray;
+    }
 
 	public int getBenutzerCount() {
 		String countQuery = "SELECT * FROM benutzer";
@@ -166,6 +188,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		return count;
 	}
+
 
 	public long createTraining(ModelTraining training) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -283,6 +306,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return getModelSatzFromCursor(c);
 	}
 
+	public ModelSatz getSatzbyTrainingID (long id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM satz Where satz_training_id =  ?";
+		Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(id) });
+		if (c != null) c.moveToFirst();
+		return getModelSatzFromCursor(c);
+	}
+
 	public ArrayList<ModelSatz> getAllSatz() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelSatz> satzList = new ArrayList<ModelSatz>();
@@ -344,6 +375,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return getModelStationFromCursor(c);
 	}
 
+	public ModelStation getStation(String name) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM station Where station_name =\""+name+"\";";
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c != null) c.moveToFirst();
+		return getModelStationFromCursor(c);
+	}
+
 	public ArrayList<ModelStation> getAllStation() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelStation> stationList = new ArrayList<ModelStation>();
@@ -356,6 +395,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} while (c.moveToNext());
 		}
 		return stationList;
+	}
+	public String[] getAllStationNamen(){
+
+		ArrayList<ModelStation> stationAL =new ArrayList<>();
+		stationAL=getAllStation();
+		String[] stringarray = new String[stationAL.size()];
+
+		for(int k=0; k<stationAL.size(); k++){
+			stringarray[k] = stationAL.get( k ).getStation_name();
+		}
+
+
+		return stringarray;
 	}
 
 	public int getStationCount() {

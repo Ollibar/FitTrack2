@@ -6,5 +6,5 @@
         android:orderInCategory="100"
         android:title="Testdaten anlegen"
         app:showAsAction="never"
-        android:onClick="testdatenEinfügen"/>
+        android:onClick="testdaten"/>
 </menu>

@@ -26,13 +26,15 @@ import android.example.com.fittrack.ListAdapter.BenutzerListAdapter;
 import android.widget.Toast;
 
 
-public class User extends AppCompatActivity
+public class Benutzer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static int aktiverNutzer_id;
 
 
 
     private DatabaseHelper db = new DatabaseHelper( this );
     private ListView listView;
+
 
 
     @Override
@@ -62,6 +64,7 @@ public class User extends AppCompatActivity
         showAllListBenutzer();
 
 
+
     }
 
     private void openUserForm() {
@@ -78,20 +81,21 @@ public class User extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(User.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Benutzer.this);
                 builder.setTitle("Wollen sie diesen Benutzer Löschen ?");
                 builder.setCancelable(true);
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                       db.deleteBenutzer(benutzerList.get(position));
-                        Toast.makeText(User.this,"Benutzer "+benutzerList.get(position).getBenutzer_name()+
+                        Toast.makeText(Benutzer.this,"Benutzer "+benutzerList.get(position).getBenutzer_name()+
                                 " wurde Erfolgreich gelöscht. Was für ein Lappen :D",
                                 Toast.LENGTH_LONG).show();
+                        // Liste aktualisieren
                         showAllListBenutzer();
                     }
                 });
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                           dialog.cancel();
@@ -145,7 +149,7 @@ public class User extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -154,7 +158,7 @@ public class User extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         }
 
@@ -162,12 +166,5 @@ public class User extends AppCompatActivity
         drawer.closeDrawer( GravityCompat.START );
         return true;
     }
-
-    public void testdatenEinfügen(Menu item){
-        try {
-            MainActivity.class.getMethod("testdatenEinfügen",null);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
     }
-}
+

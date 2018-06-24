@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.R;
-import android.example.com.fittrack.User;
-import android.support.v7.app.AlertDialog;
+import android.example.com.fittrack.Benutzer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -59,7 +58,7 @@ public class form_user extends AppCompatActivity {
 
         long index = dbHelper.createBenutzer(user);
         if(index != -1) {
-            Intent i = new Intent(this, User.class);
+            Intent i = new Intent(this, Benutzer.class);
             startActivity(i);
             Toast.makeText(this,"Neuer Pumper erstellt",Toast.LENGTH_LONG).show();
         }
@@ -97,7 +96,7 @@ public class form_user extends AppCompatActivity {
         ModelBenutzer user = new ModelBenutzer(name,alt,gew);
         int i = dbHelper.updateBenutzer(user);
 
-        Intent intent = new Intent(this, User.class);
+        Intent intent = new Intent(this, Benutzer.class);
         if(i <= 0){
             startActivity(intent);
             Toast.makeText(this,"Keine Pumper gefunden :(",Toast.LENGTH_LONG).show();

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Datum"
         android:inputType="date"
         tools:text="Datum" />
 
@@ -17,6 +18,8 @@
         android:id="@+id/editText_beschreibung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Beschreibung"
+        android:inputType="text"
         tools:text="Beschreibung" />
 
     <Spinner
@@ -33,34 +36,42 @@
         android:id="@+id/editText_dauer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         tools:text="Dauer" />
 
     <EditText
         android:id="@+id/editText_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         tools:text="Geschwindigkeit" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Training Speichern" />
+        android:text="Training Speichern"
+        android:onClick="speicherTraining"/>
 
     <TextView
+        android:id="@+id/tV_Satz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sätze: " />
+        android:text="Sätze: "
+        android:visibility="gone" />
 
     <ListView
+        android:id="@+id/list_satz"
         android:layout_width="match_parent"
-        android:layout_height="125dp" />
+        android:layout_height="125dp"
+        android:visibility="gone" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/but_satz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Satz hinzufügen" />
+        android:text="Satz hinzufügen"
+        android:visibility="gone" />
 
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.example.com.fittrack.FitDB.ModelStation;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +22,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String activeUser = null;
+    public static int activeUserID;
+    private static final String TAG = "UserActivity";
 
 
     private static final String LOG = MainActivity.class.getSimpleName();
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+
 
 
 
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
             Intent i = new Intent(this,Statistics.class);
@@ -124,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public void testdatenEinfügen(MenuItem item) {
+    public void testdaten(MenuItem item) {
         // Benutzer
         ModelBenutzer user =new ModelBenutzer( "Betty Kane",25,65 );
         db.createBenutzer( user );
@@ -143,5 +146,15 @@ public class MainActivity extends AppCompatActivity
         station = new ModelStation("Crosstrainer",2  );
         db.createStation( station );
 
+    }
+
+
+    public void test(View view) {
+        String[] array = db.getAllBenutzerNamen();
+        for(int p =0; p<array.length;p++){
+            Log.v(TAG, "Name=" + array[p]);
+            Log.v(TAG, "ok" );
+
+        }
     }
 }

@@ -85,7 +85,7 @@ public class Statistics extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -94,7 +94,7 @@ public class Statistics extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
             Intent i = new Intent(this,Statistics.class);

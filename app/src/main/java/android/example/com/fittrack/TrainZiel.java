@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
 
-public class Target extends AppCompatActivity
+public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseHelper db = new DatabaseHelper( this );
     private ListView lv;
@@ -109,7 +109,7 @@ public class Target extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -118,7 +118,7 @@ public class Target extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         }
 

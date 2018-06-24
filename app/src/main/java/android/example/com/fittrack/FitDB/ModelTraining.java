@@ -10,9 +10,10 @@ public class ModelTraining {
 	String training_beschreibung;
 	int training_dauer;
 	int training_geschwindigkeit;
+	int training_kcal;
 
 	public ModelTraining() {}
-	public ModelTraining(int training_id,String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit) {
+	public ModelTraining(int training_id,String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal) {
 		this.training_id = training_id;
 		this.training_datum = training_datum;
 		this.training_benutzer_id = training_benutzer_id;
@@ -20,7 +21,19 @@ public class ModelTraining {
 		this.training_beschreibung = training_beschreibung;
 		this.training_dauer = training_dauer;
 		this.training_geschwindigkeit = training_geschwindigkeit;
+		this.training_kcal = training_kcal;
 	}
+	public ModelTraining(String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal) {
+		//this.training_id = training_id;
+		this.training_datum = training_datum;
+		this.training_benutzer_id = training_benutzer_id;
+		this.training_station_id = training_station_id;
+		this.training_beschreibung = training_beschreibung;
+		this.training_dauer = training_dauer;
+		this.training_geschwindigkeit = training_geschwindigkeit;
+		this.training_kcal = training_kcal;
+	}
+
 	public void setTraining_id(int training_id) {
 		this.training_id = training_id;
 	}
@@ -62,5 +75,12 @@ public class ModelTraining {
 	}
 	public int getTraining_geschwindigkeit() {
 		return this.training_geschwindigkeit;
+	}
+	public void setTraining_kcal(int kcal){
+		this.training_kcal = kcal;
+
+	}
+	public int getTraining_kcal(){
+		return this.training_kcal;
 	}
 }

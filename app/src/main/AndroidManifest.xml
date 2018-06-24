@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".User"
+            android:name=".Benutzer"
             android:label="@string/title_activity_user"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -47,7 +47,7 @@
                 android:value="android.example.com.fittrack.MainActivity" />
         </activity>
         <activity
-            android:name=".Target"
+            android:name=".TrainZiel"
             android:label="@string/title_activity_target"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -58,11 +58,11 @@
         <activity
             android:name=".Formulare.form_user"
             android:label="Benutzer verwalten"
-            android:parentActivityName=".User" />
+            android:parentActivityName=".Benutzer" />
         <activity
             android:name=".Formulare.form_target"
             android:label="Benutzer verwalten"
-            android:parentActivityName=".Target" />
+            android:parentActivityName=".TrainZiel" />
         <activity
             android:name=".Formulare.form_station"
             android:label="Gerät verwalten"

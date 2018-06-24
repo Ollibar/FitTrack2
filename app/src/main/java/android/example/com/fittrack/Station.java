@@ -37,7 +37,7 @@ public class Station extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertNewStation(  );
+                openStationForm(  );
             }
         } );
 
@@ -61,9 +61,11 @@ public class Station extends AppCompatActivity
         lv.setAdapter( sla );
 
 
+
+
     }
 
-    private void insertNewStation() {
+    private void openStationForm() {
         Intent i = new Intent(this,form_station.class);
         startActivity( i );
     }
@@ -99,8 +101,6 @@ public class Station extends AppCompatActivity
 
         return super.onOptionsItemSelected( item );
     }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -110,7 +110,7 @@ public class Station extends AppCompatActivity
             Intent i = new Intent(this,MainActivity.class);
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,User.class);
+            Intent i = new Intent(this,Benutzer.class);
             startActivity( i );
         } else if (id == R.id.nav_station) {
             Intent i = new Intent(this,Station.class);
@@ -119,7 +119,7 @@ public class Station extends AppCompatActivity
             Intent i = new Intent(this,Training.class);
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,Target.class);
+            Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         }
 
