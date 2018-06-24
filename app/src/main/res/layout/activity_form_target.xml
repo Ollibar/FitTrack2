@@ -8,65 +8,69 @@
     <Spinner
         android:id="@+id/spinner_User"
         android:layout_width="match_parent"
-        android:layout_height="41dp" />
+        android:layout_height="41dp"
+        android:spinnerMode="dialog" />
 
     <Spinner
         android:id="@+id/spinner_Station"
         android:layout_width="match_parent"
-        android:layout_height="46dp" />
+        android:layout_height="46dp"
+        android:spinnerMode="dialog" />
 
     <EditText
         android:id="@+id/edT_soll_gewicht"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Sollgewicht" />
+        android:hint="Sollgewicht"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_soll_dauer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Solldauer" />
+        android:hint="Solldauer"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_soll_geschwindigkeit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Sollgeschwindigkeit" />
+        android:hint="Sollgeschwindigkeit"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_pos_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Pos1" />
+        android:hint="1.Option: Positioneinstellung"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edT_pos_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Pos2" />
+        android:hint="2.Option: Positioneinstellung"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edT_pos_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Pos3" />
+        android:hint="3.Option: Positioneinstellung"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonZielSpeichern"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Speichern" />
+        android:onClick="insertTarget"
+        android:text="@string/btnZielSpeichern" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonZielUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gerät Löschen" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Abbrechen" />
+        android:onClick="uodateTarget"
+        android:text="@string/btnZieleUpdate" />
 
 </LinearLayout>

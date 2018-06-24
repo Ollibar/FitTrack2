@@ -168,8 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	public String[] getAllBenutzerNamen(){
 
-	    ArrayList<ModelBenutzer> benutzerAL =new ArrayList<>();
-		benutzerAL=getAllBenutzer();
+	    ArrayList<ModelBenutzer> benutzerAL =getAllBenutzer();
         String[] stringarray = new String[benutzerAL.size()];
 
 		for(int k=0; k<benutzerAL.size(); k++){
@@ -398,8 +397,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	public String[] getAllStationNamen(){
 
-		ArrayList<ModelStation> stationAL =new ArrayList<>();
-		stationAL=getAllStation();
+		ArrayList<ModelStation> stationAL =getAllStation();
 		String[] stringarray = new String[stationAL.size()];
 
 		for(int k=0; k<stationAL.size(); k++){
