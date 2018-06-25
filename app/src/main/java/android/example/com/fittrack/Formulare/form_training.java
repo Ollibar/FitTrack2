@@ -1,11 +1,13 @@
 package android.example.com.fittrack.Formulare;
 
+import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.example.com.fittrack.MainActivity;
 import android.example.com.fittrack.R;
+import android.example.com.fittrack.Training;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,9 +25,9 @@ import java.util.Date;
 public class form_training extends AppCompatActivity {
     DatabaseHelper db = new DatabaseHelper( this );
     Spinner spinnerBenutzer, spinnerStation;
-    TextView geschwindigkeit, dauer, satz, datum, beschreibung;
-    ListView listView;
-    Button addSatz;
+    TextView geschwindigkeit, dauer, datum, beschreibung, kcal;
+
+
 
 
 
@@ -38,12 +40,10 @@ public class form_training extends AppCompatActivity {
 
         dauer = findViewById( R.id.editText_dauer );
         geschwindigkeit = findViewById( R.id.editText_speed );
-        satz=findViewById( R.id.tV_Satz );
-        listView=findViewById( R.id.list_satz );
-        addSatz=findViewById( R.id.but_satz );
         datum=findViewById( R.id.editText_Datum );
         Date strDate = Calendar.getInstance().getTime();
         datum.setText( dateFormat.format(strDate));
+        kcal=findViewById( R.id.editText_kcal  );
         setSpinner();
         spinnerStation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -51,22 +51,18 @@ public class form_training extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if(getStationtyp()==1){
-                    satz.setVisibility( View.VISIBLE );
-                    listView.setVisibility( View.VISIBLE );
-                    addSatz.setVisibility( View.VISIBLE );
-
                     dauer.setVisibility(View.GONE);
-
+                    kcal.setVisibility( View.GONE );
                     geschwindigkeit.setVisibility(View.GONE);
                 }
                 else if(getStationtyp()==2){
 
                     dauer.setVisibility(View.VISIBLE);
                     geschwindigkeit.setVisibility(View.VISIBLE);
+                    kcal.setVisibility( View.VISIBLE );
 
-                    satz.setVisibility( View.GONE );
-                    listView.setVisibility( View.GONE );
-                    addSatz.setVisibility( View.GONE );
+
+
                 }
             }
 
@@ -121,7 +117,7 @@ public class form_training extends AppCompatActivity {
 
 
         ModelTraining training = new ModelTraining();
-        ModelBenutzer benutzer = new ModelBenutzer();
+        ModelBenutzer benutzer;
 
         beschreibung=findViewById( R.id.editText_beschreibung );
         training.setTraining_beschreibung( beschreibung.getText().toString() );
@@ -133,11 +129,15 @@ public class form_training extends AppCompatActivity {
         training.setTraining_benutzer_id(benutzer.getBenutzer_id() );
 
         if(getStationtyp()==2){
-            training.setTraining_geschwindigkeit( R.id.editText_dauer );
-            training.setTraining_dauer(R.id.editText_dauer);
+
+            training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
+            training.setTraining_dauer(Integer.valueOf(dauer.getText().toString()));
+            training.setTraining_kcal(Integer.valueOf(kcal.getText().toString() ) );
         }
 
 
         db.createTraining(training);
+        Intent i = new Intent(this,Training.class);
+        startActivity( i );
     }
 }

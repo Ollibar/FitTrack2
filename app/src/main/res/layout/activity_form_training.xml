@@ -36,6 +36,8 @@
         android:id="@+id/editText_dauer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Dauer"
+        android:inputType="number"
         android:visibility="gone"
         tools:text="Dauer" />
 
@@ -43,8 +45,18 @@
         android:id="@+id/editText_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Geschwindigkeit"
+        android:inputType="number"
         android:visibility="gone"
         tools:text="Geschwindigkeit" />
+
+    <EditText
+        android:id="@+id/editText_kcal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kcal"
+        android:inputType="number"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/button7"
@@ -52,26 +64,6 @@
         android:layout_height="wrap_content"
         android:text="Training Speichern"
         android:onClick="speicherTraining"/>
-
-    <TextView
-        android:id="@+id/tV_Satz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sätze: "
-        android:visibility="gone" />
-
-    <ListView
-        android:id="@+id/list_satz"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/but_satz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Satz hinzufügen"
-        android:visibility="gone" />
 
 
 </LinearLayout>

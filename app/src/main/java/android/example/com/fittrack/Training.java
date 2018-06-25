@@ -2,6 +2,7 @@ package android.example.com.fittrack;
 
 import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.example.com.fittrack.Formulare.form_training;
 import android.example.com.fittrack.ListAdapter.TrainingListAdapter;
@@ -16,7 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -24,6 +28,7 @@ public class Training extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseHelper db = new DatabaseHelper( this );
     ListView lv;
+    Spinner spinnerBenutzer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +53,40 @@ public class Training extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
-
+        setSpinner();
         erzeugeTrainingListe();
+        spinnerBenutzer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                erzeugeTrainingListe();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                erzeugeTrainingListe();
+            }
+            });
+
+    }
+
+    private void setSpinner() {
+        spinnerBenutzer = (Spinner)findViewById( R.id.training_spinner_);
+
+        DatabaseHelper db = new DatabaseHelper( this );
+        String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
+        spinnerArrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBenutzer.setAdapter(spinnerArrayAdapter1);
     }
 
     private void erzeugeTrainingListe() {
-        ArrayList<ModelTraining> trainingList=db.getAllTraining();
+        String username = spinnerBenutzer.getSelectedItem().toString();
+
+        ModelBenutzer benutzer = (ModelBenutzer) db.getBenutzer( username );
+        ArrayList<ModelTraining> trainingList=db.getTrainingByUserID(benutzer.getBenutzer_id());
         lv=findViewById( R.id.listView_trainig );
         TrainingListAdapter tla = new TrainingListAdapter(getApplicationContext(),trainingList);
 

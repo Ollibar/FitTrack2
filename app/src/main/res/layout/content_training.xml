@@ -9,6 +9,11 @@
     tools:context=".Training"
     tools:showIn="@layout/app_bar_training">
 
+    <Spinner
+        android:id="@+id/training_spinner_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/listView_trainig"
         android:layout_width="match_parent"

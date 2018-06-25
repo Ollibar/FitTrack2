@@ -36,7 +36,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"training_station_id INTEGER," + 
 	"training_beschreibung VARCHAR," + 
 	"training_dauer INTEGER," + 
-	"training_geschwindigkeit INTEGER	" + 
+	"training_geschwindigkeit INTEGER,	" +
+	"training_kcal INTEGER	" +
 	")";
 
 	private static final String CREATE_TABLE_SATZ = "CREATE TABLE satz (" + 
@@ -200,6 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_beschreibung", training.getTraining_beschreibung());
 		values.put("training_dauer", training.getTraining_dauer());
 		values.put("training_geschwindigkeit", training.getTraining_geschwindigkeit());
+		values.put("training_kcal",training.getTraining_kcal());
 		return db.insertOrThrow("training", null, values);
 	}
 
@@ -213,6 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_beschreibung", training.getTraining_beschreibung());
 		values.put("training_dauer", training.getTraining_dauer());
 		values.put("training_geschwindigkeit", training.getTraining_geschwindigkeit());
+		values.put("training_kcal",training.getTraining_kcal());
 		return db.update("training", values, "training_id = ?", new String[] {String.valueOf(training.getTraining_id())});
 	}
 
@@ -230,6 +233,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		training.setTraining_beschreibung(c.getString(c.getColumnIndex("training_beschreibung")));
 		training.setTraining_dauer(c.getInt(c.getColumnIndex("training_dauer")));
 		training.setTraining_geschwindigkeit(c.getInt(c.getColumnIndex("training_geschwindigkeit")));
+		training.setTraining_kcal( c.getInt( c.getColumnIndex( "training_kcal")));
 		return training;
 	}
 
@@ -254,6 +258,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return trainingList;
 	}
+	public ArrayList<ModelTraining> getTrainingByUserID(int userID) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<ModelTraining> trainingList = new ArrayList<ModelTraining>();
+		String selectQuery = "SELECT * FROM training Where training_benutzer_id ="+userID+" ;";
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()) {
+			do {
+				ModelTraining training = getModelTrainingFromCursor(c);
+				trainingList.add(training);
+			} while (c.moveToNext());
+		}
+		return trainingList;
+	}
 
 	public int getTrainingCount() {
 		String countQuery = "SELECT * FROM training";
@@ -267,7 +284,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createSatz(ModelSatz satz) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("satz_id", satz.getSatz_id());
+		//values.put("satz_id", satz.getSatz_id());
 		values.put("satz_training_id", satz.getSatz_training_id());
 		values.put("satz_nr", satz.getSatz_nr());
 		values.put("satz_gewicht", satz.getSatz_gewicht());
@@ -318,6 +335,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelSatz> satzList = new ArrayList<ModelSatz>();
 		String selectQuery = "SELECT * FROM satz";
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()) {
+			do {
+				ModelSatz satz = getModelSatzFromCursor(c);
+				satzList.add(satz);
+			} while (c.moveToNext());
+		}
+		return satzList;
+	}
+	public ArrayList<ModelSatz> getAllSatzByTrainindID(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<ModelSatz> satzList = new ArrayList<ModelSatz>();
+		String selectQuery = "SELECT * FROM satz WHERE satz_training_id="+id;
 		Cursor c = db.rawQuery(selectQuery, null);
 		if (c.moveToFirst()) {
 			do {
