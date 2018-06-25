@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 public class form_user extends AppCompatActivity {
 
+    private DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,6 @@ public class form_user extends AppCompatActivity {
     }
 
     public void insertUserIntoDB(View view) {
-
-
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
 
         EditText txtfield1 =(EditText)  findViewById(R.id.form_user_name);
         String name = txtfield1.getText().toString();
@@ -42,11 +40,11 @@ public class form_user extends AppCompatActivity {
             txtfield1.setError("Zeile ist Leer !");
             return;
         }
-        if(TextUtils.isEmpty(alter)){
+        else if(TextUtils.isEmpty(alter)){
             txtfield2.setError("Zeile ist Leer");
             return;
         }
-        if(TextUtils.isEmpty(gewicht)){
+        else if(TextUtils.isEmpty(gewicht)){
             txtfield3.setError("Zeile ist Leer !");
             return;
         }
@@ -61,12 +59,11 @@ public class form_user extends AppCompatActivity {
             Intent i = new Intent(this, Benutzer.class);
             startActivity(i);
             Toast.makeText(this,"Neuer Pumper erstellt",Toast.LENGTH_LONG).show();
+            dbHelper.closeDB();
         }
     }
 
     public void updateUser(View view){
-
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
 
         EditText txtfield1 =(EditText)  findViewById(R.id.form_user_name);
         String name = txtfield1.getText().toString();
@@ -100,8 +97,10 @@ public class form_user extends AppCompatActivity {
         if(i <= 0){
             startActivity(intent);
             Toast.makeText(this,"Keine Pumper gefunden :(",Toast.LENGTH_LONG).show();
+            dbHelper.closeDB();
         }else startActivity(intent);
             Toast.makeText(this,name+" Updated :) ",Toast.LENGTH_LONG).show();
-    }
+            dbHelper.closeDB();
+        }
     }
 

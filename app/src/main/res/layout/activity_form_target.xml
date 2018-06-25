@@ -39,6 +39,13 @@
         android:inputType="numberDecimal" />
 
     <EditText
+        android:id="@+id/edT_gewichtwusch_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gewichtwunsch"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/edT_pos_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

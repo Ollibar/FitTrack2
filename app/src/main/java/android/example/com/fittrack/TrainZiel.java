@@ -55,8 +55,7 @@ public class TrainZiel extends AppCompatActivity
 
     private void erzeugeListe() {
 
-        ArrayList<ModelTrain_ziel> trainZielList =new ArrayList<>(  );
-        trainZielList = db.getAllTrain_ziel();
+        ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel();
         lv=findViewById( R.id.lV_ziele );
         TrainZielListAdapter tla = new TrainZielListAdapter( getApplicationContext(),trainZielList );
         lv.setAdapter( tla );
