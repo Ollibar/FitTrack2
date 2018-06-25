@@ -19,4 +19,9 @@
     <string name="buttonUserSpeichern">Speichern</string>
     <string name="buttonUserUpdate">Update</string>
     <string name="buttonUserDelete">Löschen</string>
+    <string name="tV_zielKraft">Ziele für Krafttraining</string>
+    <string name="tVZielTrainKondi">Ziele für Konditionstraining </string>
+    <string name="btnZielSpeichern">Ziele Speichern</string>
+    <string name="btnZieleUpdate">Ziele Updaten</string>
+
 </resources>

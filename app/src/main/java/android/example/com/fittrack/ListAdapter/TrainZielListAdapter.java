@@ -39,14 +39,14 @@ public class TrainZielListAdapter extends BaseAdapter {
         return 0;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+
+     public View getView(int position, View convertView, ViewGroup parent) {
 
 
         LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         View row =inf.inflate( R.layout.list_train_ziel_item,parent,false);
-        TextView txname =(TextView) row.findViewById( R.id.tV_list_ziel_name );
-        TextView txGewGes =(TextView) row.findViewById( R.id.tV_list_ziel_GewGes );
+        TextView txname =(TextView) row.findViewById( R.id.tV_list_ziel_Dauer );
+        TextView txGewGes =(TextView) row.findViewById( R.id.tV_list_ziel_Gewicht );
         TextView txDauer =(TextView) row.findViewById( R.id.tV_list_ziel_Dauer );
 
 
