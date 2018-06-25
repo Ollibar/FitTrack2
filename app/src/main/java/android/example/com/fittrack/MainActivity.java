@@ -4,7 +4,9 @@ import android.content.Intent;
 
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
+import android.example.com.fittrack.FitDB.ModelSatz;
 import android.example.com.fittrack.FitDB.ModelStation;
+import android.example.com.fittrack.FitDB.ModelTraining;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -145,6 +147,24 @@ public class MainActivity extends AppCompatActivity
         db.createStation( station );
         station = new ModelStation("Crosstrainer",2  );
         db.createStation( station );
+
+        //Trainings
+        ModelTraining  training = new ModelTraining("25/06/2018",2,3,"Beschreibung 1",123,159,147);
+        db.createTraining( training );
+        training = new ModelTraining("24/06/2018",2,4,"Beschreibung 1",123,159,147);
+        db.createTraining( training );
+        training = new ModelTraining("27/06/2018",1,1,"Beschreibung 1",0,0,0);
+        db.createTraining( training );
+        training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0);
+        db.createTraining( training );
+
+        //Satz
+        ModelSatz satz = new ModelSatz( 3,1,25,25 );
+        db.createSatz( satz );
+        satz = new ModelSatz( 3,2,25,25 );
+        db.createSatz( satz );
+        satz = new ModelSatz( 3,3,25,25 );
+        db.createSatz( satz );
 
     }
 

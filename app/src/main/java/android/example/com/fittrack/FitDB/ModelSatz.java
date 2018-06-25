@@ -15,6 +15,13 @@ public class ModelSatz {
 		this.satz_gewicht = satz_gewicht;
 		this.satz_wiederholung = satz_wiederholung;
 	}
+	public ModelSatz(int satz_training_id, int satz_nr, int satz_gewicht, int satz_wiederholung) {
+
+		this.satz_training_id = satz_training_id;
+		this.satz_nr = satz_nr;
+		this.satz_gewicht = satz_gewicht;
+		this.satz_wiederholung = satz_wiederholung;
+	}
 	public void setSatz_id(int satz_id) {
 		this.satz_id = satz_id;
 	}
