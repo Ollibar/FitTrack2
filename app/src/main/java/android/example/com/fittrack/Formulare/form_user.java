@@ -10,6 +10,7 @@ import android.example.com.fittrack.Benutzer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class form_user extends AppCompatActivity {
 
     private DatabaseHelper dbHelper = new DatabaseHelper(this);
 
+    private static final String LOG = form_user.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -55,6 +57,7 @@ public class form_user extends AppCompatActivity {
         ModelBenutzer user = new ModelBenutzer(name,alt,gew);
 
         long index = dbHelper.createBenutzer(user);
+        Log.d(LOG,"index von benutzer: "+index);
         if(index != -1) {
             Intent i = new Intent(this, Benutzer.class);
             startActivity(i);

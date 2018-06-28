@@ -50,12 +50,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"train_ziel_benutzer_id INTEGER," + 
 	"train_ziel_station_id INTEGER," + 
 	"train_ziel_soll_geschwindigkeit INTEGER DEFAULT 0," +
-	"train_ziel_soll_dauer INTEGER DEFAULT 0," +
-	"train_ziel_soll_gewicht INTEGER DEFAULT 0," +
-	"train_ziel_gewicht_wunsch INTEGER DEFAULT 0,"+
-	"train_ziel_pos1 VARCHAR DEFAULT 'k.A.'," +
-	"train_ziel_pos2 VARCHAR DEFAULT 'k.A.'," +
-	"train_ziel_pos3 VARCHAR DEFAULT 'k.A.'	" +
+	"train_ziel_soll_dauer INTEGER ," +
+	"train_ziel_soll_gewicht INTEGER ," +
+	"train_ziel_gewicht_wunsch INTEGER ,"+
+	"train_ziel_pos1 VARCHAR ," +
+	"train_ziel_pos2 VARCHAR ," +
+	"train_ziel_pos3 VARCHAR " +
 	")";
 
 

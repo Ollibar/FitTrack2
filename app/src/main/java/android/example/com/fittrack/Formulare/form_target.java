@@ -10,6 +10,7 @@ import android.example.com.fittrack.TrainZiel;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 
 public class form_target extends AppCompatActivity {
 
-
+    private static final String LOG = form_target.class.getSimpleName();
     private Spinner spinnerUser,spinnerStation;
     private ArrayAdapter<String> adapterUser, adapterTrain;
     private TextView tvSollGewicht,tvSollGeschw,tvSollDauer,tvGewichtwunsch,tvPos1,tvPos2,tvPos3;
@@ -37,7 +38,7 @@ public class form_target extends AppCompatActivity {
         getStationSpinner();
 
         spinnerStation=(Spinner)findViewById(R.id.spinner_Station);
-        spinnerUser=(Spinner)findViewById(R.id.spinner_Station);
+        spinnerUser=(Spinner)findViewById(R.id.spinner_User);
         tvSollGewicht =(TextView)findViewById(R.id.edT_soll_gewicht);
         tvSollDauer =(TextView)findViewById(R.id.edT_soll_dauer);
         tvSollGeschw=(TextView)findViewById(R.id.edT_soll_geschwindigkeit);
@@ -95,13 +96,33 @@ public class form_target extends AppCompatActivity {
         ModelTrain_ziel ziele = new ModelTrain_ziel();
         ziele.setTrain_ziel_benutzer_id(getBenutzerID());
         ziele.setTrain_ziel_station_id(getStationID());
-        ziele.setTrain_ziel_korper_gewicht(Integer.parseInt(gewichtwunsch));
-        ziele.setTrain_ziel_pos1(pos1);
+
+        if (TextUtils.isEmpty(gewichtwunsch)){
+            ziele.setTrain_ziel_korper_gewicht(0);
+        }else ziele.setTrain_ziel_korper_gewicht(Integer.parseInt(gewichtwunsch));
+        if(TextUtils.isEmpty(pos1)){
+            ziele.setTrain_ziel_pos1("k.A.");
+        }else ziele.setTrain_ziel_pos1(pos1);
+        if(TextUtils.isEmpty(pos2)){
+            ziele.setTrain_ziel_pos2("k.A.");
+        }else
         ziele.setTrain_ziel_pos2(pos2);
+        if(TextUtils.isEmpty(pos3)){
+            ziele.setTrain_ziel_pos3("k.A.");
+        }else
         ziele.setTrain_ziel_pos3(pos3);
-        ziele.setTrain_ziel_soll_dauer(Integer.parseInt(dauer));
+        if(TextUtils.isEmpty(dauer)){
+            ziele.setTrain_ziel_soll_dauer(0);
+        }else ziele.setTrain_ziel_soll_dauer(Integer.parseInt(dauer));
+        if(TextUtils.isEmpty(geschw)){
+            ziele.setTrain_ziel_soll_geschwindigkeit(0);
+        }else
         ziele.setTrain_ziel_soll_geschwindigkeit(Integer.parseInt(geschw));
+        if(TextUtils.isEmpty(gewicht)){
+            ziele.setTrain_ziel_soll_gewicht(0);
+        }else
         ziele.setTrain_ziel_soll_gewicht(Integer.parseInt(gewicht));
+
         long id = db.createTrain_ziel(ziele);
         if(id > -1) {
             Intent i = new Intent(this, TrainZiel.class);
@@ -173,13 +194,14 @@ public class form_target extends AppCompatActivity {
 
     private int getStationID(){
         String station =spinnerStation.getSelectedItem().toString();
-        ModelStation s = (ModelStation) db.getStation(station);
+        ModelStation s =  db.getStation(station);
         int id =s.getStation_id();
         return id;
     }
     private int getBenutzerID(){
         String s = spinnerUser.getSelectedItem().toString();
-        ModelBenutzer m = (ModelBenutzer) db.getBenutzer(s);
+        Log.d(LOG,"spinner user: "+s);
+        ModelBenutzer m = db.getBenutzer(s);
         int id = m.getBenutzer_id();
         return id;
     }

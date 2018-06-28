@@ -6,6 +6,7 @@ import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.R;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class TrainZielListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelTrain_ziel> train_zielArrayList;
     private DatabaseHelper db;
-
+    private static final String LOG = TrainZielListAdapter.class.getName();
     public TrainZielListAdapter(Context context, ArrayList<ModelTrain_ziel> train_ziel) {
         this.context=context;
         this.train_zielArrayList=train_ziel;
@@ -56,12 +57,15 @@ public class TrainZielListAdapter extends BaseAdapter {
         TextView zielDauer= (TextView)row.findViewById(R.id.tV_list_ziel_Dauer);
         TextView zielGeschw= (TextView)row.findViewById(R.id.tV_list_ziel_Gesw);
 
-        long id = train_zielArrayList.get(position).getTrain_ziel_benutzer_id();
-        ModelBenutzer m =db.getBenutzer(id);
-        zielBenutzer.setText("Benutzer: "+m.getBenutzer_name());
+        ModelTrain_ziel mz = train_zielArrayList.get(position);
+        int idB = mz.getTrain_ziel_benutzer_id();
 
-        long idstation = train_zielArrayList.get(position).getTrain_ziel_station_id();
-        ModelStation s = db.getStation(idstation);
+        ModelBenutzer mb = db.getBenutzer(idB);
+        zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
+
+        ModelTrain_ziel mZ = train_zielArrayList.get(position);
+        int idS = mZ.getTrain_ziel_station_id();
+        ModelStation s = db.getStation(idS);
         zielStation.setText("Gerät: "+s.getStation_name());
 
         zielGewicht.setText("Sollgewicht: "+train_zielArrayList.get(position).getTrain_ziel_soll_gewicht());
