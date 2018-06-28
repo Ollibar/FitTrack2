@@ -25,7 +25,10 @@ import java.util.Date;
 public class form_training extends AppCompatActivity {
     DatabaseHelper db = new DatabaseHelper( this );
     Spinner spinnerBenutzer, spinnerStation;
-    TextView geschwindigkeit, dauer, datum, beschreibung, kcal;
+    TextView geschwindigkeit, dauer, datum, beschreibung, kcal, gewicht,wiederholung;
+    Intent i;
+    ModelTraining training;
+    ModelBenutzer benutzer;
 
 
 
@@ -41,9 +44,12 @@ public class form_training extends AppCompatActivity {
         dauer = findViewById( R.id.editText_dauer );
         geschwindigkeit = findViewById( R.id.editText_speed );
         datum=findViewById( R.id.editText_Datum );
-        Date strDate = Calendar.getInstance().getTime();
-        datum.setText( dateFormat.format(strDate));
         kcal=findViewById( R.id.editText_kcal  );
+        gewicht = findViewById( R.id.editText_gewicht );
+        wiederholung = findViewById( R.id.editText_wiederholung );
+        beschreibung = findViewById( R.id.editText_beschreibung );
+
+
         setSpinner();
         spinnerStation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -54,12 +60,16 @@ public class form_training extends AppCompatActivity {
                     dauer.setVisibility(View.GONE);
                     kcal.setVisibility( View.GONE );
                     geschwindigkeit.setVisibility(View.GONE);
+                    gewicht.setVisibility( View.VISIBLE );
+                    wiederholung.setVisibility( View.VISIBLE );
                 }
                 else if(getStationtyp()==2){
 
                     dauer.setVisibility(View.VISIBLE);
                     geschwindigkeit.setVisibility(View.VISIBLE);
                     kcal.setVisibility( View.VISIBLE );
+                    gewicht.setVisibility( View.GONE );
+                    wiederholung.setVisibility( View.GONE );
 
 
 
@@ -72,14 +82,46 @@ public class form_training extends AppCompatActivity {
             }
         });
 
+         i = getIntent();
 
+        if(i==null){
+
+
+
+        }else{
+            long trainingID = i.getLongExtra( "ID",-1 );
+            if (trainingID!=-1){
+                training =(ModelTraining) db.getTraining( trainingID );
+
+                datum.setText( training.getTraining_datum() );
+                spinnerBenutzer.setSelection( training.getTraining_benutzer_id() );
+                spinnerStation.setSelection( training.getTraining_station_id() );
+
+
+                beschreibung.setText( training.getTraining_beschreibung() );
+                if(getStationtyp()==1){
+                    wiederholung.setText( training.getTraining_wiederholung() );
+                    gewicht.setText(String.valueOf( training.getTraining_gewicht()));
+                }
+                else if(getStationtyp()==2){
+                    dauer.setText( String.valueOf(  training.getTraining_dauer()) );
+                    geschwindigkeit.setText( String.valueOf(training.getTraining_geschwindigkeit()) );
+                    kcal.setText(String.valueOf( training.getTraining_kcal() ));
+                }
+            }
+            else{
+                Date strDate = Calendar.getInstance().getTime();
+                datum.setText( dateFormat.format(strDate));
+            }
+
+        }
     }
 
     private void setSpinner() {
         // erzeugt Listen für die Spinner
         spinnerBenutzer = (Spinner)findViewById( R.id.spinner_user );
 
-        DatabaseHelper db = new DatabaseHelper( this );
+       // DatabaseHelper db = new DatabaseHelper( this );
          String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
          ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
@@ -115,29 +157,53 @@ public class form_training extends AppCompatActivity {
 
     public void speicherTraining(View view) {
 
+        if (i==null) {
+            training = new ModelTraining();
+            training.setTraining_beschreibung( beschreibung.getText().toString() );
+            training.setTraining_datum( datum.getText().toString() );
+            training.setTraining_station_id( getStationID() );
+            benutzer = db.getBenutzer( spinnerBenutzer.getSelectedItem().toString() );
+            training.setTraining_benutzer_id( benutzer.getBenutzer_id() );
+            int stationtyp = getStationtyp();
+            if (stationtyp == 2) {
+                training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
+                training.setTraining_dauer( Integer.valueOf( dauer.getText().toString() ) );
+                training.setTraining_kcal( Integer.valueOf( kcal.getText().toString() ) );
+            } else if (stationtyp == 1) {
+                training.setTraining_wiederholung( Integer.valueOf( wiederholung.getText().toString() ) );
+                training.setTraining_gewicht( Integer.valueOf( gewicht.getText().toString() ) );
+            }
 
-        ModelTraining training = new ModelTraining();
-        ModelBenutzer benutzer;
 
-        beschreibung=findViewById( R.id.editText_beschreibung );
-        training.setTraining_beschreibung( beschreibung.getText().toString() );
-        training.setTraining_datum(datum.getText().toString());
-        training.setTraining_station_id( getStationID() );
+            db.createTraining( training );
+            i = new Intent( this, Training.class );
+            startActivity( i );
+        }
+        else{
+            training = new ModelTraining();
+            training.setTraining_beschreibung( beschreibung.getText().toString() );
+            training.setTraining_datum( datum.getText().toString() );
+            training.setTraining_station_id( getStationID() );
+            benutzer = db.getBenutzer( spinnerBenutzer.getSelectedItem().toString() );
+            training.setTraining_benutzer_id( benutzer.getBenutzer_id() );
+            int stationtyp = getStationtyp();
+            if (stationtyp == 2) {
+                training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
+                training.setTraining_dauer( Integer.valueOf( dauer.getText().toString() ) );
+                training.setTraining_kcal( Integer.valueOf( kcal.getText().toString() ) );
+            } else if (stationtyp == 1) {
+                training.setTraining_wiederholung( Integer.valueOf( wiederholung.getText().toString() ) );
+                training.setTraining_gewicht( Integer.valueOf( gewicht.getText().toString() ) );
+            }
+            db.updateTraining( training );
+            i = new Intent( this, Training.class );
+            startActivity( i );
 
-        benutzer = db.getBenutzer(  spinnerBenutzer.getSelectedItem().toString() );
 
-        training.setTraining_benutzer_id(benutzer.getBenutzer_id() );
 
-        if(getStationtyp()==2){
 
-            training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
-            training.setTraining_dauer(Integer.valueOf(dauer.getText().toString()));
-            training.setTraining_kcal(Integer.valueOf(kcal.getText().toString() ) );
+
         }
 
-
-        db.createTraining(training);
-        Intent i = new Intent(this,Training.class);
-        startActivity( i );
     }
 }

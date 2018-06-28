@@ -15,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,7 +40,7 @@ public class Training extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertNeTraining();
+                insertNewTraining();
             }
         } );
 
@@ -59,6 +58,7 @@ public class Training extends AppCompatActivity
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 erzeugeTrainingListe();
 
             }
@@ -91,9 +91,18 @@ public class Training extends AppCompatActivity
         TrainingListAdapter tla = new TrainingListAdapter(getApplicationContext(),trainingList);
 
         lv.setAdapter(tla);
+        lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TrainingOnClickDialog tcd = new TrainingOnClickDialog(Training.this, id);
+                tcd.show();
+            }
+        });
+
+
     }
 
-    private void insertNeTraining() {
+    private void insertNewTraining() {
         Intent i = new Intent(this,form_training.class);
         startActivity( i );
     }
@@ -108,12 +117,7 @@ public class Training extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.training, menu );
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

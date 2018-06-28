@@ -37,7 +37,8 @@ public class StationListAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return 0;
+
+        return stationArrayList.get( position ).getStation_id();
     }
 
     @Override
@@ -46,11 +47,11 @@ public class StationListAdapter extends BaseAdapter{
 
            LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
            @SuppressLint("ViewHolder") View row =inf.inflate(R.layout.list_station_item,parent,false);
-           TextView txID =(TextView) row.findViewById( R.id.tV_station_id );
+
            TextView txName =(TextView) row.findViewById( R.id.tV_station_name );
            TextView txTyp =(TextView) row.findViewById( R.id.tV_station_typ );
             String x = Integer.toString( position );
-           txID.setText(x );
+
            txName.setText( stationArrayList.get( position ).getStation_name() );
            String stationTyp="k.A.";
            if(stationArrayList.get( position ).getStation_typ()==1){

@@ -3,15 +3,12 @@ package android.example.com.fittrack.FitDB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -37,17 +34,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"training_beschreibung VARCHAR," + 
 	"training_dauer INTEGER," + 
 	"training_geschwindigkeit INTEGER,	" +
-	"training_kcal INTEGER	" +
+	"training_kcal INTEGER,	" +
+	"training_wiederholung INTEGER,	" +
+	 "training_gewicht INTEGER	" +
 	")";
 
-	private static final String CREATE_TABLE_SATZ = "CREATE TABLE satz (" + 
-	"satz_id INTEGER PRIMARY KEY," + 
-	"satz_training_id INTEGER," + 
-	"satz_nr INTEGER," + 
-	"satz_gewicht INTEGER	" + 
-	")";
-
-	private static final String CREATE_TABLE_STATION = "CREATE TABLE station (" + 
+	private static final String CREATE_TABLE_STATION = "CREATE TABLE station (" +
 	"station_id INTEGER PRIMARY KEY," +
 	"station_name VARCHAR," + 
 	"station_typ INTEGER	" + 
@@ -71,7 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_BENUTZER);
 		db.execSQL(CREATE_TABLE_TRAINING);
-		db.execSQL(CREATE_TABLE_SATZ);
 		db.execSQL(CREATE_TABLE_STATION);
 		db.execSQL(CREATE_TABLE_TRAIN_ZIEL);
 	}
@@ -81,7 +72,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS benutzer");
 		db.execSQL("DROP TABLE IF EXISTS training");
-		db.execSQL("DROP TABLE IF EXISTS satz");
 		db.execSQL("DROP TABLE IF EXISTS station");
 		db.execSQL("DROP TABLE IF EXISTS train_ziel");
 		onCreate(db);
@@ -91,7 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void clear(SQLiteDatabase db) {
 		db.execSQL("DELETE FROM benutzer");
 		db.execSQL("DELETE FROM training");
-		db.execSQL("DELETE FROM satz");
 		db.execSQL("DELETE FROM station");
 		db.execSQL("DELETE FROM train_ziel");
 	}
@@ -202,6 +191,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_dauer", training.getTraining_dauer());
 		values.put("training_geschwindigkeit", training.getTraining_geschwindigkeit());
 		values.put("training_kcal",training.getTraining_kcal());
+		values.put("training_wiederholung",training.getTraining_wiederholung());
+		values.put("training_gewicht",training.getTraining_gewicht());
 		return db.insertOrThrow("training", null, values);
 	}
 
@@ -216,6 +207,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_dauer", training.getTraining_dauer());
 		values.put("training_geschwindigkeit", training.getTraining_geschwindigkeit());
 		values.put("training_kcal",training.getTraining_kcal());
+		values.put("training_wiederholung",training.getTraining_wiederholung());
+		values.put("training_gewicht",training.getTraining_gewicht());
 		return db.update("training", values, "training_id = ?", new String[] {String.valueOf(training.getTraining_id())});
 	}
 
@@ -234,6 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		training.setTraining_dauer(c.getInt(c.getColumnIndex("training_dauer")));
 		training.setTraining_geschwindigkeit(c.getInt(c.getColumnIndex("training_geschwindigkeit")));
 		training.setTraining_kcal( c.getInt( c.getColumnIndex( "training_kcal")));
+		training.setTraining_wiederholung( c.getInt(c.getColumnIndex( "training_wiederholung" )) );
+		training.setTraining_gewicht( c.getInt(c.getColumnIndex( "training_gewicht" )) );
 		return training;
 	}
 
@@ -281,92 +276,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return count;
 	}
 
-	public long createSatz(ModelSatz satz) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		//values.put("satz_id", satz.getSatz_id());
-		values.put("satz_training_id", satz.getSatz_training_id());
-		values.put("satz_nr", satz.getSatz_nr());
-		values.put("satz_gewicht", satz.getSatz_gewicht());
-		return db.insertOrThrow("satz", null, values);
-	}
-
-	public int updateSatz(ModelSatz satz) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put("satz_id", satz.getSatz_id());
-		values.put("satz_training_id", satz.getSatz_training_id());
-		values.put("satz_nr", satz.getSatz_nr());
-		values.put("satz_gewicht", satz.getSatz_gewicht());
-		return db.update("satz", values, "satz_id = ?", new String[] {String.valueOf(satz.getSatz_id())});
-	}
-
-	public int deleteSatz(ModelSatz satz) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete("satz", "satz_id = ?", new String[] {String.valueOf(satz.getSatz_id())});
-	}
-
-	protected ModelSatz getModelSatzFromCursor(Cursor c){
-		ModelSatz satz = new ModelSatz();
-		satz.setSatz_id(c.getInt(c.getColumnIndex("satz_id")));
-		satz.setSatz_training_id(c.getInt(c.getColumnIndex("satz_training_id")));
-		satz.setSatz_nr(c.getInt(c.getColumnIndex("satz_nr")));
-		satz.setSatz_gewicht(c.getInt(c.getColumnIndex("satz_gewicht")));
-		return satz;
-	}
-
-	public ModelSatz getSatz(long id) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM satz Where satz_id =  ?";
-		Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(id) });
-		if (c != null) c.moveToFirst();
-		return getModelSatzFromCursor(c);
-	}
-
-	public ModelSatz getSatzbyTrainingID (long id) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM satz Where satz_training_id =  ?";
-		Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(id) });
-		if (c != null) c.moveToFirst();
-		return getModelSatzFromCursor(c);
-	}
-
-	public ArrayList<ModelSatz> getAllSatz() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		ArrayList<ModelSatz> satzList = new ArrayList<ModelSatz>();
-		String selectQuery = "SELECT * FROM satz";
-		Cursor c = db.rawQuery(selectQuery, null);
-		if (c.moveToFirst()) {
-			do {
-				ModelSatz satz = getModelSatzFromCursor(c);
-				satzList.add(satz);
-			} while (c.moveToNext());
-		}
-		return satzList;
-	}
-	public ArrayList<ModelSatz> getAllSatzByTrainindID(int id) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		ArrayList<ModelSatz> satzList = new ArrayList<ModelSatz>();
-		String selectQuery = "SELECT * FROM satz WHERE satz_training_id="+id;
-		Cursor c = db.rawQuery(selectQuery, null);
-		if (c.moveToFirst()) {
-			do {
-				ModelSatz satz = getModelSatzFromCursor(c);
-				satzList.add(satz);
-			} while (c.moveToNext());
-		}
-		return satzList;
-	}
-
-	public int getSatzCount() {
-		String countQuery = "SELECT * FROM satz";
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(countQuery, null);
-		int count = cursor.getCount();
-		cursor.close();
-		return count;
-	}
-
 	public long createStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -387,6 +296,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public int deleteStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("station", "station_id = ?", new String[] {String.valueOf(station.getStation_id())});
+	}
+	public void deleteStationbyID(long id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete("station", "station_id = "+id+";",null  );
 	}
 
 	protected ModelStation getModelStationFromCursor(Cursor c){

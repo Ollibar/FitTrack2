@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Statistics extends AppCompatActivity
+public class Statistik extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -53,12 +53,6 @@ public class Statistics extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.statistics, menu );
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,7 +91,7 @@ public class Statistics extends AppCompatActivity
             Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistics.class);
+            Intent i = new Intent(this,Statistik.class);
             startActivity( i );
 
         }

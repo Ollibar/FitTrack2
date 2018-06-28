@@ -27,15 +27,10 @@
         android:onClick="speicherStation"/>
 
     <Button
-        android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gerät Löschen" />
+        android:text="Abbrechen"
+        android:onClick="abbrechen"/>
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Abbrechen" />
 
 </LinearLayout>

@@ -58,6 +58,22 @@
         android:inputType="number"
         android:visibility="gone" />
 
+    <EditText
+        android:id="@+id/editText_wiederholung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Wiederholungen"
+        android:inputType="number"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/editText_gewicht"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gewicht"
+        android:inputType="number"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/button7"
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -59,14 +60,21 @@ public class Station extends AppCompatActivity
         StationListAdapter sla =new StationListAdapter( getApplicationContext(),stationList );
 
         lv.setAdapter( sla );
-
-
-
-
+        lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            openStationForm(id);
+            }
+        } );
     }
 
     private void openStationForm() {
         Intent i = new Intent(this,form_station.class);
+        startActivity( i );
+    }
+    private void openStationForm(long id) {
+        Intent i = new Intent(this,form_station.class);
+        i.putExtra( "stationID",id );
         startActivity( i );
     }
 
@@ -80,12 +88,6 @@ public class Station extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.station, menu );
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

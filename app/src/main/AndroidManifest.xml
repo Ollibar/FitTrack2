@@ -69,10 +69,15 @@
             android:parentActivityName=".Station" />
         <activity
             android:name=".Formulare.form_training"
-            android:label="Gerät verwalten"
+            android:label="Training verwalten"
             android:parentActivityName=".Training" />
+
+        <activity android:name=".TrainingOnClickDialog"
+            android:label="Training Dialog"
+            android:parentActivityName=".Training" />
+
         <activity
-            android:name=".Statistics"
+            android:name=".Statistik"
             android:label="@string/title_activity_statistics"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

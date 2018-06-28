@@ -11,9 +11,11 @@ public class ModelTraining {
 	int training_dauer;
 	int training_geschwindigkeit;
 	int training_kcal;
+	int training_wiederholung;
+	int training_gewicht;
 
 	public ModelTraining() {}
-	public ModelTraining(int training_id,String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal) {
+	public ModelTraining(int training_id,String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal, int training_wiederholung, int training_gewicht) {
 		this.training_id = training_id;
 		this.training_datum = training_datum;
 		this.training_benutzer_id = training_benutzer_id;
@@ -22,8 +24,10 @@ public class ModelTraining {
 		this.training_dauer = training_dauer;
 		this.training_geschwindigkeit = training_geschwindigkeit;
 		this.training_kcal = training_kcal;
+		this.training_gewicht = training_gewicht;
+		this.training_wiederholung =training_wiederholung;
 	}
-	public ModelTraining(String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal) {
+	public ModelTraining(String training_datum,int training_benutzer_id,int training_station_id,String training_beschreibung,int training_dauer,int training_geschwindigkeit, int training_kcal,int training_wiederholung, int training_gewicht) {
 		//this.training_id = training_id;
 		this.training_datum = training_datum;
 		this.training_benutzer_id = training_benutzer_id;
@@ -32,6 +36,8 @@ public class ModelTraining {
 		this.training_dauer = training_dauer;
 		this.training_geschwindigkeit = training_geschwindigkeit;
 		this.training_kcal = training_kcal;
+		this.training_gewicht = training_gewicht;
+		this.training_wiederholung =training_wiederholung;
 	}
 
 	public void setTraining_id(int training_id) {
@@ -83,4 +89,13 @@ public class ModelTraining {
 	public int getTraining_kcal(){
 		return this.training_kcal;
 	}
+	public void setTraining_wiederholung(int training_wiederholung){
+		this.training_wiederholung = training_wiederholung;
+	}
+	public int getTraining_wiederholung(){ return this.training_wiederholung;}
+
+	public void setTraining_gewicht(int training_gewicht){
+		this.training_gewicht = training_gewicht;
+	}
+	public int getTraining_gewicht(){return training_gewicht;}
 }

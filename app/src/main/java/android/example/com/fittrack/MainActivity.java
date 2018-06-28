@@ -4,12 +4,9 @@ import android.content.Intent;
 
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
-import android.example.com.fittrack.FitDB.ModelSatz;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,12 +17,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static int activeUserID;
     private static final String TAG = "UserActivity";
+    TextView nav_Arnisays;
 
 
     private static final String LOG = MainActivity.class.getSimpleName();
@@ -38,15 +39,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById( R.id.fab );
-        fab.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
-                        .setAction( "Action", null ).show();
-            }
-        } );
-
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
@@ -56,9 +48,40 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
+        nav_Arnisays =findViewById( R.id.textView4 );
 
 
 
+    }
+
+    private void getArnisquote() {
+        String[] quotearray = {
+                "Bodybuilding is much like any other sport. To be successful, you must dedicate yourself 100% to your training, diet and mental approach.",
+                "Failure is not an option. Everybody has to succeed.",
+                "There are no shortcuts - Everything is reps, reps, reps.",
+                "The mind is the limit. As long as the mind can envision the fact that you can do something, you can do it, as long as you really believe 100 percent.",
+                "The worst thing i can be is the same as everybody else.",
+                "The Resistance that you fight physically in the gym and the resistance that you figt in life can only build a stron character.",
+                "Stop Whining",
+                "Trust yourself",
+                "Work Your Butt Off",
+                "When you go through hardships and decide not to surrender, that is strength",
+                "For me life is continuously being hungry. The meaning of life is not simply to exist, to survive, but to move ahead, to go up, to achieve, to conquer.",
+                "tart wide, expand further, and never look back.",
+                "Just remember, you can't climb the ladder of success with your hands in your pockets.",
+                "Nothing is impossible, the word itself says 'I'm possible'!",
+                "What is the point of being on this Earth if you are going to be like everyone else?",
+                "The mind is the limit. As long as the mind can envision the fact that you can do something, you can do it, as long as you really believe 100 percent.",
+                "If you don’t find the time, if you don’t do the work, you don’t get the results.",
+                "Life’s six rules for success. 1. Trust yourself. 2. Break some rules. 3. Don’t be afraid to fail. 4. Ignore the naysayers. 5. Work like hell. 6. Give something back.",
+                "Life may be full of pain but that’s not an excuse to give up.",
+                "Money doesn’t make you happy. I now have $50 million but I was just as happy when I had $48 million."};
+
+        int random = new Random().nextInt(quotearray.length);
+        String quote =quotearray[random];
+
+
+        nav_Arnisays.setText(quote);
 
     }
 
@@ -81,9 +104,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -96,6 +117,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+    // Navigation Drawer Menü Listner
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -116,7 +138,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistics.class);
+            Intent i = new Intent(this,Statistik.class);
             startActivity( i );
 
         }
@@ -126,9 +148,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-
-
+    // Methode zum einfügen von Testdaten in die Datenbank
     public void testdaten(MenuItem item) {
         // Benutzer
         ModelBenutzer user =new ModelBenutzer( "Betty Kane",25,65 );
@@ -149,22 +169,16 @@ public class MainActivity extends AppCompatActivity
         db.createStation( station );
 
         //Trainings
-        ModelTraining  training = new ModelTraining("25/06/2018",2,3,"Beschreibung 1",123,159,147);
+        ModelTraining  training = new ModelTraining("25/06/2018",2,3,"Beschreibung 1",123,159,147,0,0);
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",2,4,"Beschreibung 1",123,159,147);
+        training = new ModelTraining("24/06/2018",2,4,"Beschreibung 1",123,159,147,0,0);
         db.createTraining( training );
-        training = new ModelTraining("27/06/2018",1,1,"Beschreibung 1",0,0,0);
+        training = new ModelTraining("27/06/2018",1,1,"Beschreibung 1",0,0,0,30,50);
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0);
+        training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0,45,45);
         db.createTraining( training );
 
-        //Satz
-        ModelSatz satz = new ModelSatz( 3,1,25,25 );
-        db.createSatz( satz );
-        satz = new ModelSatz( 3,2,25,25 );
-        db.createSatz( satz );
-        satz = new ModelSatz( 3,3,25,25 );
-        db.createSatz( satz );
+
 
     }
 
@@ -176,5 +190,9 @@ public class MainActivity extends AppCompatActivity
             Log.v(TAG, "ok" );
 
         }
+    }
+
+    public void getArnisquote(View view) {
+        getArnisquote();
     }
 }

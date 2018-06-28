@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/benutzeronclickdialog"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_list_satz_nummer"
+    <Button
+        android:id="@+id/bt_dialog_Bearbeiten"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Bearbeiten" />
 
-    <TextView
-        android:id="@+id/tv_list_satz_wiederholung"
+    <Button
+        android:id="@+id/bt_dialog_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Löschen" />
 
-    <TextView
-        android:id="@+id/tv_list_satz_gewicht"
+    <Button
+        android:id="@+id/bt_dialog_abbrechen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Abbrechen" />
 </LinearLayout>
