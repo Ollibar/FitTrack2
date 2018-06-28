@@ -138,8 +138,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	public ModelBenutzer getBenutzer(String name) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM benutzer Where benutzer_name =\"" + name + "\";";
-		Cursor c = db.rawQuery( selectQuery, null );
+		String selectQuery = "SELECT * FROM benutzer Where benutzer_name = ?";
+		Cursor c = db.rawQuery( selectQuery, new String[] {name} );
 		if (c != null) c.moveToFirst();
 		return getModelBenutzerFromCursor( c );
 	}
@@ -364,7 +364,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public long createTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("train_ziel_id", train_ziel.getTrain_ziel_id());
 		values.put("train_ziel_benutzer_id", train_ziel.getTrain_ziel_benutzer_id());
 		values.put("train_ziel_station_id", train_ziel.getTrain_ziel_station_id());
 		values.put("train_ziel_soll_geschwindigkeit", train_ziel.getTrain_ziel_soll_geschwindigkeit());
@@ -380,7 +379,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public int updateTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put("train_ziel_id", train_ziel.getTrain_ziel_id());
 		values.put("train_ziel_benutzer_id", train_ziel.getTrain_ziel_benutzer_id());
 		values.put("train_ziel_station_id", train_ziel.getTrain_ziel_station_id());
 		values.put("train_ziel_soll_geschwindigkeit", train_ziel.getTrain_ziel_soll_geschwindigkeit());
@@ -389,7 +387,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("train_ziel_pos1", train_ziel.getTrain_ziel_pos1());
 		values.put("train_ziel_pos2", train_ziel.getTrain_ziel_pos2());
 		values.put("train_ziel_pos3", train_ziel.getTrain_ziel_pos3());
-		return db.update("train_ziel_benutzer_id", values, "id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_benutzer_id())});
+		return db.update("train_ziel_id", values, "id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
 	}
 
 	public int deleteTrain_ziel(ModelTrain_ziel train_ziel) {
@@ -410,6 +408,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		train_ziel.setTrain_ziel_pos3(c.getString(c.getColumnIndex("train_ziel_pos3")));
 		return train_ziel;
 	}
+	public long getTrainZielID(long stationID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM train_ziel Where train_ziel_station_id =  ?";
+        Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(stationID) });
+        if (c != null) c.moveToFirst();
+        ModelTrain_ziel ziel =getModelTrain_zielFromCursor(c);
+        return ziel.getTrain_ziel_id();
+    }
 
 	public ModelTrain_ziel getTrain_ziel(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -440,12 +446,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int count = cursor.getCount();
 		cursor.close();
 		return count;
-	}
-
-	public void sqlquery(String q){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.rawQuery( q,null );
-
 	}
 
 }
