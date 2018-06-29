@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelStation;
+import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.os.Bundle;
 import android.util.Log;
@@ -177,6 +178,10 @@ public class MainActivity extends AppCompatActivity
         db.createTraining( training );
         training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0,45,45);
         db.createTraining( training );
+
+        // Trainingsziel
+        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,12,12,123,1,"2","3","4");
+        db.createTrain_ziel(train_ziel);
 
 
 

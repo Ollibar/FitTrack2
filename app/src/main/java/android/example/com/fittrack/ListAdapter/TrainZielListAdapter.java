@@ -23,6 +23,8 @@ public class TrainZielListAdapter extends BaseAdapter {
     public TrainZielListAdapter(Context context, ArrayList<ModelTrain_ziel> train_ziel) {
         this.context=context;
         this.train_zielArrayList=train_ziel;
+        db=new DatabaseHelper(context);
+
     }
 
     @Override
@@ -37,7 +39,7 @@ public class TrainZielListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return train_zielArrayList.get(position).getTrain_ziel_id();
     }
 
 
@@ -58,10 +60,10 @@ public class TrainZielListAdapter extends BaseAdapter {
         TextView zielGeschw= (TextView)row.findViewById(R.id.tV_list_ziel_Gesw);
 
         ModelTrain_ziel mz = train_zielArrayList.get(position);
-        int idB = mz.getTrain_ziel_benutzer_id();
+        long idB = mz.getTrain_ziel_benutzer_id();
 
-        ModelBenutzer mb = db.getBenutzer(idB);
-        zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
+       ModelBenutzer mb = db.getBenutzer(train_zielArrayList.get(position).getTrain_ziel_benutzer_id());
+       zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
 
         ModelTrain_ziel mZ = train_zielArrayList.get(position);
         int idS = mZ.getTrain_ziel_station_id();

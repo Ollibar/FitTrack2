@@ -14,6 +14,18 @@ public class ModelTrain_ziel {
 
 	public ModelTrain_ziel() {}
 
+	public ModelTrain_ziel(int train_ziel_benutzer_id, int train_ziel_station_id, int train_ziel_soll_geschwindigkeit, int train_ziel_soll_dauer, int train_ziel_soll_gewicht, int train_ziel_korper_gewicht, String train_ziel_pos1, String train_ziel_pos2, String train_ziel_pos3) {
+		this.train_ziel_benutzer_id = train_ziel_benutzer_id;
+		this.train_ziel_station_id = train_ziel_station_id;
+		this.train_ziel_soll_geschwindigkeit = train_ziel_soll_geschwindigkeit;
+		this.train_ziel_soll_dauer = train_ziel_soll_dauer;
+		this.train_ziel_soll_gewicht = train_ziel_soll_gewicht;
+		this.train_ziel_korper_gewicht = train_ziel_korper_gewicht;
+		this.train_ziel_pos1 = train_ziel_pos1;
+		this.train_ziel_pos2 = train_ziel_pos2;
+		this.train_ziel_pos3 = train_ziel_pos3;
+	}
+
 	public int getTrain_ziel_korper_gewicht() {
 		return train_ziel_korper_gewicht;
 	}
