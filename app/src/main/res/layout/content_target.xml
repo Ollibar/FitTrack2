@@ -9,8 +9,15 @@
     tools:context=".TrainZiel"
     tools:showIn="@layout/app_bar_target">
 
+    <Spinner
+        android:id="@+id/spinner_traning_ziel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/lV_ziele"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@android:drawable/button_onoff_indicator_off"
+        android:dividerHeight="5dp" />
 </LinearLayout>

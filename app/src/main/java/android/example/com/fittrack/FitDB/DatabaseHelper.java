@@ -387,12 +387,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("train_ziel_pos1", train_ziel.getTrain_ziel_pos1());
 		values.put("train_ziel_pos2", train_ziel.getTrain_ziel_pos2());
 		values.put("train_ziel_pos3", train_ziel.getTrain_ziel_pos3());
-		return db.update("train_ziel_id", values, "id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
+		return db.update("train_ziel", values, "train_ziel_id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
 	}
 
 	public int deleteTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete("train_ziel", "id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
+		return db.delete("train_ziel", "train_ziel_id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
 	}
 
 	protected ModelTrain_ziel getModelTrain_zielFromCursor(Cursor c){
@@ -419,12 +419,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public ModelTrain_ziel getTrain_ziel(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM train_ziel Where id =  ?";
+		String selectQuery = "SELECT * FROM train_ziel Where train_ziel_id =  ?";
 		Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(id) });
 		if (c != null) c.moveToFirst();
 		return getModelTrain_zielFromCursor(c);
 	}
 
+	public ArrayList<ModelTrain_ziel> getAllTrain_ziel(int benutzerID){
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<ModelTrain_ziel> train_zielList = new ArrayList<>();
+		String selectQuery =  "SELECT * FROM train_ziel Where train_ziel_benutzer_id ="+benutzerID+" ;";
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()) {
+			do {
+				ModelTrain_ziel train_ziel = getModelTrain_zielFromCursor(c);
+				train_zielList.add(train_ziel);
+			} while (c.moveToNext());
+		}
+		return train_zielList;
+	}
 	public ArrayList<ModelTrain_ziel> getAllTrain_ziel() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelTrain_ziel> train_zielList = new ArrayList<ModelTrain_ziel>();

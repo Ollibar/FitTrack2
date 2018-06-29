@@ -7,4 +7,9 @@
         android:title="Testdaten anlegen"
         app:showAsAction="never"
         android:onClick="testdaten"/>
+    <item
+        android:title="Statistiken der App"
+        android:id="@+id/appStatistics"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>

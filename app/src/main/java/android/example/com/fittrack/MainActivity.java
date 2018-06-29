@@ -111,6 +111,10 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if(id == R.id.appStatistics){
+            Intent in = new Intent(this,AppStatistics.class);
+            startActivity(in);
+            return true;
         }
 
         return super.onOptionsItemSelected( item );
@@ -180,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         db.createTraining( training );
 
         // Trainingsziel
-        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,12,12,123,1,"2","3","4");
+        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,0,60,123,70,"sitzend","stehend","liegend");
         db.createTrain_ziel(train_ziel);
 
 
@@ -200,4 +204,6 @@ public class MainActivity extends AppCompatActivity
     public void getArnisquote(View view) {
         getArnisquote();
     }
-}
+
+    }
+

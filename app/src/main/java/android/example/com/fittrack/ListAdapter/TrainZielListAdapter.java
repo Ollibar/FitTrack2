@@ -20,6 +20,7 @@ public class TrainZielListAdapter extends BaseAdapter {
     private ArrayList<ModelTrain_ziel> train_zielArrayList;
     private DatabaseHelper db;
     private static final String LOG = TrainZielListAdapter.class.getName();
+
     public TrainZielListAdapter(Context context, ArrayList<ModelTrain_ziel> train_ziel) {
         this.context=context;
         this.train_zielArrayList=train_ziel;
@@ -59,24 +60,21 @@ public class TrainZielListAdapter extends BaseAdapter {
         TextView zielDauer= (TextView)row.findViewById(R.id.tV_list_ziel_Dauer);
         TextView zielGeschw= (TextView)row.findViewById(R.id.tV_list_ziel_Gesw);
 
-        ModelTrain_ziel mz = train_zielArrayList.get(position);
-        long idB = mz.getTrain_ziel_benutzer_id();
+
 
        ModelBenutzer mb = db.getBenutzer(train_zielArrayList.get(position).getTrain_ziel_benutzer_id());
        zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
 
-        ModelTrain_ziel mZ = train_zielArrayList.get(position);
-        int idS = mZ.getTrain_ziel_station_id();
-        ModelStation s = db.getStation(idS);
-        zielStation.setText("Gerät: "+s.getStation_name());
+        ModelStation ms = db.getStation(train_zielArrayList.get(position).getTrain_ziel_station_id());
+        zielStation.setText("Gerät: "+ms.getStation_name());
 
-        zielGewicht.setText("Sollgewicht: "+train_zielArrayList.get(position).getTrain_ziel_soll_gewicht());
+        zielGewicht.setText("Sollgewicht: "+train_zielArrayList.get(position).getTrain_ziel_soll_gewicht()+" KG");
         zielPos1.setText("Position 1: "+train_zielArrayList.get(position).getTrain_ziel_pos1());
         zielPos2.setText("Position 2: "+train_zielArrayList.get(position).getTrain_ziel_pos2());
         zielPos3.setText("Position 3: "+train_zielArrayList.get(position).getTrain_ziel_pos3());
-        zielWunschgewicht.setText("Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht());
-        zielDauer.setText("Dauer: "+train_zielArrayList.get(position).getTrain_ziel_soll_dauer());
-        zielGeschw.setText("Geschwindigkeit: "+train_zielArrayList.get(position).getTrain_ziel_soll_geschwindigkeit());
+        zielWunschgewicht.setText("Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
+        zielDauer.setText("Dauer: "+train_zielArrayList.get(position).getTrain_ziel_soll_dauer()+" Min.");
+        zielGeschw.setText("Geschwindigkeit: "+train_zielArrayList.get(position).getTrain_ziel_soll_geschwindigkeit()+" KmH");
 
 
          return row;

@@ -27,6 +27,7 @@
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
             android:textStyle="bold" />
     </LinearLayout>
 

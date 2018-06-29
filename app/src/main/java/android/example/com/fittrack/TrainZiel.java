@@ -2,10 +2,12 @@ package android.example.com.fittrack;
 
 import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
+import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.Formulare.form_target;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,16 +17,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
+import android.widget.Spinner;
 
 public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseHelper db = new DatabaseHelper( this );
+    private static final String LOG = TrainZiel.class.getSimpleName();
     private ListView lv;
+    private Spinner spinnerUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +57,38 @@ public class TrainZiel extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
+        setSpinner();
         erzeugeListe();
+
+        spinnerUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                erzeugeListe();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d(LOG,"adater ausgeführt");
+            }
+        });
     }
 
     private void erzeugeListe() {
 
-        ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel();
+        String username = spinnerUser.getSelectedItem().toString();
+        ModelBenutzer mb = db.getBenutzer(username);
+        ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel(mb.getBenutzer_id());
         lv=findViewById( R.id.lV_ziele );
         TrainZielListAdapter tla = new TrainZielListAdapter( getApplicationContext(),trainZielList );
         lv.setAdapter( tla );
+    }
+    private void setSpinner() {
+        spinnerUser = findViewById( R.id.spinner_traning_ziel);
+        String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<>
+                (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
+        spinnerArrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUser.setAdapter(spinnerArrayAdapter1);
     }
 
     private void openTargetForm() {

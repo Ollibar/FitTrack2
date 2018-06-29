@@ -20,6 +20,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
+        app:itemBackground="@android:drawable/btn_default"
+        app:itemTextAppearance="@style/TextAppearance.AppCompat.Button"
+        app:itemTextColor="@android:color/holo_red_light"
         app:menu="@menu/activity_main_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

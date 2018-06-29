@@ -21,29 +21,29 @@
         android:id="@+id/edT_soll_gewicht"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sollgewicht"
+        android:hint="Sollgewicht in KG"
         android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_soll_dauer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Solldauer"
+        android:hint="Solldauer in Min."
         android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_soll_geschwindigkeit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sollgeschwindigkeit"
+        android:hint="Sollgeschwindigkeit in KmH"
         android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_gewichtwusch_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Gewichtwunsch"
-        android:inputType="text" />
+        android:hint="Gewichtwunsch in KG"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/edT_pos_1"
@@ -68,6 +68,7 @@
 
     <Button
         android:id="@+id/buttonZielSpeichern"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="insertTarget"
@@ -75,6 +76,7 @@
 
     <Button
         android:id="@+id/buttonZielUpdate"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="updateTarget"

@@ -23,5 +23,7 @@
     <string name="tVZielTrainKondi">Ziele für Konditionstraining </string>
     <string name="btnZielSpeichern">Ziele Speichern</string>
     <string name="btnZieleUpdate">Ziele Updaten</string>
+    <string name="appStatistics">Deine App</string>
+    <string name="buttonAppstatistics">Zurück</string>
 
 </resources>

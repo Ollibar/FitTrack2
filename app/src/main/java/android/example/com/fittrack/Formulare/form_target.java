@@ -145,7 +145,8 @@ public class form_target extends AppCompatActivity {
 
         long id =db.getTrainZielID(getStationID());
 
-        ModelTrain_ziel ziel =(ModelTrain_ziel) db.getTrain_ziel(id);
+        Log.d(LOG,"trainingsziel id : "+id);
+        ModelTrain_ziel ziel = db.getTrain_ziel(id);
 
         ziel.setTrain_ziel_benutzer_id(getBenutzerID());
         ziel.setTrain_ziel_station_id(getStationID());

@@ -13,7 +13,7 @@
         android:id="@+id/stationlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:divider="#000000"
-        android:dividerHeight="2dp"/>
+        android:divider="@android:drawable/button_onoff_indicator_off"
+        android:dividerHeight="5dp"
+        android:scrollbars="vertical" />
 </LinearLayout>
