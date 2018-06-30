@@ -255,6 +255,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			dp[i]= new DataPoint(cursor.getInt(0),cursor.getInt(1));
 		}return dp;
 	}
+	public Cursor getPumperStats(long benutzerId){
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String query ="Select training_datum,Sum(training_kcal) As Kcal from training group by training_datum\n" +
+				"having training_benutzer_id ="+benutzerId+";";
+		Cursor c =db.rawQuery(query,null);
+		return c;
+	}
 
 
 	public ArrayList<ModelTraining> getAllTraining() {
