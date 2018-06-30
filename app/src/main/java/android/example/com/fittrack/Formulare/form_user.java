@@ -19,23 +19,22 @@ import android.widget.Toast;
 public class form_user extends AppCompatActivity {
 
     private DatabaseHelper dbHelper = new DatabaseHelper(this);
-
+    private  EditText txtfield1,txtfield2,txtfield3;
     private static final String LOG = form_user.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_form_user );
+
+        txtfield1 =(EditText)  findViewById(R.id.form_user_name);
+        txtfield2 =(EditText)  findViewById(R.id.form_user_age);
+        txtfield3 =(EditText)  findViewById(R.id.form_user_weight);
     }
 
     public void insertUserIntoDB(View view) {
 
-        EditText txtfield1 =(EditText)  findViewById(R.id.form_user_name);
         String name = txtfield1.getText().toString();
-
-        EditText txtfield2 =(EditText)  findViewById(R.id.form_user_age);
         String alter = txtfield2.getText().toString();
-
-        EditText txtfield3 =(EditText)  findViewById(R.id.form_user_weight);
         String gewicht = txtfield3.getText().toString();
 
         if(TextUtils.isEmpty(name)){
@@ -68,13 +67,10 @@ public class form_user extends AppCompatActivity {
 
     public void updateUser(View view){
 
-        EditText txtfield1 =(EditText)  findViewById(R.id.form_user_name);
+        ModelBenutzer user = new ModelBenutzer();
+
         String name = txtfield1.getText().toString();
-
-        EditText txtfield2 =(EditText)  findViewById(R.id.form_user_age);
         String alter = txtfield2.getText().toString();
-
-        EditText txtfield3 =(EditText)  findViewById(R.id.form_user_weight);
         String gewicht = txtfield3.getText().toString();
 
         if(TextUtils.isEmpty(name)){
@@ -82,18 +78,16 @@ public class form_user extends AppCompatActivity {
             return;
         }
         if(TextUtils.isEmpty(alter)){
-            txtfield2.setError("Zeile ist Leer");
-            return;
-        }
+            user = dbHelper.getBenutzer(name);
+            user.setBenutzer_alter(user.getBenutzer_alter());
+        }else user.setBenutzer_alter(Integer.parseInt(alter));
+
         if(TextUtils.isEmpty(gewicht)){
-            txtfield3.setError("Zeile ist Leer !");
-            return;
-        }
+            user =dbHelper.getBenutzer(name);
+            user.setBenutzer_alter(user.getBenutzer_gewicht());
+        }else user.setBenutzer_gewicht(Integer.parseInt(gewicht));
 
-        int alt = Integer.parseInt(alter);
-        int gew = Integer.parseInt(gewicht);
 
-        ModelBenutzer user = new ModelBenutzer(name,alt,gew);
         int i = dbHelper.updateBenutzer(user);
 
         Intent intent = new Intent(this, Benutzer.class);

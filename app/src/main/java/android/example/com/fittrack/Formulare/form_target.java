@@ -126,6 +126,7 @@ public class form_target extends AppCompatActivity {
         ziele.setTrain_ziel_soll_gewicht(Integer.parseInt(gewicht));
 
         long id = db.createTrain_ziel(ziele);
+
         if(id > -1) {
             Intent i = new Intent(this, TrainZiel.class);
             startActivity(i);

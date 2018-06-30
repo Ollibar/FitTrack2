@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.jjoe64.graphview.series.DataPoint;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -239,6 +241,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelTrainingFromCursor(c);
 	}
+	public DataPoint[]getData(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		String [] colummns={"training_datum","sum(training_kcal)"};
+		String groupBy = "training_datum";
+		Cursor cursor = db.query("training",colummns,null,null,groupBy,
+				null,null);
+		DataPoint[]dp = new DataPoint[cursor.getCount()];
+
+		for(int i=0;i<cursor.getCount();i++){
+			cursor.moveToNext();
+			//x=datum  y=sum(kcal)
+			dp[i]= new DataPoint(cursor.getInt(0),cursor.getInt(1));
+		}return dp;
+	}
+
 
 	public ArrayList<ModelTraining> getAllTraining() {
 		SQLiteDatabase db = this.getReadableDatabase();
