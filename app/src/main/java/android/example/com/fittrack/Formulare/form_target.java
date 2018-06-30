@@ -58,7 +58,7 @@ public class form_target extends AppCompatActivity {
                     tvSollGewicht.setVisibility(View.VISIBLE);
                     tvSollDauer.setVisibility(View.GONE);
                     tvSollGeschw.setVisibility(View.GONE);
-                    tvGewichtwunsch.setVisibility(View.GONE);
+                    tvGewichtwunsch.setVisibility(View.VISIBLE);
                     tvPos1.setVisibility(View.VISIBLE);
                     tvPos2.setVisibility(View.VISIBLE);
                     tvPos3.setVisibility(View.VISIBLE);
@@ -99,7 +99,9 @@ public class form_target extends AppCompatActivity {
 
         if (TextUtils.isEmpty(gewichtwunsch)){
             ziele.setTrain_ziel_korper_gewicht(0);
-        }else ziele.setTrain_ziel_korper_gewicht(Integer.parseInt(gewichtwunsch));
+        } else
+            ziele.setTrain_ziel_korper_gewicht(Integer.parseInt(gewichtwunsch));
+        Log.d(LOG,"insert gewichtwunsch"+gewichtwunsch);
         if(TextUtils.isEmpty(pos1)){
             ziele.setTrain_ziel_pos1("k.A.");
         }else ziele.setTrain_ziel_pos1(pos1);

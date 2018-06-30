@@ -192,15 +192,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void test(View view) {
-        String[] array = db.getAllBenutzerNamen();
-        for(int p =0; p<array.length;p++){
-            Log.v(TAG, "Name=" + array[p]);
-            Log.v(TAG, "ok" );
-
-        }
-    }
-
     public void getArnisquote(View view) {
         getArnisquote();
     }

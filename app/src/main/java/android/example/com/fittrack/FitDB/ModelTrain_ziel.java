@@ -1,16 +1,16 @@
 package android.example.com.fittrack.FitDB;
 
 public class ModelTrain_ziel {
-	int train_ziel_id;
-	int train_ziel_benutzer_id;
-	int train_ziel_station_id;
-	int train_ziel_soll_geschwindigkeit;
-	int train_ziel_soll_dauer;
-	int train_ziel_soll_gewicht;
-	int train_ziel_korper_gewicht;
-	String train_ziel_pos1;
-	String train_ziel_pos2;
-	String train_ziel_pos3;
+	private int train_ziel_id;
+	private int train_ziel_benutzer_id;
+	private int train_ziel_station_id;
+	private int train_ziel_soll_geschwindigkeit;
+	private int train_ziel_soll_dauer;
+	private int train_ziel_soll_gewicht;
+	private int train_ziel_korper_gewicht;
+	private String train_ziel_pos1;
+	private String train_ziel_pos2;
+	private String train_ziel_pos3;
 
 	public ModelTrain_ziel() {}
 

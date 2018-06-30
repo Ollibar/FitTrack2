@@ -21,16 +21,18 @@
 
     <Button
         android:id="@+id/button4"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Speichern"
-        android:onClick="speicherStation"/>
+        android:onClick="speicherStation"
+        android:text="Speichern" />
 
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Abbrechen"
-        android:onClick="abbrechen"/>
+        android:onClick="abbrechen"
+        android:text="Abbrechen" />
 
 
 </LinearLayout>

@@ -89,7 +89,7 @@ public class Benutzer extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                       db.deleteBenutzer(benutzerList.get(position));
                         Toast.makeText(Benutzer.this,"Benutzer "+benutzerList.get(position).getBenutzer_name()+
-                                " wurde Erfolgreich gelöscht. Was für ein Lappen :D",
+                                " wurde Erfolgreich gelöscht. Hasta la vista, baby!",
                                 Toast.LENGTH_LONG).show();
                         // Liste aktualisieren
                         showAllListBenutzer();

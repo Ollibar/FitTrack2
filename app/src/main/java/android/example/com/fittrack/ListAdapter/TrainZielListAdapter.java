@@ -73,6 +73,7 @@ public class TrainZielListAdapter extends BaseAdapter {
         zielPos2.setText("Position 2: "+train_zielArrayList.get(position).getTrain_ziel_pos2());
         zielPos3.setText("Position 3: "+train_zielArrayList.get(position).getTrain_ziel_pos3());
         zielWunschgewicht.setText("Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
+        Log.d(LOG,"Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
         zielDauer.setText("Dauer: "+train_zielArrayList.get(position).getTrain_ziel_soll_dauer()+" Min.");
         zielGeschw.setText("Geschwindigkeit: "+train_zielArrayList.get(position).getTrain_ziel_soll_geschwindigkeit()+" KmH");
 

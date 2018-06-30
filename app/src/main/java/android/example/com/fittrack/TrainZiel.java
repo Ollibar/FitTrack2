@@ -1,5 +1,6 @@
 package android.example.com.fittrack;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
@@ -7,6 +8,7 @@ import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.Formulare.form_target;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 
 import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,12 +78,39 @@ public class TrainZiel extends AppCompatActivity
 
     private void erzeugeListe() {
 
-        String username = spinnerUser.getSelectedItem().toString();
+        final String username = spinnerUser.getSelectedItem().toString();
         ModelBenutzer mb = db.getBenutzer(username);
-        ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel(mb.getBenutzer_id());
+        final ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel(mb.getBenutzer_id());
         lv=findViewById( R.id.lV_ziele );
         TrainZielListAdapter tla = new TrainZielListAdapter( getApplicationContext(),trainZielList );
         lv.setAdapter( tla );
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(TrainZiel.this);
+                alert.setTitle("Dieses Ziel wirklich LÖSCHEN !?");
+                alert.setCancelable(true);
+                alert.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        db.deleteTrain_ziel(trainZielList.get(position));
+                        Toast.makeText(TrainZiel.this,"You are one ugly motherf****r "+
+                                username+
+                                ", Arnie-Predator",Toast.LENGTH_LONG
+                        ).show();
+                        erzeugeListe();
+                    }
+                });
+                alert.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                         dialog.cancel();
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
+            }
+        });
     }
     private void setSpinner() {
         spinnerUser = findViewById( R.id.spinner_traning_ziel);

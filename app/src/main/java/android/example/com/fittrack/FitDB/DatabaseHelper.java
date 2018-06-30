@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"train_ziel_id INTEGER PRIMARY KEY," +
 	"train_ziel_benutzer_id INTEGER," + 
 	"train_ziel_station_id INTEGER," + 
-	"train_ziel_soll_geschwindigkeit INTEGER DEFAULT 0," +
+	"train_ziel_soll_geschwindigkeit INTEGER," +
 	"train_ziel_soll_dauer INTEGER ," +
 	"train_ziel_soll_gewicht INTEGER ," +
 	"train_ziel_gewicht_wunsch INTEGER ,"+
@@ -384,6 +384,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("train_ziel_soll_geschwindigkeit", train_ziel.getTrain_ziel_soll_geschwindigkeit());
 		values.put("train_ziel_soll_dauer", train_ziel.getTrain_ziel_soll_dauer());
 		values.put("train_ziel_soll_gewicht", train_ziel.getTrain_ziel_soll_gewicht());
+		values.put("train_ziel_gewicht_wunsch",train_ziel.getTrain_ziel_korper_gewicht());
 		values.put("train_ziel_pos1", train_ziel.getTrain_ziel_pos1());
 		values.put("train_ziel_pos2", train_ziel.getTrain_ziel_pos2());
 		values.put("train_ziel_pos3", train_ziel.getTrain_ziel_pos3());
@@ -403,6 +404,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		train_ziel.setTrain_ziel_soll_geschwindigkeit(c.getInt(c.getColumnIndex("train_ziel_soll_geschwindigkeit")));
 		train_ziel.setTrain_ziel_soll_dauer(c.getInt(c.getColumnIndex("train_ziel_soll_dauer")));
 		train_ziel.setTrain_ziel_soll_gewicht(c.getInt(c.getColumnIndex("train_ziel_soll_gewicht")));
+		train_ziel.setTrain_ziel_korper_gewicht(c.getInt(c.getColumnIndex("train_ziel_gewicht_wunsch")));
 		train_ziel.setTrain_ziel_pos1(c.getString(c.getColumnIndex("train_ziel_pos1")));
 		train_ziel.setTrain_ziel_pos2(c.getString(c.getColumnIndex("train_ziel_pos2")));
 		train_ziel.setTrain_ziel_pos3(c.getString(c.getColumnIndex("train_ziel_pos3")));

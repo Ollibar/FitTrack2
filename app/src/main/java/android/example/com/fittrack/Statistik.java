@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.jjoe64.graphview.GraphView;
+
 public class Statistik extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    GraphView graphView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -52,7 +55,9 @@ public class Statistik extends AppCompatActivity
             super.onBackPressed();
         }
     }
+    private void createTestgraph(){
 
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

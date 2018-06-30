@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,11 +8,8 @@
     tools:context=".Statistik"
     tools:showIn="@layout/app_bar_statistics">
 
-    <TextView
-        android:id="@+id/textView2"
+    <com.jjoe64.graphview.GraphView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Statistiken"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="234dp" />
-</android.support.constraint.ConstraintLayout>
+        android:id="@+id/graphView"/>
+</LinearLayout>
