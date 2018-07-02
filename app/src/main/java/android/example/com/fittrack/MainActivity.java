@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
                 "There are no shortcuts - Everything is reps, reps, reps.",
                 "The mind is the limit. As long as the mind can envision the fact that you can do something, you can do it, as long as you really believe 100 percent.",
                 "The worst thing i can be is the same as everybody else.",
-                "The Resistance that you fight physically in the gym and the resistance that you figt in life can only build a stron character.",
+                "The Resistance that you fight physically in the gym and the resistance that you fight in life can only build a strong character.",
                 "Stop Whining",
                 "Trust yourself",
                 "Work Your Butt Off",

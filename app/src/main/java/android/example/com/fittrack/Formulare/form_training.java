@@ -83,11 +83,10 @@ public class form_training extends AppCompatActivity {
         });
 
          i = getIntent();
-
-        if(i==null){
-
-
-
+        // wenn aufruf über die Liste
+        if(i.getLongExtra( "ID",-1 )==-1){
+            Date strDate = Calendar.getInstance().getTime();
+            datum.setText( dateFormat.format(strDate));
         }else{
             long trainingID = i.getLongExtra( "ID",-1 );
             if (trainingID!=-1){
@@ -100,7 +99,7 @@ public class form_training extends AppCompatActivity {
 
                 beschreibung.setText( training.getTraining_beschreibung() );
                 if(getStationtyp()==1){
-                    wiederholung.setText( training.getTraining_wiederholung() );
+                    wiederholung.setText(String.valueOf( training.getTraining_wiederholung() )  );
                     gewicht.setText(String.valueOf( training.getTraining_gewicht()));
                 }
                 else if(getStationtyp()==2){
@@ -109,12 +108,7 @@ public class form_training extends AppCompatActivity {
                     kcal.setText(String.valueOf( training.getTraining_kcal() ));
                 }
             }
-            else{
-                Date strDate = Calendar.getInstance().getTime();
-                datum.setText( dateFormat.format(strDate));
-            }
-
-        }
+         }
     }
 
     private void setSpinner() {
@@ -157,7 +151,6 @@ public class form_training extends AppCompatActivity {
 
     public void speicherTraining(View view) {
 
-        if (i==null) {
             training = new ModelTraining();
             training.setTraining_beschreibung( beschreibung.getText().toString() );
             training.setTraining_datum( datum.getText().toString() );
@@ -165,10 +158,12 @@ public class form_training extends AppCompatActivity {
             benutzer = db.getBenutzer( spinnerBenutzer.getSelectedItem().toString() );
             training.setTraining_benutzer_id( benutzer.getBenutzer_id() );
             int stationtyp = getStationtyp();
+            // Wenn Stationstyp = Kardio (2)
             if (stationtyp == 2) {
                 training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
                 training.setTraining_dauer( Integer.valueOf( dauer.getText().toString() ) );
                 training.setTraining_kcal( Integer.valueOf( kcal.getText().toString() ) );
+            // Wenn Stationstyp = Kraft (1)
             } else if (stationtyp == 1) {
                 training.setTraining_wiederholung( Integer.valueOf( wiederholung.getText().toString() ) );
                 training.setTraining_gewicht( Integer.valueOf( gewicht.getText().toString() ) );
@@ -178,32 +173,29 @@ public class form_training extends AppCompatActivity {
             db.createTraining( training );
             i = new Intent( this, Training.class );
             startActivity( i );
+
+    }
+
+    public void aktualisiereTraining(View view) {
+        training = new ModelTraining();
+        training.setTraining_beschreibung( beschreibung.getText().toString() );
+        training.setTraining_datum( datum.getText().toString() );
+        training.setTraining_station_id( getStationID() );
+        benutzer = db.getBenutzer( spinnerBenutzer.getSelectedItem().toString() );
+        training.setTraining_benutzer_id( benutzer.getBenutzer_id() );
+        int stationtyp = getStationtyp();
+        // Wenn Stationstyp = Kardio (2)
+        if (stationtyp == 2) {
+            training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
+            training.setTraining_dauer( Integer.valueOf( dauer.getText().toString() ) );
+            training.setTraining_kcal( Integer.valueOf( kcal.getText().toString() ) );
+            // Wenn Stationstyp = Kraft (1)
+        } else if (stationtyp == 1) {
+            training.setTraining_wiederholung( Integer.valueOf( wiederholung.getText().toString() ) );
+            training.setTraining_gewicht( Integer.valueOf( gewicht.getText().toString() ) );
         }
-        else{
-            training = new ModelTraining();
-            training.setTraining_beschreibung( beschreibung.getText().toString() );
-            training.setTraining_datum( datum.getText().toString() );
-            training.setTraining_station_id( getStationID() );
-            benutzer = db.getBenutzer( spinnerBenutzer.getSelectedItem().toString() );
-            training.setTraining_benutzer_id( benutzer.getBenutzer_id() );
-            int stationtyp = getStationtyp();
-            if (stationtyp == 2) {
-                training.setTraining_geschwindigkeit( Integer.valueOf( geschwindigkeit.getText().toString() ) );
-                training.setTraining_dauer( Integer.valueOf( dauer.getText().toString() ) );
-                training.setTraining_kcal( Integer.valueOf( kcal.getText().toString() ) );
-            } else if (stationtyp == 1) {
-                training.setTraining_wiederholung( Integer.valueOf( wiederholung.getText().toString() ) );
-                training.setTraining_gewicht( Integer.valueOf( gewicht.getText().toString() ) );
-            }
-            db.updateTraining( training );
-            i = new Intent( this, Training.class );
-            startActivity( i );
-
-
-
-
-
-        }
-
+        db.updateTraining( training );
+        i = new Intent( this, Training.class );
+        startActivity( i );
     }
 }

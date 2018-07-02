@@ -45,7 +45,7 @@ public class TrainingOnClickDialog extends Dialog implements View.OnClickListene
             c.startActivity(i);
         }else if(v.getId()==R.id.bt_dialog_delete){
 
-            db.deleteStationbyID( this.trainingID );
+            db.deleteTrainingbyID( trainingID );
 
 
 

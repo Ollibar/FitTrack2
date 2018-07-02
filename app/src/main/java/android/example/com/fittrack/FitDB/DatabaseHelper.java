@@ -34,11 +34,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"training_benutzer_id INTEGER," + 
 	"training_station_id INTEGER," + 
 	"training_beschreibung VARCHAR," + 
-	"training_dauer INTEGER," + 
-	"training_geschwindigkeit INTEGER,	" +
-	"training_kcal INTEGER,	" +
-	"training_wiederholung INTEGER,	" +
-	 "training_gewicht INTEGER	" +
+	"training_dauer INTEGER DEFAULT 0," +
+	"training_geschwindigkeit INTEGER DEFAULT 0,	" +
+	"training_kcal INTEGER DEFAULT 0,	" +
+	"training_wiederholung INTEGER DEFAULT 0,	" +
+	 "training_gewicht INTEGER DEFAULT 0	" +
 	")";
 
 	private static final String CREATE_TABLE_STATION = "CREATE TABLE station (" +
@@ -218,6 +218,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("training", "training_id = ?", new String[] {String.valueOf(training.getTraining_id())});
 	}
+	public void deleteTrainingbyID(long trainingID) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete("training", "training_id = "+trainingID+ ";",null );}
+
 
 	protected ModelTraining getModelTrainingFromCursor(Cursor c){
 		ModelTraining training = new ModelTraining();
@@ -487,5 +491,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		return count;
 	}
+
 
 }
