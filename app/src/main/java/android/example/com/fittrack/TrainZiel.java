@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    DatabaseHelper db = new DatabaseHelper( this );
+    private DatabaseHelper db = new DatabaseHelper( this );
     private static final String LOG = TrainZiel.class.getSimpleName();
     private ListView lv;
     private Spinner spinnerUser;

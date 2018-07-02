@@ -15,10 +15,12 @@ import java.util.ArrayList;
 public class BenutzerListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelBenutzer> benutzerArrayList;
+    private LayoutInflater inf;
 
     public BenutzerListAdapter(Context context, ArrayList<ModelBenutzer> benutzer) {
         this.context=context;
         this.benutzerArrayList=benutzer;
+        inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     }
 
     @Override
@@ -39,8 +41,6 @@ public class BenutzerListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
-        LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         View row =inf.inflate( R.layout.list_benutzer_item,parent,false);
         TextView txID =(TextView) row.findViewById( R.id.tV_list_benutzer_ID );
         TextView txName =(TextView) row.findViewById( R.id.tV_list_benutzer_name );

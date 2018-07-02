@@ -116,8 +116,7 @@ public class Statistik extends AppCompatActivity
 
     private void erzeugeTrainingListe() {
         String username = spinnerBenutzer.getSelectedItem().toString();
-        ModelBenutzer benutzer = new ModelBenutzer(  );
-        benutzer=db.getBenutzer( username );
+        ModelBenutzer benutzer = db.getBenutzer( username );
 
 
         lv = findViewById( R.id.statistikList );

@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 public class Benutzer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public static int aktiverNutzer_id;
+
 
 
 
