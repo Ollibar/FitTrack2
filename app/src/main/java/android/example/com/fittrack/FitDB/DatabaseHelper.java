@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.jjoe64.graphview.series.DataPoint;
 
@@ -245,11 +246,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelTrainingFromCursor(c);
 	}
-	public DataPoint[]getData(){
+	public DataPoint[]getData(int userID){
 		SQLiteDatabase db = this.getReadableDatabase();
 		String [] colummns={"training_datum","sum(training_kcal)"};
 		String groupBy = "training_datum";
-		Cursor cursor = db.query("training",colummns,null,null,groupBy,
+		String selection = "training_benutzer_id = ?";
+		String [] selectionArgs = new String[]{String.valueOf(userID)};
+		Cursor cursor = db.query("training",colummns,selection,selectionArgs,groupBy,
 				null,null);
 		DataPoint[]dp = new DataPoint[cursor.getCount()];
 
@@ -257,7 +260,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor.moveToNext();
 			//x=datum  y=sum(kcal)
 			dp[i]= new DataPoint(cursor.getInt(0),cursor.getInt(1));
+			Log.d(LOG,"get data: "+dp[i]);
 		}return dp;
+
 	}
 	public Cursor getPumperStats(long benutzerId){
 		SQLiteDatabase db = this.getReadableDatabase();

@@ -6,6 +6,7 @@ import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.FitDB.ModelTraining;
+import android.example.com.fittrack.Formulare.form_training;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -32,6 +34,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,7 +44,7 @@ public class Statistik extends AppCompatActivity
 
     private DatabaseHelper db ;
     private Spinner userSpinner;
-    private ArrayAdapter<String>  userAdapter;
+    private ArrayAdapter<String> userAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -69,10 +72,12 @@ public class Statistik extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener( this );
 
         getUserSpinner();
+
+
         userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                  createTestgraph();
             }
 
             @Override
@@ -80,7 +85,7 @@ public class Statistik extends AppCompatActivity
 
             }
         });
-        createTestgraph();
+
     }
 
     @Override
@@ -93,29 +98,18 @@ public class Statistik extends AppCompatActivity
         }
     }
     private void createTestgraph(){
-
-
-
+        String s = userSpinner.getSelectedItem().toString();
         GraphView graph = (GraphView) findViewById(R.id.graphViewKcal);
-
-// you can directly pass Date objects to DataPoint-Constructor
-// this will convert the Date to double via Date#getTime()
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(db.getData());
-
+        DataPoint[]data = db.getData(db.getBenutzer(s).getBenutzer_id());
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(data);
+        series.setValuesOnTopColor(Color.RED);
+        series.setDrawValuesOnTop(true);
         graph.addSeries(series);
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("Datum");
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Kcal");
 
-// set date label formatter
-     graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
-        //graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
 
-// set manual x bounds to have nice steps
-      /*  graph.getViewport().setMinX(d1.getTime());
-        graph.getViewport().setMaxX(d3.getTime());
-        graph.getViewport().setXAxisBoundsManual(true);*/
 
-// as we use dates as labels, the human rounding to nice readable numbers
-// is not necessary
-        graph.getGridLabelRenderer().setHumanRounding(false);
     }
 
 
