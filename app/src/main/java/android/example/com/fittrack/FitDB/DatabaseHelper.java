@@ -68,8 +68,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_STATION);
 		db.execSQL(CREATE_TABLE_TRAIN_ZIEL);
 	}
-
-
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS benutzer");
@@ -78,26 +76,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS train_ziel");
 		onCreate(db);
 	}
-
-
 	public void clear(SQLiteDatabase db) {
 		db.execSQL("DELETE FROM benutzer");
 		db.execSQL("DELETE FROM training");
 		db.execSQL("DELETE FROM station");
 		db.execSQL("DELETE FROM train_ziel");
 	}
-
-
 	public void closeDB() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		if (db != null && db.isOpen()) db.close();
 	}
-
 	private String getDateTime() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
+
+	// Methoden für die Tabelle benutzer
 
 	public long createBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -107,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
 		return db.insertOrThrow("benutzer", null, values);
 	}
-
 	public int updateBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -116,12 +110,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
 		return db.update("benutzer", values, "benutzer_name = ?", new String[] {benutzer.getBenutzer_name()});
 	}
-
 	public int deleteBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("benutzer", "benutzer_id = ?", new String[] {String.valueOf(benutzer.getBenutzer_id())});
 	}
-
 	protected ModelBenutzer getModelBenutzerFromCursor(Cursor c){
 		ModelBenutzer benutzer = new ModelBenutzer();
 		benutzer.setBenutzer_id(c.getInt(c.getColumnIndex("benutzer_id")));
@@ -130,7 +122,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		benutzer.setBenutzer_gewicht(c.getInt(c.getColumnIndex("benutzer_gewicht")));
 		return benutzer;
 	}
-
 	public ModelBenutzer getBenutzer(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM benutzer Where benutzer_id =  ?";
@@ -145,7 +136,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelBenutzerFromCursor( c );
 	}
-
 	public ArrayList<ModelBenutzer> getAllBenutzer() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelBenutzer> benutzerList = new ArrayList<>();
@@ -171,7 +161,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return stringarray;
     }
-
 	public int getBenutzerCount() {
 		String countQuery = "SELECT * FROM benutzer";
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -181,6 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return count;
 	}
 
+	// Methoden für die Tabelle training
 
 	public long createTraining(ModelTraining training) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -197,7 +187,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_gewicht",training.getTraining_gewicht());
 		return db.insertOrThrow("training", null, values);
 	}
-
 	public int updateTraining(ModelTraining training) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -213,7 +202,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("training_gewicht",training.getTraining_gewicht());
 		return db.update("training", values, "training_id = ?", new String[] {String.valueOf(training.getTraining_id())});
 	}
-
 	public int deleteTraining(ModelTraining training) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("training", "training_id = ?", new String[] {String.valueOf(training.getTraining_id())});
@@ -221,8 +209,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void deleteTrainingbyID(long trainingID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete("training", "training_id = "+trainingID+ ";",null );}
-
-
 	protected ModelTraining getModelTrainingFromCursor(Cursor c){
 		ModelTraining training = new ModelTraining();
 		training.setTraining_id(c.getInt(c.getColumnIndex("training_id")));
@@ -237,7 +223,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		training.setTraining_gewicht( c.getInt(c.getColumnIndex( "training_gewicht" )) );
 		return training;
 	}
-
 	public ModelTraining getTraining(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM training Where training_id =  ?";
@@ -267,8 +252,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor c =db.rawQuery(query,null);
 		return c;
 	}
-
-
 	public ArrayList<ModelTraining> getAllTraining() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelTraining> trainingList = new ArrayList<ModelTraining>();
@@ -295,7 +278,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return trainingList;
 	}
-
 	public int getTrainingCount() {
 		String countQuery = "SELECT * FROM training";
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -305,6 +287,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return count;
 	}
 
+	// Methoden für die Tabelle station
+
 	public long createStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -312,7 +296,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("station_typ", station.getStation_typ());
 		return db.insertOrThrow("station", null, values);
 	}
-
 	public int updateStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -321,7 +304,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("station_typ", station.getStation_typ());
 		return db.update("station", values, "station_id = ?", new String[] {String.valueOf(station.getStation_id())});
 	}
-
 	public int deleteStation(ModelStation station) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("station", "station_id = ?", new String[] {String.valueOf(station.getStation_id())});
@@ -330,7 +312,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete("station", "station_id = "+id+";",null  );
 	}
-
 	protected ModelStation getModelStationFromCursor(Cursor c){
 		ModelStation station = new ModelStation();
 		station.setStation_id(c.getInt(c.getColumnIndex("station_id")));
@@ -338,7 +319,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		station.setStation_typ(c.getInt(c.getColumnIndex("station_typ")));
 		return station;
 	}
-
 	public ModelStation getStation(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM station Where station_id =  ?";
@@ -346,7 +326,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelStationFromCursor(c);
 	}
-
 	public ModelStation getStation(String name) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM station Where station_name =\""+name+"\";";
@@ -354,7 +333,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelStationFromCursor(c);
 	}
-
 	public ArrayList<ModelStation> getAllStation() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelStation> stationList = new ArrayList<ModelStation>();
@@ -380,7 +358,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		return stringarray;
 	}
-
 	public int getStationCount() {
 		String countQuery = "SELECT * FROM station";
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -389,6 +366,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		cursor.close();
 		return count;
 	}
+
+	// Methoden für die Tabelle train_ziel
 
 	public long createTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -404,7 +383,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("train_ziel_pos3", train_ziel.getTrain_ziel_pos3());
 		return db.insertOrThrow("train_ziel", null, values);
 	}
-
 	public int updateTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -419,12 +397,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("train_ziel_pos3", train_ziel.getTrain_ziel_pos3());
 		return db.update("train_ziel", values, "train_ziel_id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
 	}
-
 	public int deleteTrain_ziel(ModelTrain_ziel train_ziel) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("train_ziel", "train_ziel_id = ?", new String[] {String.valueOf(train_ziel.getTrain_ziel_id())});
 	}
-
 	protected ModelTrain_ziel getModelTrain_zielFromCursor(Cursor c){
 		ModelTrain_ziel train_ziel = new ModelTrain_ziel();
 		train_ziel.setTrain_ziel_id(c.getInt(c.getColumnIndex("train_ziel_id")));
@@ -447,7 +423,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ModelTrain_ziel ziel =getModelTrain_zielFromCursor(c);
         return ziel.getTrain_ziel_id();
     }
-
 	public ModelTrain_ziel getTrain_ziel(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM train_ziel Where train_ziel_id =  ?";
@@ -455,7 +430,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelTrain_zielFromCursor(c);
 	}
-
 	public ArrayList<ModelTrain_ziel> getAllTrain_ziel(int benutzerID){
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelTrain_ziel> train_zielList = new ArrayList<>();
@@ -482,7 +456,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return train_zielList;
 	}
-
 	public int getTrain_zielCount() {
 		String countQuery = "SELECT * FROM train_ziel";
 		SQLiteDatabase db = this.getReadableDatabase();
