@@ -184,10 +184,10 @@ public class MainActivity extends AppCompatActivity
         db.createTraining( training );
 
         // Trainingsziel
-        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,0,60,123,70,"sitzend","stehend","liegend");
+        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,60,60,123,70,"sitzend","stehend","liegend");
         db.createTrain_ziel(train_ziel);
-
-
+        ModelTrain_ziel train_ziele = new ModelTrain_ziel(1,2,90,60,123,70,"sitzend","stehend","liegend");
+        db.createTrain_ziel(train_ziele);
 
     }
 

@@ -19,12 +19,14 @@ public class TrainZielListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelTrain_ziel> train_zielArrayList;
     private DatabaseHelper db;
+    private LayoutInflater inf;
     private static final String LOG = TrainZielListAdapter.class.getName();
 
     public TrainZielListAdapter(Context context, ArrayList<ModelTrain_ziel> train_ziel) {
         this.context=context;
         this.train_zielArrayList=train_ziel;
-        db=new DatabaseHelper(context);
+        db = new DatabaseHelper(context);
+        inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
     }
 
@@ -45,9 +47,6 @@ public class TrainZielListAdapter extends BaseAdapter {
 
 
      public View getView(int position, View convertView, ViewGroup parent) {
-
-
-        LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         View row =inf.inflate( R.layout.list_train_ziel_item,parent,false);
 
         TextView zielBenutzer= (TextView)row.findViewById(R.id.tV_zielBenutzerName);
@@ -72,7 +71,7 @@ public class TrainZielListAdapter extends BaseAdapter {
         zielPos1.setText("Position 1: "+train_zielArrayList.get(position).getTrain_ziel_pos1());
         zielPos2.setText("Position 2: "+train_zielArrayList.get(position).getTrain_ziel_pos2());
         zielPos3.setText("Position 3: "+train_zielArrayList.get(position).getTrain_ziel_pos3());
-        zielWunschgewicht.setText("Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
+        zielWunschgewicht.setText("Wunschkörpergewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
         Log.d(LOG,"Wunschgewicht: "+train_zielArrayList.get(position).getTrain_ziel_korper_gewicht()+" KG");
         zielDauer.setText("Dauer: "+train_zielArrayList.get(position).getTrain_ziel_soll_dauer()+" Min.");
         zielGeschw.setText("Geschwindigkeit: "+train_zielArrayList.get(position).getTrain_ziel_soll_geschwindigkeit()+" KmH");
