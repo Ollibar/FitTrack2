@@ -60,16 +60,12 @@ public class StatistikListAdapter extends BaseAdapter {
         TextView txDatum =(TextView) row.findViewById( R.id.stat_datum );
         TextView txPumperPower =(TextView) row.findViewById( R.id.stat_pump);
         TextView txKardio =(TextView) row.findViewById( R.id.stat_kardio );
-        c.moveToFirst();
-        SimpleDateFormat sdf = new SimpleDateFormat( "dd/mm/yy" );
-        Date datum=null ;
-        String s = c.getString(c.getColumnIndex( "training_datum" ));
+        c.moveToPosition( position );
 
+        String s = c.getString(c.getColumnIndex( "training_datum" ));
         txDatum.setText( s);
-        c.moveToFirst();
-        txKardio.setText(String.valueOf( c.getInt( 2 ) ));
-        c.moveToFirst();
-//       txPumperPower.setText( String.valueOf( c.getInt( 3 ) ) );
+        txKardio.setText(String.valueOf( c.getInt( c.getColumnIndex( "kcal" ) ) )+" kcal");
+        txPumperPower.setText( String.valueOf( c.getInt( c.getColumnIndex( "pumpPower"  ) ) ) + "PumpPower");
 
 
         return row;

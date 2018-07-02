@@ -252,7 +252,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor getPumperStats(long benutzerId){
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		String query ="Select training_datum,Sum(training_kcal)As Kcal,Sum(training_wiederholung * training_gewicht) As pumpPower  from training group by training_datum\n" +
+		String query ="Select training_datum,Sum(training_kcal)As kcal,Sum(training_wiederholung * training_gewicht) As pumpPower  from training group by training_datum\n" +
 				"having training_benutzer_id ="+benutzerId+";";
 		Cursor c =db.rawQuery(query,null);
 		return c;
