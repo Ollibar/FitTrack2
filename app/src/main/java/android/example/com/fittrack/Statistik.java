@@ -121,7 +121,7 @@ public class Statistik extends AppCompatActivity
 
         lv = findViewById( R.id.statistikList );
 
-        Cursor c = (Cursor) db.getPumperStats( benutzer.getBenutzer_id() );
+        Cursor c = db.getPumperStats( benutzer.getBenutzer_id() );
         StatistikListAdapter sla = new StatistikListAdapter( getApplicationContext(), c );
 
         lv.setAdapter( sla );

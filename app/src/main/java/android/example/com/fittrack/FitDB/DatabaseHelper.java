@@ -210,6 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void deleteTrainingbyID(long trainingID) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete("training", "training_id = "+trainingID+ ";",null );}
+
 	protected ModelTraining getModelTrainingFromCursor(Cursor c){
 		ModelTraining training = new ModelTraining();
 		training.setTraining_id(c.getInt(c.getColumnIndex("training_id")));
