@@ -7,6 +7,8 @@ import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.example.com.fittrack.Formulare.form_training;
+import android.example.com.fittrack.ListAdapter.StatistikListAdapter;
+import android.example.com.fittrack.ListAdapter.TrainingListAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -41,7 +43,8 @@ import java.util.Date;
 
 public class Statistik extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+        Spinner spinnerBenutzer;
+        ListView lv;
     private DatabaseHelper db ;
     private Spinner userSpinner;
     private ArrayAdapter<String> userAdapter;
@@ -77,7 +80,7 @@ public class Statistik extends AppCompatActivity
         userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  createTestgraph();
+                  //createTestgraph();
             }
 
             @Override
@@ -88,6 +91,18 @@ public class Statistik extends AppCompatActivity
 
     }
 
+    private void getUserSpinner() {
+
+        spinnerBenutzer = (Spinner)findViewById( R.id.training_spinner_);
+
+        String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
+        spinnerArrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBenutzer.setAdapter(spinnerArrayAdapter1);
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
@@ -97,6 +112,29 @@ public class Statistik extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    private void erzeugeTrainingListe() {
+        String username = spinnerBenutzer.getSelectedItem().toString();
+        ModelBenutzer benutzer = new ModelBenutzer(  );
+        benutzer=db.getBenutzer( username );
+
+
+        lv = findViewById( R.id.statistikList );
+
+        Cursor c = (Cursor) db.getPumperStats( benutzer.getBenutzer_id() );
+        StatistikListAdapter sla = new StatistikListAdapter( getApplicationContext(), c );
+
+        lv.setAdapter( sla );
+       /*
+        lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TrainingOnClickDialog tcd = new TrainingOnClickDialog( Training.this, id );
+                tcd.show();
+            }
+        } )*/;
+    }
+    /*
     private void createTestgraph(){
         String s = userSpinner.getSelectedItem().toString();
         GraphView graph = (GraphView) findViewById(R.id.graphViewKcal);
@@ -111,15 +149,7 @@ public class Statistik extends AppCompatActivity
 
 
     }
-
-
-    private void getUserSpinner(){
-        String [] array = db.getAllBenutzerNamen();
-        userSpinner = (Spinner)findViewById(R.id.spinnerStatisticUser);
-        userAdapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,array);
-        userSpinner.setAdapter(userAdapter);
-    }
-
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
