@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class StatistikListAdapter extends BaseAdapter {
 
@@ -57,11 +60,16 @@ public class StatistikListAdapter extends BaseAdapter {
         TextView txDatum =(TextView) row.findViewById( R.id.stat_datum );
         TextView txPumperPower =(TextView) row.findViewById( R.id.stat_pump);
         TextView txKardio =(TextView) row.findViewById( R.id.stat_kardio );
+        c.moveToFirst();
+        SimpleDateFormat sdf = new SimpleDateFormat( "dd/mm/yy" );
+        Date datum=null ;
+        String s = c.getString(c.getColumnIndex( "training_datum" ));
 
-        txDatum.setText( c.getString( 0 ) );
-        txPumperPower.setText( c.getInt( 1 ) );
-        txKardio.setText(c.getInt( 2 ));
-
+        txDatum.setText( s);
+        c.moveToFirst();
+        txKardio.setText(String.valueOf( c.getInt( 2 ) ));
+        c.moveToFirst();
+//       txPumperPower.setText( String.valueOf( c.getInt( 3 ) ) );
 
 
         return row;

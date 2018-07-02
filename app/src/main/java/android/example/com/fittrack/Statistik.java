@@ -46,7 +46,7 @@ public class Statistik extends AppCompatActivity
         Spinner spinnerBenutzer;
         ListView lv;
     private DatabaseHelper db ;
-    private Spinner userSpinner;
+
     private ArrayAdapter<String> userAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +77,11 @@ public class Statistik extends AppCompatActivity
         getUserSpinner();
 
 
-        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerBenutzer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                   //createTestgraph();
+                erzeugeTrainingListe();
             }
 
             @Override
@@ -92,8 +93,8 @@ public class Statistik extends AppCompatActivity
     }
 
     private void getUserSpinner() {
-
-        spinnerBenutzer = (Spinner)findViewById( R.id.training_spinner_);
+        db = new DatabaseHelper( this );
+        spinnerBenutzer = (Spinner)findViewById( R.id.spinnerStatisticUser);
 
         String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
@@ -125,14 +126,13 @@ public class Statistik extends AppCompatActivity
         StatistikListAdapter sla = new StatistikListAdapter( getApplicationContext(), c );
 
         lv.setAdapter( sla );
-       /*
+
         lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TrainingOnClickDialog tcd = new TrainingOnClickDialog( Training.this, id );
-                tcd.show();
+
             }
-        } )*/;
+        } );
     }
     /*
     private void createTestgraph(){
