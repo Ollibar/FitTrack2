@@ -4,7 +4,6 @@ import android.example.com.fittrack.R;
 import android.widget.TextView;
 
 public class ModelBenutzer {
-	private static int activeUserID;
 	private int benutzer_id;
 	private String benutzer_name;
 	private int benutzer_alter;
@@ -52,10 +51,6 @@ public class ModelBenutzer {
 
 	public int getBenutzer_gewicht() {
 		return this.benutzer_gewicht;
-	}
-
-	public void setActiveUser(int id){
-		activeUserID = id;
 	}
 
 }

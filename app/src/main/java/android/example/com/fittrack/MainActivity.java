@@ -174,19 +174,37 @@ public class MainActivity extends AppCompatActivity
         db.createStation( station );
 
         //Trainings
-        ModelTraining  training = new ModelTraining("25/06/2018",2,3,"Beschreibung 1",123,159,147,0,0);
+        ModelTraining  training = new ModelTraining("20/06/2018",2,3,"Beschreibung 1",123,159,147,0,0);
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",2,4,"Beschreibung 1",123,159,147,0,0);
+        training = new ModelTraining("17/06/2018",2,4,"Beschreibung 1",123,159,147,0,0);
         db.createTraining( training );
-        training = new ModelTraining("27/06/2018",1,1,"Beschreibung 1",0,0,0,30,50);
+        training = new ModelTraining("01/06/2018",1,1,"1",0,0,0,11,67);
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0,45,45);
+        training = new ModelTraining("03/06/2018",1,1,"2",0,0,0,13,42);
+        db.createTraining( training );
+        training = new ModelTraining("05/06/2018",1,1,"3",0,0,0,15,26);
+        db.createTraining( training );
+        training = new ModelTraining("07/06/2018",1,1,"4",0,0,0,17,30);
+        db.createTraining( training );
+        training = new ModelTraining("09/06/2018",1,1,"5",0,0,0,23,20);
+        db.createTraining( training );
+        training = new ModelTraining("11/06/2018",1,1,"6",0,0,0,11,11);
+        db.createTraining( training );
+        training = new ModelTraining("09/06/2018",1,2,"5",0,0,0,22,20);
+        db.createTraining( training );
+        training = new ModelTraining("11/06/2018",1,2,"6",0,0,0,33,12);
+        db.createTraining( training );
+        training = new ModelTraining("13/06/2018",3,2,"7",0,0,0,450,1);
+        db.createTraining( training );
+        training = new ModelTraining("09/06/2018",1,3,"8",60,12,600,0,0);
+        db.createTraining( training );
+        training = new ModelTraining("11/06/2018",1,3,"9",60,12,600,0,0);
         db.createTraining( training );
 
         // Trainingsziel
-        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,60,60,123,70,"sitzend","stehend","liegend");
+        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,0,0,0,70,"3 ","4 "," ");
         db.createTrain_ziel(train_ziel);
-        ModelTrain_ziel train_ziele = new ModelTrain_ziel(1,2,90,60,123,70,"sitzend","stehend","liegend");
+        ModelTrain_ziel train_ziele = new ModelTrain_ziel(1,2,90,60,123,70," ","   "," ");
         db.createTrain_ziel(train_ziele);
 
     }

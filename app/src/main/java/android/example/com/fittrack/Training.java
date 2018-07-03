@@ -52,6 +52,7 @@ public class Training extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
+
         setSpinner();
         erzeugeTrainingListe();
         spinnerBenutzer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -155,6 +156,10 @@ public class Training extends AppCompatActivity
         } else if (id == R.id.nav_target) {
             Intent i = new Intent(this,TrainZiel.class);
             startActivity( i );
+        } else if (id == R.id.nav_statistics) {
+            Intent i = new Intent(this,Statistik.class);
+            startActivity( i );
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );

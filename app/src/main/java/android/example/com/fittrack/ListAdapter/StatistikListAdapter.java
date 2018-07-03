@@ -65,7 +65,7 @@ public class StatistikListAdapter extends BaseAdapter {
         String s = c.getString(c.getColumnIndex( "training_datum" ));
         txDatum.setText( s);
         txKardio.setText(String.valueOf( c.getInt( c.getColumnIndex( "kcal" ) ) )+" kcal");
-        txPumperPower.setText( String.valueOf( c.getInt( c.getColumnIndex( "pumpPower"  ) ) ) + "PumpPower");
+        txPumperPower.setText( String.valueOf( c.getInt( c.getColumnIndex( "pumpPower"  ) ) ) + " PumpPower");
 
 
         return row;
