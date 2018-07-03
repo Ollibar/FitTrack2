@@ -87,11 +87,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		if (db != null && db.isOpen()) db.close();
 	}
-	private String getDateTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-		Date date = new Date();
-		return dateFormat.format(date);
-	}
 
 	// Methoden für die Tabelle benutzer
 
@@ -109,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("benutzer_name", benutzer.getBenutzer_name());
 		values.put("benutzer_alter", benutzer.getBenutzer_alter());
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
-		return db.update("benutzer", values, "benutzer_name = ?", new String[] {benutzer.getBenutzer_name()});
+		return db.update("benutzer", values, "benutzer_id = ?", new String[] {String.valueOf(benutzer.getBenutzer_id())});
 	}
 	public int deleteBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();

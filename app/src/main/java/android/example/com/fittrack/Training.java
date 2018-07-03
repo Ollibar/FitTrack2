@@ -52,7 +52,6 @@ public class Training extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
-
         setSpinner();
         erzeugeTrainingListe();
         spinnerBenutzer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

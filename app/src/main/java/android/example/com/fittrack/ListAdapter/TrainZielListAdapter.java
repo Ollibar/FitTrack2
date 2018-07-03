@@ -60,6 +60,7 @@ public class TrainZielListAdapter extends BaseAdapter {
         TextView zielGeschw= (TextView)row.findViewById(R.id.tV_list_ziel_Gesw);
 
 
+        train_zielArrayList.get(position);
 
        ModelBenutzer mb = db.getBenutzer(train_zielArrayList.get(position).getTrain_ziel_benutzer_id());
        zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
