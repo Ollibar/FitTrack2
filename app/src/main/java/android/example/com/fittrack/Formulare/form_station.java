@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.R;
+import android.example.com.fittrack.Station;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,6 +44,8 @@ public class form_station extends AppCompatActivity {
 
         ModelStation station =new ModelStation( statName,typvalue );
         db.createStation( station );
+        Intent i = new Intent(this,Station.class);
+        startActivity( i );
 
     }
 
@@ -54,8 +57,10 @@ public class form_station extends AppCompatActivity {
         if(i.getLongExtra( "stationID",-1 )!=-1) {
             station = db.getStation( i.getLongExtra( "stationID", -1 ) );
             station.setStation_name( edTName.getText().toString() );
-            station.setStation_typ( spTyp.getSelectedItemPosition() );
+            station.setStation_typ( spTyp.getSelectedItemPosition()+1 );
             db.updateStation( station );
+            Intent i = new Intent(this,Station.class);
+            startActivity( i );
         }
     }
 }
