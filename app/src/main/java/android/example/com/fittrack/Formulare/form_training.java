@@ -89,12 +89,12 @@ public class form_training extends AppCompatActivity {
             datum.setText( dateFormat.format(strDate));
         }else{
             long trainingID = i.getLongExtra( "ID",-1 );
-            if (trainingID!=-1){
+            if (trainingID !=-1){
                 training =(ModelTraining) db.getTraining( trainingID );
 
                 datum.setText( training.getTraining_datum() );
-                spinnerBenutzer.setSelection( training.getTraining_benutzer_id() );
-                spinnerStation.setSelection( training.getTraining_station_id() );
+                spinnerBenutzer.setSelection( training.getTraining_benutzer_id()-1 );
+                spinnerStation.setSelection( training.getTraining_station_id()-1 );
 
 
                 beschreibung.setText( training.getTraining_beschreibung() );
