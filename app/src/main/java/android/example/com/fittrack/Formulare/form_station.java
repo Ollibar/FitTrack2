@@ -16,6 +16,7 @@ public class form_station extends AppCompatActivity {
     String statName;
     Spinner spTyp;
     Intent i;
+    ModelStation station=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,9 @@ public class form_station extends AppCompatActivity {
         spTyp =(Spinner) findViewById( R.id.stationspinner );
         i = getIntent();
 
-        if(i!=null){
+        if(i.getLongExtra( "stationID",-1 )!=-1){
             ModelStation station = new ModelStation(  );
-            station = db.getStation( i.getLongExtra( "stationID",0 ) );
+            station = db.getStation( i.getLongExtra( "stationID",-1 ) );
             edTName.setText( station.getStation_name() );
             spTyp.setSelection( station.getStation_typ()-1 );
         }
@@ -47,5 +48,14 @@ public class form_station extends AppCompatActivity {
 
     public void abbrechen(View view) {
         super.onBackPressed();
+    }
+
+    public void aktualisiereStation(View view) {
+        if(i.getLongExtra( "stationID",-1 )!=-1) {
+            station = db.getStation( i.getLongExtra( "stationID", -1 ) );
+            station.setStation_name( edTName.getText().toString() );
+            station.setStation_typ( spTyp.getSelectedItemPosition() );
+            db.updateStation( station );
+        }
     }
 }

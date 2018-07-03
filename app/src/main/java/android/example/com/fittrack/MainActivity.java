@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
         db.createStation( station );
         station = new ModelStation("Crosstrainer",2  );
         db.createStation( station );
-        
+
 
         //Trainings
         ModelTraining  training = new ModelTraining("20/06/2018",2,3,"Beschreibung 1",123,159,147,0,0);

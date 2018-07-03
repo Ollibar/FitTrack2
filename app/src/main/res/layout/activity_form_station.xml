@@ -26,6 +26,13 @@
         android:layout_height="wrap_content"
         android:onClick="speicherStation"
         android:text="Speichern" />
+    <Button
+        android:id="@+id/button5"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="aktualisiereStation"
+        android:text="Update" />
 
     <Button
         style="@style/Widget.AppCompat.Button.Colored"
