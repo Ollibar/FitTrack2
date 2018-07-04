@@ -1,5 +1,3 @@
-
-
 // angelehnt an http://www.vogella.com/tutorials/AndroidListView/article.html#adapterown
 
 package android.example.com.fittrack.ListAdapter;
@@ -16,13 +14,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class StationListAdapter extends BaseAdapter{
+public class StationListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelStation> stationArrayList;
 
     public StationListAdapter(Context context, ArrayList<ModelStation> stations) {
-        this.context=context;
-        this.stationArrayList=stations;
+        this.context = context;
+        this.stationArrayList = stations;
     }
 
     @Override
@@ -45,22 +43,21 @@ public class StationListAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-           LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-           @SuppressLint("ViewHolder") View row =inf.inflate(R.layout.list_station_item,parent,false);
+        LayoutInflater inf = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        @SuppressLint("ViewHolder") View row = inf.inflate( R.layout.list_station_item, parent, false );
 
-           TextView txName =(TextView) row.findViewById( R.id.tV_station_name );
-           TextView txTyp =(TextView) row.findViewById( R.id.tV_station_typ );
-            String x = Integer.toString( position );
+        TextView txName = (TextView) row.findViewById( R.id.tV_station_name );
+        TextView txTyp = (TextView) row.findViewById( R.id.tV_station_typ );
+        String x = Integer.toString( position );
 
-           txName.setText( stationArrayList.get( position ).getStation_name() );
-           String stationTyp="k.A.";
-           if(stationArrayList.get( position ).getStation_typ()==1){
-               stationTyp ="Kraft";
-           }else if(stationArrayList.get( position ).getStation_typ()==2){
-               stationTyp="Kardio";
-           }
-           txTyp.setText( stationTyp );
-
+        txName.setText( stationArrayList.get( position ).getStation_name() );
+        String stationTyp = "k.A.";
+        if (stationArrayList.get( position ).getStation_typ() == 1) {
+            stationTyp = "Kraft";
+        } else if (stationArrayList.get( position ).getStation_typ() == 2) {
+            stationTyp = "Kardio";
+        }
+        txTyp.setText( stationTyp );
 
 
         return row;

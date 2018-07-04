@@ -1,15 +1,12 @@
 package android.example.com.fittrack;
 
 import android.content.Intent;
-
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.FitDB.ModelTraining;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -25,13 +23,11 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static int activeUserID;
     private static final String TAG = "UserActivity";
-    TextView nav_Arnisays;
-
-
     private static final String LOG = MainActivity.class.getSimpleName();
-    private DatabaseHelper db = new DatabaseHelper(this);
+    public static int activeUserID;
+    TextView nav_Arnisays;
+    private DatabaseHelper db = new DatabaseHelper( this );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +45,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById( R.id.nav_view );
         navigationView.setNavigationItemSelectedListener( this );
 
-        nav_Arnisays =findViewById( R.id.textView4 );
-
+        nav_Arnisays = findViewById( R.id.textView4 );
 
 
     }
@@ -78,11 +73,11 @@ public class MainActivity extends AppCompatActivity
                 "Life may be full of pain but that’s not an excuse to give up.",
                 "Money doesn’t make you happy. I now have $50 million but I was just as happy when I had $48 million."};
 
-        int random = new Random().nextInt(quotearray.length);
-        String quote =quotearray[random];
+        int random = new Random().nextInt( quotearray.length );
+        String quote = quotearray[random];
 
 
-        nav_Arnisays.setText(quote);
+        nav_Arnisays.setText( quote );
 
     }
 
@@ -111,9 +106,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == R.id.appStatistics){
-            Intent in = new Intent(this,AppStatistics.class);
-            startActivity(in);
+        } else if (id == R.id.appStatistics) {
+            Intent in = new Intent( this, AppStatistics.class );
+            startActivity( in );
             return true;
         }
 
@@ -128,22 +123,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent( this, MainActivity.class );
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,Benutzer.class);
+            Intent i = new Intent( this, Benutzer.class );
             startActivity( i );
         } else if (id == R.id.nav_station) {
-            Intent i = new Intent(this,Station.class);
+            Intent i = new Intent( this, Station.class );
             startActivity( i );
         } else if (id == R.id.nav_training) {
-            Intent i = new Intent(this,Training.class);
+            Intent i = new Intent( this, Training.class );
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,TrainZiel.class);
+            Intent i = new Intent( this, TrainZiel.class );
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistik.class);
+            Intent i = new Intent( this, Statistik.class );
             startActivity( i );
 
         }
@@ -156,38 +151,57 @@ public class MainActivity extends AppCompatActivity
     // Methode zum einfügen von Testdaten in die Datenbank
     public void testdaten(MenuItem item) {
         // Benutzer
-        ModelBenutzer user =new ModelBenutzer( "Betty Kane",25,65 );
+        ModelBenutzer user = new ModelBenutzer( "Betty Kane", 25, 65 );
         db.createBenutzer( user );
-        user =new ModelBenutzer( "Arthur Curry",39,90 );
+        user = new ModelBenutzer( "Arthur Curry", 39, 90 );
         db.createBenutzer( user );
-        user =new ModelBenutzer( "Scott Lang",31,70 );
+        user = new ModelBenutzer( "Scott Lang", 31, 70 );
         db.createBenutzer( user );
 
         //Stationen
-        ModelStation station = new ModelStation("Brustpresse",1  );
+        ModelStation station = new ModelStation( "Brustpresse", 1 );
         db.createStation( station );
-        station = new ModelStation("Klimmzugmaschine",1  );
+        station = new ModelStation( "Klimmzugmaschine", 1 );
         db.createStation( station );
-        station = new ModelStation("Laufband",2  );
+        station = new ModelStation( "Laufband", 2 );
         db.createStation( station );
-        station = new ModelStation("Crosstrainer",2  );
+        station = new ModelStation( "Crosstrainer", 2 );
         db.createStation( station );
 
+
         //Trainings
-        ModelTraining  training = new ModelTraining("25/06/2018",2,3,"Beschreibung 1",123,159,147,0,0);
+        ModelTraining training = new ModelTraining( "20/06/2018", 2, 3, "Beschreibung 1", 123, 159, 147, 0, 0 );
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",2,4,"Beschreibung 1",123,159,147,0,0);
+        training = new ModelTraining( "17/06/2018", 2, 4, "Beschreibung 1", 123, 159, 147, 0, 0 );
         db.createTraining( training );
-        training = new ModelTraining("27/06/2018",1,1,"Beschreibung 1",0,0,0,30,50);
+        training = new ModelTraining( "01/06/2018", 1, 1, "1", 0, 0, 0, 11, 67 );
         db.createTraining( training );
-        training = new ModelTraining("24/06/2018",3,2,"Beschreibung 1",0,0,0,45,45);
+        training = new ModelTraining( "03/06/2018", 1, 1, "2", 0, 0, 0, 13, 42 );
+        db.createTraining( training );
+        training = new ModelTraining( "05/06/2018", 1, 1, "3", 0, 0, 0, 15, 26 );
+        db.createTraining( training );
+        training = new ModelTraining( "07/06/2018", 1, 1, "4", 0, 0, 0, 17, 30 );
+        db.createTraining( training );
+        training = new ModelTraining( "09/06/2018", 1, 1, "5", 0, 0, 0, 23, 20 );
+        db.createTraining( training );
+        training = new ModelTraining( "11/06/2018", 1, 1, "6", 0, 0, 0, 11, 11 );
+        db.createTraining( training );
+        training = new ModelTraining( "09/06/2018", 1, 2, "5", 0, 0, 0, 22, 20 );
+        db.createTraining( training );
+        training = new ModelTraining( "11/06/2018", 1, 2, "6", 0, 0, 0, 33, 12 );
+        db.createTraining( training );
+        training = new ModelTraining( "13/06/2018", 3, 2, "7", 0, 0, 0, 450, 1 );
+        db.createTraining( training );
+        training = new ModelTraining( "09/06/2018", 1, 3, "8", 60, 12, 600, 0, 0 );
+        db.createTraining( training );
+        training = new ModelTraining( "11/06/2018", 1, 3, "9", 60, 12, 600, 0, 0 );
         db.createTraining( training );
 
         // Trainingsziel
-        ModelTrain_ziel train_ziel = new ModelTrain_ziel(1,1,60,60,123,70,"sitzend","stehend","liegend");
-        db.createTrain_ziel(train_ziel);
-        ModelTrain_ziel train_ziele = new ModelTrain_ziel(1,2,90,60,123,70,"sitzend","stehend","liegend");
-        db.createTrain_ziel(train_ziele);
+        ModelTrain_ziel train_ziel = new ModelTrain_ziel( 1, 1, 0, 0, 0, 70, "3 ", "4 ", " " );
+        db.createTrain_ziel( train_ziel );
+        ModelTrain_ziel train_ziele = new ModelTrain_ziel( 1, 2, 90, 60, 123, 70, " ", "   ", " " );
+        db.createTrain_ziel( train_ziele );
 
     }
 
@@ -195,5 +209,5 @@ public class MainActivity extends AppCompatActivity
         getArnisquote();
     }
 
-    }
+}
 

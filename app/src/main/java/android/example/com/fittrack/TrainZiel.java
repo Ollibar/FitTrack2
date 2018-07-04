@@ -6,33 +6,31 @@ import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelBenutzer;
 import android.example.com.fittrack.FitDB.ModelTrain_ziel;
 import android.example.com.fittrack.Formulare.form_target;
+import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-
-import android.example.com.fittrack.ListAdapter.TrainZielListAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DatabaseHelper db = new DatabaseHelper( this );
     private static final String LOG = TrainZiel.class.getSimpleName();
+    private DatabaseHelper db = new DatabaseHelper( this );
     private ListView lv;
     private Spinner spinnerUser;
 
@@ -63,7 +61,7 @@ public class TrainZiel extends AppCompatActivity
         setSpinner();
         erzeugeListe();
 
-        spinnerUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerUser.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 erzeugeListe();
@@ -71,58 +69,59 @@ public class TrainZiel extends AppCompatActivity
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d(LOG,"adater ausgeführt");
+                Log.d( LOG, "adater ausgeführt" );
             }
-        });
+        } );
     }
 
     private void erzeugeListe() {
 
         final String username = spinnerUser.getSelectedItem().toString();
-        ModelBenutzer mb = db.getBenutzer(username);
-        final ArrayList<ModelTrain_ziel> trainZielList =db.getAllTrain_ziel(mb.getBenutzer_id());
-        lv=findViewById( R.id.lV_ziele );
-        TrainZielListAdapter tla = new TrainZielListAdapter( getApplicationContext(),trainZielList );
+        ModelBenutzer mb = db.getBenutzer( username );
+        final ArrayList<ModelTrain_ziel> trainZielList = db.getAllTrain_ziel( mb.getBenutzer_id() );
+        lv = findViewById( R.id.lV_ziele );
+        TrainZielListAdapter tla = new TrainZielListAdapter( getApplicationContext(), trainZielList );
         lv.setAdapter( tla );
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(TrainZiel.this);
-                alert.setTitle("Dieses Ziel wirklich LÖSCHEN !?");
-                alert.setCancelable(true);
-                alert.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alert = new AlertDialog.Builder( TrainZiel.this );
+                alert.setTitle( "Dieses Ziel wirklich LÖSCHEN !?" );
+                alert.setCancelable( true );
+                alert.setPositiveButton( "Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db.deleteTrain_ziel(trainZielList.get(position));
-                        Toast.makeText(TrainZiel.this,"You are one ugly motherf****r "+
-                                username+
-                                ", Arnie-Predator",Toast.LENGTH_LONG
+                        db.deleteTrain_ziel( trainZielList.get( position ) );
+                        Toast.makeText( TrainZiel.this, "You are one ugly motherf****r " +
+                                username +
+                                ", Arnie-Predator", Toast.LENGTH_LONG
                         ).show();
                         erzeugeListe();
                     }
-                });
-                alert.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                } );
+                alert.setNegativeButton( "Nein", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                         dialog.cancel();
+                        dialog.cancel();
                     }
-                });
+                } );
                 AlertDialog dialog = alert.create();
                 dialog.show();
             }
-        });
+        } );
     }
+
     private void setSpinner() {
-        spinnerUser = findViewById( R.id.spinner_traning_ziel);
-        String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
+        spinnerUser = findViewById( R.id.spinner_traning_ziel );
+        String[] spinnerBenutzerArray = db.getAllBenutzerNamen();
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<>
-                (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
-        spinnerArrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUser.setAdapter(spinnerArrayAdapter1);
+                ( this, android.R.layout.simple_spinner_item, spinnerBenutzerArray );
+        spinnerArrayAdapter1.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        spinnerUser.setAdapter( spinnerArrayAdapter1 );
     }
 
     private void openTargetForm() {
-        Intent i = new Intent(this,form_target.class);
+        Intent i = new Intent( this, form_target.class );
         startActivity( i );
     }
 
@@ -159,22 +158,22 @@ public class TrainZiel extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent( this, MainActivity.class );
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,Benutzer.class);
+            Intent i = new Intent( this, Benutzer.class );
             startActivity( i );
         } else if (id == R.id.nav_station) {
-            Intent i = new Intent(this,Station.class);
+            Intent i = new Intent( this, Station.class );
             startActivity( i );
         } else if (id == R.id.nav_training) {
-            Intent i = new Intent(this,Training.class);
+            Intent i = new Intent( this, Training.class );
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,TrainZiel.class);
+            Intent i = new Intent( this, TrainZiel.class );
             startActivity( i );
-        }else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistik.class);
+        } else if (id == R.id.nav_statistics) {
+            Intent i = new Intent( this, Statistik.class );
             startActivity( i );
 
         }

@@ -10,30 +10,30 @@ import android.widget.TextView;
 
 public class AppStatistics extends AppCompatActivity {
 
-    private DatabaseHelper db = new DatabaseHelper(this);
+    TextView user, station, training, ziel;
+    private DatabaseHelper db = new DatabaseHelper( this );
 
-    TextView user,station,training,ziel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_statistics);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.app_statistics );
 
-        user = (TextView)findViewById(R.id.tV_anzahlUser);
-        station =(TextView)findViewById(R.id.tV_anzahlStation);
-        training=(TextView)findViewById(R.id.tV_anzahlTraining);
-        ziel=(TextView)findViewById(R.id.tV_anzahlZiele);
+        user = (TextView) findViewById( R.id.tV_anzahlUser );
+        station = (TextView) findViewById( R.id.tV_anzahlStation );
+        training = (TextView) findViewById( R.id.tV_anzahlTraining );
+        ziel = (TextView) findViewById( R.id.tV_anzahlZiele );
 
-        if(db != null){
-            user.setText("Anzahl der User in deine App: "+db.getBenutzerCount());
-            station.setText("Anzahl der Geräte in deine App: "+db.getStationCount());
-            training.setText("Anzahl der Trainings in deine App: "+db.getTrainingCount());
-            ziel.setText("Anzahl der Trainingsziele in deine App: "+db.getTrain_zielCount());
+        if (db != null) {
+            user.setText( "Anzahl der User in deine App: " + db.getBenutzerCount() );
+            station.setText( "Anzahl der Geräte in deine App: " + db.getStationCount() );
+            training.setText( "Anzahl der Trainings in deine App: " + db.getTrainingCount() );
+            ziel.setText( "Anzahl der Trainingsziele in deine App: " + db.getTrain_zielCount() );
         }
     }
 
-    public void onClickback(View view){
-        Intent in = new Intent(this,MainActivity.class);
-        startActivity(in);
+    public void onClickback(View view) {
+        Intent in = new Intent( this, MainActivity.class );
+        startActivity( in );
         db.closeDB();
     }
 }

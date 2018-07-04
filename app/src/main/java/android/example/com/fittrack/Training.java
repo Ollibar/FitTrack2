@@ -8,7 +8,6 @@ import android.example.com.fittrack.Formulare.form_training;
 import android.example.com.fittrack.ListAdapter.TrainingListAdapter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -54,7 +54,7 @@ public class Training extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener( this );
         setSpinner();
         erzeugeTrainingListe();
-        spinnerBenutzer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        spinnerBenutzer.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -67,43 +67,43 @@ public class Training extends AppCompatActivity
             public void onNothingSelected(AdapterView<?> parent) {
                 erzeugeTrainingListe();
             }
-            });
+        } );
 
     }
 
     private void setSpinner() {
-        spinnerBenutzer = (Spinner)findViewById( R.id.training_spinner_);
+        spinnerBenutzer = (Spinner) findViewById( R.id.training_spinner_ );
 
         DatabaseHelper db = new DatabaseHelper( this );
-        String[] spinnerBenutzerArray=db.getAllBenutzerNamen();
+        String[] spinnerBenutzerArray = db.getAllBenutzerNamen();
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, spinnerBenutzerArray);
-        spinnerArrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBenutzer.setAdapter(spinnerArrayAdapter1);
+                ( this, android.R.layout.simple_spinner_item, spinnerBenutzerArray );
+        spinnerArrayAdapter1.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        spinnerBenutzer.setAdapter( spinnerArrayAdapter1 );
     }
 
     private void erzeugeTrainingListe() {
         String username = spinnerBenutzer.getSelectedItem().toString();
 
         ModelBenutzer benutzer = (ModelBenutzer) db.getBenutzer( username );
-        ArrayList<ModelTraining> trainingList=db.getTrainingByUserID(benutzer.getBenutzer_id());
-        lv=findViewById( R.id.listView_trainig );
-        TrainingListAdapter tla = new TrainingListAdapter(getApplicationContext(),trainingList);
+        ArrayList<ModelTraining> trainingList = db.getTrainingByUserID( benutzer.getBenutzer_id() );
+        lv = findViewById( R.id.listView_trainig );
+        TrainingListAdapter tla = new TrainingListAdapter( getApplicationContext(), trainingList );
 
-        lv.setAdapter(tla);
+        lv.setAdapter( tla );
         lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TrainingOnClickDialog tcd = new TrainingOnClickDialog(Training.this, id);
+                TrainingOnClickDialog tcd = new TrainingOnClickDialog( Training.this, id );
                 tcd.show();
             }
-        });
+        } );
 
 
     }
 
     private void insertNewTraining() {
-        Intent i = new Intent(this,form_training.class);
+        Intent i = new Intent( this, form_training.class );
         startActivity( i );
     }
 
@@ -116,7 +116,6 @@ public class Training extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
 
 
     @Override
@@ -141,22 +140,22 @@ public class Training extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent( this, MainActivity.class );
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,Benutzer.class);
+            Intent i = new Intent( this, Benutzer.class );
             startActivity( i );
         } else if (id == R.id.nav_station) {
-            Intent i = new Intent(this,Station.class);
+            Intent i = new Intent( this, Station.class );
             startActivity( i );
         } else if (id == R.id.nav_training) {
-            Intent i = new Intent(this,Training.class);
+            Intent i = new Intent( this, Training.class );
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,TrainZiel.class);
+            Intent i = new Intent( this, TrainZiel.class );
             startActivity( i );
-        }else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistik.class);
+        } else if (id == R.id.nav_statistics) {
+            Intent i = new Intent( this, Statistik.class );
             startActivity( i );
 
         }
