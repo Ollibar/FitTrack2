@@ -8,8 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -73,7 +72,8 @@
             android:label="Training verwalten"
             android:parentActivityName=".Training" />
 
-        <activity android:name=".TrainingOnClickDialog"
+        <activity
+            android:name=".TrainingOnClickDialog"
             android:label="Training Dialog"
             android:parentActivityName=".Training" />
 
@@ -87,7 +87,8 @@
                 android:value="android.example.com.fittrack.MainActivity" />
         </activity>
 
-        <activity android:name=".AppStatistics"
+        <activity
+            android:name=".AppStatistics"
             android:label="App Statistics"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

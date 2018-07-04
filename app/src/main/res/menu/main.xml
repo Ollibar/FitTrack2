@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
+        android:onClick="testdaten"
         android:orderInCategory="100"
         android:title="Testdaten anlegen"
-        app:showAsAction="never"
-        android:onClick="testdaten"/>
+        app:showAsAction="never" />
     <item
-        android:title="Statistiken der App"
         android:id="@+id/appStatistics"
         android:orderInCategory="100"
+        android:title="Statistiken der App"
         app:showAsAction="never" />
 </menu>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name = "station_typ">
+    <string-array name="station_typ">
         <item>Kraft</item>
         <item>Kardio</item>
 
     </string-array>
-    <integer-array name = "station_typ_value">
+    <integer-array name="station_typ_value">
         <item>1</item>
         <item>2</item>
     </integer-array>

@@ -4,23 +4,21 @@ import android.content.Intent;
 import android.example.com.fittrack.FitDB.DatabaseHelper;
 import android.example.com.fittrack.FitDB.ModelStation;
 import android.example.com.fittrack.Formulare.form_station;
+import android.example.com.fittrack.ListAdapter.StationListAdapter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-
-import android.example.com.fittrack.ListAdapter.StationListAdapter;
 
 public class Station extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,7 +36,7 @@ public class Station extends AppCompatActivity
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openStationForm(  );
+                openStationForm();
             }
         } );
 
@@ -56,25 +54,26 @@ public class Station extends AppCompatActivity
 
     private void erzeugeStationListe() {
         ArrayList<ModelStation> stationList = db.getAllStation();
-        lv = findViewById(R.id.stationlist);
-        StationListAdapter sla =new StationListAdapter( getApplicationContext(),stationList );
+        lv = findViewById( R.id.stationlist );
+        StationListAdapter sla = new StationListAdapter( getApplicationContext(), stationList );
 
         lv.setAdapter( sla );
         lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            openStationForm(id);
+                openStationForm( id );
             }
         } );
     }
 
     private void openStationForm() {
-        Intent i = new Intent(this,form_station.class);
+        Intent i = new Intent( this, form_station.class );
         startActivity( i );
     }
+
     private void openStationForm(long id) {
-        Intent i = new Intent(this,form_station.class);
-        i.putExtra( "stationID",id );
+        Intent i = new Intent( this, form_station.class );
+        i.putExtra( "stationID", id );
         startActivity( i );
     }
 
@@ -103,28 +102,29 @@ public class Station extends AppCompatActivity
 
         return super.onOptionsItemSelected( item );
     }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent( this, MainActivity.class );
             startActivity( i );
         } else if (id == R.id.nav_user) {
-            Intent i = new Intent(this,Benutzer.class);
+            Intent i = new Intent( this, Benutzer.class );
             startActivity( i );
         } else if (id == R.id.nav_station) {
-            Intent i = new Intent(this,Station.class);
+            Intent i = new Intent( this, Station.class );
             startActivity( i );
         } else if (id == R.id.nav_training) {
-            Intent i = new Intent(this,Training.class);
+            Intent i = new Intent( this, Training.class );
             startActivity( i );
         } else if (id == R.id.nav_target) {
-            Intent i = new Intent(this,TrainZiel.class);
+            Intent i = new Intent( this, TrainZiel.class );
             startActivity( i );
         } else if (id == R.id.nav_statistics) {
-            Intent i = new Intent(this,Statistik.class);
+            Intent i = new Intent( this, Statistik.class );
             startActivity( i );
 
         }
@@ -135,7 +135,7 @@ public class Station extends AppCompatActivity
     }
 
     public void insertNewStation(View view) {
-        Intent i = new Intent(this,form_station.class);
+        Intent i = new Intent( this, form_station.class );
         startActivity( i );
     }
 

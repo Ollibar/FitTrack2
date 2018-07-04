@@ -17,8 +17,8 @@
             android:id="@+id/nav_target"
             android:title="Ziele" />
         <item
-        android:id="@+id/nav_training"
-        android:title="Training" />
+            android:id="@+id/nav_training"
+            android:title="Training" />
         <item
             android:id="@+id/nav_statistics"
             android:title="Auswertung" />
@@ -28,7 +28,7 @@
         android:id="@+id/testStation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Testdaten einfügen"
-        android:onClick="testdatenIntoDB"/>
+        android:onClick="testdatenIntoDB"
+        android:text="Testdaten einfügen" />
 
 </menu>

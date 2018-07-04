@@ -16,22 +16,22 @@ public class form_station extends AppCompatActivity {
     String statName;
     Spinner spTyp;
     Intent i;
-    ModelStation station=null;
+    ModelStation station = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_form_station );
-        edTName =(EditText) findViewById( R.id.edT_station_name ) ;
-        statName =edTName.getText().toString();
-        spTyp =(Spinner) findViewById( R.id.stationspinner );
+        edTName = (EditText) findViewById( R.id.edT_station_name );
+        statName = edTName.getText().toString();
+        spTyp = (Spinner) findViewById( R.id.stationspinner );
         i = getIntent();
 
-        if(i.getLongExtra( "stationID",-1 )!=-1){
-            ModelStation station = new ModelStation(  );
-            station = db.getStation( i.getLongExtra( "stationID",-1 ) );
+        if (i.getLongExtra( "stationID", -1 ) != -1) {
+            ModelStation station = new ModelStation();
+            station = db.getStation( i.getLongExtra( "stationID", -1 ) );
             edTName.setText( station.getStation_name() );
-            spTyp.setSelection( station.getStation_typ()-1 );
+            spTyp.setSelection( station.getStation_typ() - 1 );
         }
     }
 
@@ -41,7 +41,7 @@ public class form_station extends AppCompatActivity {
         int[] values = getResources().getIntArray( R.array.station_typ_value );
         int typvalue = values[spinner_pos];
 
-        ModelStation station =new ModelStation( statName,typvalue );
+        ModelStation station = new ModelStation( statName, typvalue );
         db.createStation( station );
 
     }
@@ -51,7 +51,7 @@ public class form_station extends AppCompatActivity {
     }
 
     public void aktualisiereStation(View view) {
-        if(i.getLongExtra( "stationID",-1 )!=-1) {
+        if (i.getLongExtra( "stationID", -1 ) != -1) {
             station = db.getStation( i.getLongExtra( "stationID", -1 ) );
             station.setStation_name( edTName.getText().toString() );
             station.setStation_typ( spTyp.getSelectedItemPosition() );

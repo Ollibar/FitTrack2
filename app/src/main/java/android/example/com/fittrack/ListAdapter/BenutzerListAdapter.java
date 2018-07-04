@@ -18,9 +18,9 @@ public class BenutzerListAdapter extends BaseAdapter {
     private LayoutInflater inf;
 
     public BenutzerListAdapter(Context context, ArrayList<ModelBenutzer> benutzer) {
-        this.context=context;
-        this.benutzerArrayList=benutzer;
-        inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        this.context = context;
+        this.benutzerArrayList = benutzer;
+        inf = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     }
 
     @Override
@@ -41,17 +41,16 @@ public class BenutzerListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View row =inf.inflate( R.layout.list_benutzer_item,parent,false);
-        TextView txID =(TextView) row.findViewById( R.id.tV_list_benutzer_ID );
-        TextView txName =(TextView) row.findViewById( R.id.tV_list_benutzer_name );
-        TextView txAlter =(TextView) row.findViewById( R.id.tV_list_benutzer_alter );
-        TextView txGewicht =(TextView) row.findViewById( R.id.tV_list_benutzer_gewicht );
+        View row = inf.inflate( R.layout.list_benutzer_item, parent, false );
+        TextView txID = (TextView) row.findViewById( R.id.tV_list_benutzer_ID );
+        TextView txName = (TextView) row.findViewById( R.id.tV_list_benutzer_name );
+        TextView txAlter = (TextView) row.findViewById( R.id.tV_list_benutzer_alter );
+        TextView txGewicht = (TextView) row.findViewById( R.id.tV_list_benutzer_gewicht );
 
-        txID.setText( "Nr.: "+Integer.toString(position) );
-        txName.setText( "Name: "+ benutzerArrayList.get( position ).getBenutzer_name() );
-        txAlter.setText( benutzerArrayList.get(position).getBenutzer_alter() +" Jahre" );
-        txGewicht.setText( benutzerArrayList.get( position ).getBenutzer_gewicht()+" Kg" );
-
+        txID.setText( "Nr.: " + Integer.toString( position ) );
+        txName.setText( "Name: " + benutzerArrayList.get( position ).getBenutzer_name() );
+        txAlter.setText( benutzerArrayList.get( position ).getBenutzer_alter() + " Jahre" );
+        txGewicht.setText( benutzerArrayList.get( position ).getBenutzer_gewicht() + " Kg" );
 
 
         return row;

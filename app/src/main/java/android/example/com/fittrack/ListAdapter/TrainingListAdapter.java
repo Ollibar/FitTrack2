@@ -20,8 +20,8 @@ public class TrainingListAdapter extends BaseAdapter {
     private ArrayList<ModelTraining> trainingArrayList;
 
     public TrainingListAdapter(Context context, ArrayList<ModelTraining> stations) {
-        this.context=context;
-        this.trainingArrayList=stations;
+        this.context = context;
+        this.trainingArrayList = stations;
     }
 
     @Override
@@ -41,35 +41,32 @@ public class TrainingListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DatabaseHelper db =new DatabaseHelper( context );
+        DatabaseHelper db = new DatabaseHelper( context );
 
 
-        LayoutInflater inf =(LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        @SuppressLint("ViewHolder") View row =inf.inflate( R.layout.list_train_item,parent,false);
-        TextView txDatum =(TextView) row.findViewById( R.id.list_train_item_Datum );
-        TextView txStationName =(TextView) row.findViewById( R.id.list_train_item_station_name);
-        TextView txDauer =(TextView) row.findViewById( R.id.list_train_item_dauer );
-        TextView txKcal =(TextView) row.findViewById( R.id.list_train_item_kcal );
-        TextView txGeschwindigkeit =(TextView) row.findViewById( R.id.list_train_item_geschwindigkeit);
+        LayoutInflater inf = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        @SuppressLint("ViewHolder") View row = inf.inflate( R.layout.list_train_item, parent, false );
+        TextView txDatum = (TextView) row.findViewById( R.id.list_train_item_Datum );
+        TextView txStationName = (TextView) row.findViewById( R.id.list_train_item_station_name );
+        TextView txDauer = (TextView) row.findViewById( R.id.list_train_item_dauer );
+        TextView txKcal = (TextView) row.findViewById( R.id.list_train_item_kcal );
+        TextView txGeschwindigkeit = (TextView) row.findViewById( R.id.list_train_item_geschwindigkeit );
 
 
-
-        txDatum.setText(trainingArrayList.get( position ).getTraining_datum() );
-        ModelStation station= db.getStation(trainingArrayList.get( position ).getTraining_station_id() );
-
+        txDatum.setText( trainingArrayList.get( position ).getTraining_datum() );
+        ModelStation station = db.getStation( trainingArrayList.get( position ).getTraining_station_id() );
 
 
-
-     txStationName.setText(station.getStation_name());
+        txStationName.setText( station.getStation_name() );
         // wenn Kraft gerät dann zeige Gewicht + Wiederholung
-        if(station.getStation_typ()==1){
+        if (station.getStation_typ() == 1) {
 
-            txGeschwindigkeit.setText( trainingArrayList.get( position ).getTraining_wiederholung()+" x" );
-            txKcal.setText( trainingArrayList.get( position ).getTraining_gewicht() +" Kg");
+            txGeschwindigkeit.setText( trainingArrayList.get( position ).getTraining_wiederholung() + " x" );
+            txKcal.setText( trainingArrayList.get( position ).getTraining_gewicht() + " Kg" );
 
         }
         // wenn Kardio Gerät dann zeige Geschwindigkeit + Dauer + Kcal
-        else if(station.getStation_typ()==2){
+        else if (station.getStation_typ() == 2) {
             txDauer.setText( trainingArrayList.get( position ).getTraining_dauer() + " Min." );
             txGeschwindigkeit.setText( trainingArrayList.get( position ).getTraining_geschwindigkeit() + " Km/h" );
             txKcal.setText( trainingArrayList.get( position ).getTraining_kcal() + " Kcal" );
