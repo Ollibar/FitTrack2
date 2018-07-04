@@ -23,6 +23,13 @@ public class TrainZielListAdapter extends BaseAdapter {
     private LayoutInflater inf;
     private static final String LOG = TrainZielListAdapter.class.getName();
 
+    /**
+     * wir übergeben eine activity und ein arraylist im constructor des adapters
+     * anschließen können wir ein layout mit inhalt aus der arraylist befüllen
+     * mit hilfe eines LayoutInflater
+     * @param context der jeweilige context/ klasse
+     * @param train_ziel die jeweilige arrayliste
+     */
     public TrainZielListAdapter(Context context, ArrayList<ModelTrain_ziel> train_ziel) {
         this.context=context;
         this.train_zielArrayList=train_ziel;
@@ -46,8 +53,15 @@ public class TrainZielListAdapter extends BaseAdapter {
         return train_zielArrayList.get(position).getTrain_ziel_id();
     }
 
-
+    /**
+     * befüllen die layout datei mit den inhalt aus dem arraylist
+     * @param position
+     * @param convertView
+     * @param parent xml datei
+     * @return die befüllte layout datei
+     */
      public View getView(int position, View convertView, ViewGroup parent) {
+
         View row =inf.inflate( R.layout.list_train_ziel_item,parent,false);
 
         TextView zielBenutzer= (TextView)row.findViewById(R.id.tV_zielBenutzerName);
@@ -59,9 +73,6 @@ public class TrainZielListAdapter extends BaseAdapter {
         TextView zielWunschgewicht= (TextView)row.findViewById(R.id.tV_ziel_body_weight);
         TextView zielDauer= (TextView)row.findViewById(R.id.tV_list_ziel_Dauer);
         TextView zielGeschw= (TextView)row.findViewById(R.id.tV_list_ziel_Gesw);
-
-
-        train_zielArrayList.get(position);
 
        ModelBenutzer mb = db.getBenutzer(train_zielArrayList.get(position).getTrain_ziel_benutzer_id());
        zielBenutzer.setText("Benutzer: "+mb.getBenutzer_name());
