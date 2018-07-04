@@ -14,7 +14,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * datenbank: realisierung durch die vererbung von SQLiteOpenHelper klasse
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
+
 	private static final String LOG = DatabaseHelper.class.getName();
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "fitDB.db";
@@ -22,6 +27,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
+	/**
+	 * String für die Erstellung von benutzer Tabelle
+	 */
 	private static final String CREATE_TABLE_BENUTZER = "CREATE TABLE benutzer (" + 
 	"benutzer_id INTEGER PRIMARY KEY," + 
 	"benutzer_name VARCHAR," + 
@@ -29,6 +37,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"benutzer_gewicht INTEGER	" + 
 	")";
 
+	/**
+	 * String für die Erstellung von training Tabelle
+	 */
 	private static final String CREATE_TABLE_TRAINING = "CREATE TABLE training (" + 
 	"training_id INTEGER PRIMARY KEY," + 
 	"training_datum DATE," + 
@@ -42,11 +53,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 "training_gewicht INTEGER DEFAULT 0	" +
 	")";
 
+	/**
+	 * String für die Erstellung von station Tabelle
+	 */
+
 	private static final String CREATE_TABLE_STATION = "CREATE TABLE station (" +
 	"station_id INTEGER PRIMARY KEY," +
 	"station_name VARCHAR," + 
 	"station_typ INTEGER	" + 
 	")";
+
+	/**
+	 * String für die Erstellung von train_ziel Tabelle
+	 */
 
 	private static final String CREATE_TABLE_TRAIN_ZIEL = "CREATE TABLE train_ziel (" + 
 	"train_ziel_id INTEGER PRIMARY KEY," +
@@ -61,7 +80,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	"train_ziel_pos3 VARCHAR " +
 	")";
 
-
+	/**
+	 * führt die SQL strings aus und erstellt die Tabellen
+	 * @param db für die methode execSQL(DDL)
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_BENUTZER);
@@ -69,6 +91,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_STATION);
 		db.execSQL(CREATE_TABLE_TRAIN_ZIEL);
 	}
+
+	/**
+	 * overide method und ist nur von bedeutung wenn die Version
+	 * der datenbank sich irgenwand ändern sollte
+	 * @param db
+	 * @param oldVersion
+	 * @param newVersion
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS benutzer");
@@ -77,12 +107,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS train_ziel");
 		onCreate(db);
 	}
-	public void clear(SQLiteDatabase db) {
-		db.execSQL("DELETE FROM benutzer");
-		db.execSQL("DELETE FROM training");
-		db.execSQL("DELETE FROM station");
-		db.execSQL("DELETE FROM train_ziel");
-	}
+
+	/**
+	 * schließ die verbindung zur datenbank
+	 */
 	public void closeDB() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		if (db != null && db.isOpen()) db.close();
@@ -90,6 +118,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// Methoden für die Tabelle benutzer
 
+	/**
+	 * wir übergeben ein ModelBenutzer Objekt-
+	 * bekommen mit den get-Methoden dieser Klasse die dazu gehörigen daten-
+	 * speichern es in ein ContentValue Objekt-
+	 * mit deren hilfe wir die daten in die datenbank schreiben können
+	 * anschließen rufen wir die insertOrThrow() auf und schreiben in die datenbank
+	 * @param benutzer ModelBenutzer Objekt
+	 * @return eine ID für den neuerstellten datensatz oder -1 wenn fehlgeschlagen
+	 */
 	public long createBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -98,6 +135,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
 		return db.insertOrThrow("benutzer", null, values);
 	}
+
+	/**
+	 * wir übergeben ein ModelBenutzer Objekt-
+	 * bekommen mit den get-Methoden dieser Klasse die dazu gehörigen daten-
+	 * speichern es in ein ContentValue Objekt-
+	 * mit deren hilfe wir die daten in die datenbank schreiben können
+	 * anschließen rufen wir die update() methode auf und schreiben in die datenbank
+	 * @param benutzer ModelBenutzer Objekt
+	 * @return anzahl der veränderten datenzeilen
+	 */
 	public int updateBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -106,10 +153,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put("benutzer_gewicht", benutzer.getBenutzer_gewicht());
 		return db.update("benutzer", values, "benutzer_id = ?", new String[] {String.valueOf(benutzer.getBenutzer_id())});
 	}
+
+	/**
+	 * es wird ein ModelBenutzer-Objekt übergeben
+	 * mit hilfe einfacher where bedingung durch die id löschen wir dann den benutzer aus der datenbank
+	 * @param benutzer ModelBenutzer Objekt
+	 * @return anzahl der betroffenen datenzeilen
+	 */
 	public int deleteBenutzer(ModelBenutzer benutzer) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("benutzer", "benutzer_id = ?", new String[] {String.valueOf(benutzer.getBenutzer_id())});
 	}
+
+	/**
+	 *
+	 * @param c
+	 * @return
+	 */
 	protected ModelBenutzer getModelBenutzerFromCursor(Cursor c){
 		ModelBenutzer benutzer = new ModelBenutzer();
 		benutzer.setBenutzer_id(c.getInt(c.getColumnIndex("benutzer_id")));

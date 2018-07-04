@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class TrainZielListAdapter extends BaseAdapter {
+
     private Context context;
     private ArrayList<ModelTrain_ziel> train_zielArrayList;
     private DatabaseHelper db;
