@@ -5,14 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import com.jjoe64.graphview.series.DataPoint;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 /**
  * datenbank: realisierung durch die vererbung von SQLiteOpenHelper klasse
@@ -156,7 +151,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	/**
 	 * es wird ein ModelBenutzer-Objekt übergeben
-	 * mit hilfe einfacher where bedingung durch die id löschen wir dann den benutzer aus der datenbank
+	 * mit hilfe einfacher where bedingungen durch die id löschen wir dann den benutzer
+	 * aus der datenbank
 	 * @param benutzer ModelBenutzer Objekt
 	 * @return anzahl der betroffenen datenzeilen
 	 */
@@ -166,9 +162,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	/**
-	 *
-	 * @param c
-	 * @return
+	 * wandeln den übergebenen cursor in ein ModelBenutzer um
+	 * und bekommen so indirekt den Datensatz in der datenbank
+	 * um damit im code weiter arbeiten zu können
+	 * @param c bekommen einen cursor aus den methoden getBenutzer(long),getBenutzer(name)
+	 * @return ModelBenutzer
 	 */
 	protected ModelBenutzer getModelBenutzerFromCursor(Cursor c){
 		ModelBenutzer benutzer = new ModelBenutzer();
@@ -178,6 +176,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		benutzer.setBenutzer_gewicht(c.getInt(c.getColumnIndex("benutzer_gewicht")));
 		return benutzer;
 	}
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
 	public ModelBenutzer getBenutzer(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM benutzer Where benutzer_id =  ?";
@@ -287,6 +291,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelTrainingFromCursor(c);
 	}
+/*
 	public DataPoint[]getData(int userID){
 		SQLiteDatabase db = this.getReadableDatabase();
 		String [] colummns={"training_datum","sum(training_kcal)"};
@@ -302,9 +307,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			//x=datum  y=sum(kcal)
 			dp[i]= new DataPoint(cursor.getInt(0),cursor.getInt(1));
 			Log.d(LOG,"get data: "+dp[i]);
-		}return dp;
+		}return dp;}
+*/
 
-	}
+
 	public Cursor getPumperStats(long benutzerId){
 		SQLiteDatabase db = this.getReadableDatabase();
 
