@@ -236,7 +236,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null) c.moveToFirst();
         return getModelTrainingFromCursor( c );
     }
-
+/*
     public DataPoint[] getData(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] colummns = {"training_datum", "sum(training_kcal)"};
@@ -246,6 +246,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query( "training", colummns, selection, selectionArgs, groupBy,
                 null, null );
         DataPoint[] dp = new DataPoint[cursor.getCount()];
+	protected ModelTraining getModelTrainingFromCursor(Cursor c){
+		ModelTraining training = new ModelTraining();
+		training.setTraining_id(c.getInt(c.getColumnIndex("training_id")));
+		training.setTraining_datum(c.getString(c.getColumnIndex("training_datum")));
+		training.setTraining_benutzer_id(c.getInt(c.getColumnIndex("training_benutzer_id")));
+		training.setTraining_station_id(c.getInt(c.getColumnIndex("training_station_id")));
+		training.setTraining_beschreibung(c.getString(c.getColumnIndex("training_beschreibung")));
+		training.setTraining_dauer(c.getInt(c.getColumnIndex("training_dauer")));
+		training.setTraining_geschwindigkeit(c.getInt(c.getColumnIndex("training_geschwindigkeit")));
+		training.setTraining_kcal( c.getInt( c.getColumnIndex( "training_kcal")));
+		training.setTraining_wiederholung( c.getInt(c.getColumnIndex( "training_wiederholung" )) );
+		training.setTraining_gewicht( c.getInt(c.getColumnIndex( "training_gewicht" )) );
+		return training;
+	}
+	public ModelTraining getTraining(long id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM training Where training_id =  ?";
+		Cursor c = db.rawQuery(selectQuery, new String[] { String.valueOf(id) });
+		if (c != null) c.moveToFirst();
+		return getModelTrainingFromCursor(c);
+	}
+	/*
+	public DataPoint[]getData(int userID){
+		SQLiteDatabase db = this.getReadableDatabase();
+		String [] colummns={"training_datum","sum(training_kcal)"};
+		String groupBy = "training_datum";
+		String selection = "training_benutzer_id = ?";
+		String [] selectionArgs = new String[]{String.valueOf(userID)};
+		Cursor cursor = db.query("training",colummns,selection,selectionArgs,groupBy,
+				null,null);
+		DataPoint[]dp = new DataPoint[cursor.getCount()];
 
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
@@ -256,9 +287,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return dp;
 
     }
-
-    public Cursor getPumperStats(long benutzerId) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    */
+	public Cursor getPumperStats(long benutzerId){
+		SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "Select training_datum,Sum(training_kcal)As kcal,Sum(training_wiederholung * training_gewicht) As pumpPower  from training group by training_datum\n" +
                 "having training_benutzer_id =" + benutzerId + ";";
