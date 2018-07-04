@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+
 public class TrainingOnClickDialog extends Dialog implements View.OnClickListener {
     public Activity c;
     public Dialog d;
