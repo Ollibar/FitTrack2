@@ -18,7 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * Activity für das Speichern und Updaten von trainingsziele
+ */
 public class form_target extends AppCompatActivity {
 
     private static final String LOG = form_target.class.getSimpleName();
@@ -28,6 +30,11 @@ public class form_target extends AppCompatActivity {
 
 
     private DatabaseHelper db = new DatabaseHelper( this );
+
+    /**
+     * über spinnerStation selektieren wir welche daten der benutzer auszufüllen hat
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +88,10 @@ public class form_target extends AppCompatActivity {
 
     }
 
+    /**
+     * speichern von ziele, einfache if/else für den fall wenn der benutzer etwas eingibt oder nicht
+     * @param view
+     */
 
     public void insertTarget(View view) {
 
@@ -135,6 +146,12 @@ public class form_target extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * update ein ziel;
+     * if/else für den fall wenn der benutzer etwas eingibt oder nicht
+     * @param view
+     */
 
     public void updateTarget(View view) {
 
@@ -195,6 +212,11 @@ public class form_target extends AppCompatActivity {
         db.closeDB();
     }
 
+    /**
+     * bekommen durch den ausgewählten inhalt des spinners den ganzen datensatz für station und
+     * geben die id zurück
+     * @return station id
+     */
 
     private int getStationID() {
         String station = spinnerStation.getSelectedItem().toString();
@@ -202,6 +224,12 @@ public class form_target extends AppCompatActivity {
         int id = s.getStation_id();
         return id;
     }
+
+    /**
+     * bekommen durch den ausgewählten inhalt des spinners den ganzen datensatz für benutzer und
+     * geben die id zurück
+     * @return benutzer ID
+     */
 
     private int getBenutzerID() {
         String s = spinnerUser.getSelectedItem().toString();
@@ -211,6 +239,9 @@ public class form_target extends AppCompatActivity {
         return id;
     }
 
+    /**
+     * befüllen spinner mit benutzernamen
+     */
 
     private void getUserSpinner() {
         String[] array = db.getAllBenutzerNamen();
@@ -218,6 +249,10 @@ public class form_target extends AppCompatActivity {
         adapterUser = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, array );
         spinnerUser.setAdapter( adapterUser );
     }
+
+    /**
+     * befüllen spinner mit stationnamen
+     */
 
     private void getStationSpinner() {
         String[] array = db.getAllStationNamen();

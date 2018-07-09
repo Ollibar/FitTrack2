@@ -1,5 +1,9 @@
 package android.example.com.fittrack.FitDB;
 
+/**
+ *Javaklasse für die interne behandlung der daten
+ */
+
 public class ModelTrain_ziel {
 	private int train_ziel_id;
 	private int train_ziel_benutzer_id;

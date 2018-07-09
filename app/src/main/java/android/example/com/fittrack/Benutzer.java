@@ -23,6 +23,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Activity für Funktionen rum um den Benutzer
+ */
 
 public class Benutzer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +34,13 @@ public class Benutzer extends AppCompatActivity
     private DatabaseHelper db = new DatabaseHelper( this );
     private ListView listView;
 
-
+    /**
+     * die wichtigstens komponente des navigationdrawer werden hier erstellt
+     * sowie die methode für die erzeugung der benutzer listview
+     * überwiegend automatisch generiert durch android studio(toolbar, floatingactionbutton,layout,
+     * navigationview)
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -60,11 +69,20 @@ public class Benutzer extends AppCompatActivity
 
 
     }
-
+    /**
+     * toogle button wird gedrückt und die userform activity wird gestartet
+     * für die eingabe der daten
+     */
     private void openUserForm() {
         Intent i = new Intent( this, form_user.class );
         startActivity( i );
     }
+    /**
+     * methode für die erzeugung der benutzer listview
+     * aus der datenbank bekommen wir eine Arraylist von allen Benutzer;
+     * durch ein OnClickItemListener mit integrierten AlertDialog können wir dann ein Benutzer
+     * aus der Datenbank löschen
+     */
 
     public void showAllListBenutzer() {
         final ArrayList<ModelBenutzer> benutzerList = db.getAllBenutzer();
@@ -125,7 +143,11 @@ public class Benutzer extends AppCompatActivity
 
         return super.onOptionsItemSelected( item );
     }
-
+    /**
+     * navigation durch die die UI
+     * @param item acttivities
+     * @return true
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

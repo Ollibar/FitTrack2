@@ -1,7 +1,8 @@
 package android.example.com.fittrack.FitDB;
 
-import android.example.com.fittrack.R;
-import android.widget.TextView;
+/**
+ * Javaklasse für die interne behandlung der daten
+ */
 
 public class ModelBenutzer {
 	private int benutzer_id;

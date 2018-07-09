@@ -27,12 +27,26 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Activity für fukntionen rum um die ziele des benutzers
+ */
+
 public class TrainZiel extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String LOG = TrainZiel.class.getSimpleName();
     private DatabaseHelper db = new DatabaseHelper( this );
     private ListView lv;
     private Spinner spinnerUser;
+
+    /**
+     * die wichtigstens komponente des navigationdrawer werden hier erstellt
+     * überwiegend automatisch generiert durch android studio(toolbar, floatingactionbutton,layout,
+     * navigationview);
+     * ein onClickListener für den floating button um form_target Activity zu öffnen;
+     * befüllen mit setSpinner() methode unseren Spinner für die ListView;
+     * die Listview ist dann spezifisch für den einen Benutzer;
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +88,13 @@ public class TrainZiel extends AppCompatActivity
         } );
     }
 
+    /**
+     * wir bekommen über den ausgewählten Inhalt des Spinners die jeweilige BenutzerID
+     * und bekommen mit getAllTrain_ziel(int BenutzerID) alle ziele des zugehörigen Benutzer
+     * anschließende verknüpfung zwischen Arraylist der ziele mit ListView;
+     * OnclickListener für die option des löschen in der Listview
+     */
+
     private void erzeugeListe() {
 
         final String username = spinnerUser.getSelectedItem().toString();
@@ -111,6 +132,10 @@ public class TrainZiel extends AppCompatActivity
         } );
     }
 
+    /**
+     * befüllen den Spinner mit allen benutzer namen in der datenbank
+     */
+
     private void setSpinner() {
         spinnerUser = findViewById( R.id.spinner_traning_ziel );
         String[] spinnerBenutzerArray = db.getAllBenutzerNamen();
@@ -119,6 +144,10 @@ public class TrainZiel extends AppCompatActivity
         spinnerArrayAdapter1.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         spinnerUser.setAdapter( spinnerArrayAdapter1 );
     }
+
+    /**
+     * öffnen form_taget activity
+     */
 
     private void openTargetForm() {
         Intent i = new Intent( this, form_target.class );
@@ -135,21 +164,11 @@ public class TrainZiel extends AppCompatActivity
         }
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected( item );
-    }
+    /**
+     * navigation UI
+     * @param item
+     * @return true
+     */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

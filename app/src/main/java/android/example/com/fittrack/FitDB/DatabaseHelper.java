@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 /**
- * datenbank: realisierung durch die vererbung von SQLiteOpenHelper klasse
+ * unsere datenbank: realisierung durch die vererbung von SQLiteOpenHelper klasse
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -139,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * speichern es in ein ContentValue Objekt-
 	 * mit deren hilfe wir die daten in die datenbank schreiben können
 	 * anschließen rufen wir die update() methode auf und schreiben in die datenbank
+     * mit hilfe der ID des übergebenen Objektes
 	 * @param benutzer ModelBenutzer Objekt
 	 * @return anzahl der veränderten datenzeilen
 	 */
@@ -153,8 +154,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	/**
 	 * es wird ein ModelBenutzer-Objekt übergeben
-	 * mit hilfe einfacher where bedingungen durch die id löschen wir dann den benutzer
-	 * aus der datenbank
+	 * mit hilfe einfacher where bedingung löschen wir dann den benutzer aus der datenbank
+     * durch die id
 	 * @param benutzer ModelBenutzer Objekt
 	 * @return anzahl der betroffenen datenzeilen
 	 */
@@ -180,10 +181,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	/**
-	 *
-	 * @param id
-	 * @return
+	 * eine where query gibt uns den entsprechenden benutzer mit der angegebenen id
+	 * und gehen mit hilfe eines cursors durch die daten und wandeln sie stück für srück
+     * in ein Benutzer-Objekt um
+     * @param id
+	 * @return benutzer daten mit der übergebenen id
 	 */
+
 	public ModelBenutzer getBenutzer(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM benutzer Where benutzer_id =  ?";
@@ -191,6 +195,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelBenutzerFromCursor(c);
 	}
+
+    /**
+     * eine where query gibt uns den entsprechenden benutzer mit dem entsprechenden namen
+     * und gehen mit hilfe eines cursors durch die daten und wandeln sie stück für srück
+     * in ein Benutzer Objekt um
+     *  @param name
+     * @return benutzer daten mit den übergebenen namen
+     */
+
 	public ModelBenutzer getBenutzer(String name) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM benutzer Where benutzer_name = ?";
@@ -198,6 +211,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c != null) c.moveToFirst();
 		return getModelBenutzerFromCursor( c );
 	}
+
+    /**
+     * mit einer einfachen where query lassen wir die gesamtheit der benutzer daten suchen
+     * anschließen befüllen wir ein arraylist mit hilfe eines cursor-objekt
+     * @return arraylist von allen benutzer und die dazugehörigen daten
+     */
 	public ArrayList<ModelBenutzer> getAllBenutzer() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		ArrayList<ModelBenutzer> benutzerList = new ArrayList<>();
@@ -211,6 +230,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return benutzerList;
 	}
+
+    /**
+     * befüllen ein array mit benutzernamen
+     * @return array von benutzernamen
+     */
+
 	public String[] getAllBenutzerNamen(){
 
         ArrayList<ModelBenutzer> benutzerAL = getAllBenutzer();
@@ -223,6 +248,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return stringarray;
     }
+
+    /**
+     * @return anzahl der benutzer in der app
+     */
 
     public int getBenutzerCount() {
         String countQuery = "SELECT * FROM benutzer";
@@ -456,6 +485,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Methoden für die Tabelle train_ziel
 
+    /**
+     * wir übergeben ein ModelTrain_ziel Objekt-
+     * bekommen mit den get-Methoden dieser Klasse die dazu gehörigen daten-
+     * speichern es in ein ContentValue Objekt-
+     * mit deren hilfe wir die daten in die datenbank schreiben können
+     * anschließen rufen wir die insertOrThrow() auf und schreiben in die datenbank
+     * @param train_ziel
+     * @return ID des Ziels
+     */
     public long createTrain_ziel(ModelTrain_ziel train_ziel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -470,6 +508,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put( "train_ziel_pos3", train_ziel.getTrain_ziel_pos3() );
         return db.insertOrThrow( "train_ziel", null, values );
     }
+
+    /**
+     * wir übergeben ein ModelTrain_ziel Objekt-
+     * bekommen mit den get-Methoden dieser Klasse die dazu gehörigen daten-
+     * speichern es in ein ContentValue Objekt-
+     * mit deren hilfe wir die daten in die datenbank schreiben können
+     * anschließen rufen wir die update() methode auf und schreiben in die datenbank mit hilfe der
+     * ID des übergebenen Objektes
+     * @param train_ziel
+     * @return
+     */
 
     public int updateTrain_ziel(ModelTrain_ziel train_ziel) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -486,11 +535,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update( "train_ziel", values, "train_ziel_id = ?", new String[]{String.valueOf( train_ziel.getTrain_ziel_id() )} );
     }
 
+    /**
+     * uns wird ein ModelBenutzer-Objekt übergeben
+     * mit hilfe einfacher where bedingung löschen wir dann den benutze aus der datenbank
+     * mit der ID
+     * @param train_ziel Objekt
+     * @return anzahl der zeilen die gelöscht wurden
+     */
     public int deleteTrain_ziel(ModelTrain_ziel train_ziel) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete( "train_ziel", "train_ziel_id = ?", new String[]{String.valueOf( train_ziel.getTrain_ziel_id() )} );
     }
 
+    /**
+     * wandeln den übergebenen cursor in ein ModelBenutzer um
+     * und bekommen so indirekt den Datensatz in der datenbank
+     * um damit im code weiter arbeiten zu können
+     * @param c
+     * @return ModelTrain_ziel Objekt
+     */
     protected ModelTrain_ziel getModelTrain_zielFromCursor(Cursor c) {
         ModelTrain_ziel train_ziel = new ModelTrain_ziel();
         train_ziel.setTrain_ziel_id( c.getInt( c.getColumnIndex( "train_ziel_id" ) ) );
@@ -506,6 +569,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return train_ziel;
     }
 
+    /**
+     * eine where query gibt uns die entsprechenden ziele mit der angegebenen id
+     * und gehen mit hilfe eines cursors durch die daten und wandeln sie stück für srück
+     * in ein ModelTrain_ziel Objekt um
+     * @param stationID
+     * @return alle daten mit der übergebene id
+     */
+
     public long getTrainZielID(long stationID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM train_ziel Where train_ziel_station_id =  ?";
@@ -515,6 +586,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ziel.getTrain_ziel_id();
     }
 
+    /**
+     * eine where query gibt uns den entsprechenden benutzer mit dem entsprechenden namen
+     * und gehen mit hilfe eines cursors durch die daten und wandeln sie stück für srück
+     * in ein ModelTrain_ziel Objekt um
+     * @param id
+     * @return ModelTrain_ziel mit der übergebenen ID
+     */
+
     public ModelTrain_ziel getTrain_ziel(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM train_ziel Where train_ziel_id =  ?";
@@ -523,6 +602,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return getModelTrain_zielFromCursor( c );
     }
 
+    /**
+     * mit einer einfachen where query lassen wir die gesamtheit der benutzer daten suchen
+     * anschließen befüllen wir ein arraylist mit hilfe eines cursor-objekt
+     * @param benutzerID
+     * @return arraylist mit allen daten von trainingsziele
+     */
     public ArrayList<ModelTrain_ziel> getAllTrain_ziel(int benutzerID) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<ModelTrain_ziel> train_zielList = new ArrayList<>();
@@ -537,20 +622,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return train_zielList;
     }
 
-    public ArrayList<ModelTrain_ziel> getAllTrain_ziel() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<ModelTrain_ziel> train_zielList = new ArrayList<ModelTrain_ziel>();
-        String selectQuery = "SELECT * FROM train_ziel";
-        Cursor c = db.rawQuery( selectQuery, null );
-        if (c.moveToFirst()) {
-            do {
-                ModelTrain_ziel train_ziel = getModelTrain_zielFromCursor( c );
-                train_zielList.add( train_ziel );
-            } while (c.moveToNext());
-        }
-        return train_zielList;
-    }
-
+    /**
+     * @return anzahl von ziele in der app
+     */
     public int getTrain_zielCount() {
         String countQuery = "SELECT * FROM train_ziel";
         SQLiteDatabase db = this.getReadableDatabase();

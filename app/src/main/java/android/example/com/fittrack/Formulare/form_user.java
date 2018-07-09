@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * speichern und update von user
+ */
 
 public class form_user extends AppCompatActivity {
 
@@ -31,6 +34,15 @@ public class form_user extends AppCompatActivity {
         txtfield2 = (EditText) findViewById( R.id.form_user_age );
         txtfield3 = (EditText) findViewById( R.id.form_user_weight );
     }
+
+    /**
+     * Methode für das clicken auf den user speichern button;
+     * wir hollen uns die eingetragenen daten von user aus den EditText
+     * und schreiben sie in die datenbank mit hilfe eines ModelBenutzer Objekt
+     * das wir der methode createBenutzer(ModelBenutzer) übergeben;
+     * anschließen gehen wir in die Benutzer activity zurück
+     * @param view
+     */
 
     public void insertUserIntoDB(View view) {
 
@@ -63,6 +75,15 @@ public class form_user extends AppCompatActivity {
             dbHelper.closeDB();
         }
     }
+
+    /**
+     * updateUser Button
+     * erzwingen die eingabe des namens mit der try/catch;
+     * da wir dann in der der update methode durch where bedingung die datensätze mit dem
+     * name vergleichen;
+     * anschließen gehen wir in die Benutzer activity zurück
+     * @param view
+     */
 
     public void updateUser(View view) {
 

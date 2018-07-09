@@ -8,11 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Gesamtstatistik
+ */
 public class AppStatistics extends AppCompatActivity {
 
     TextView user, station, training, ziel;
     private DatabaseHelper db = new DatabaseHelper( this );
 
+    /**
+     * zeig die anzahl der user/ station/ training/ ziel in der ganzen app
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -31,6 +38,10 @@ public class AppStatistics extends AppCompatActivity {
         }
     }
 
+    /**
+     * zurück zum MainActivity
+     * @param view
+     */
     public void onClickback(View view) {
         Intent in = new Intent( this, MainActivity.class );
         startActivity( in );

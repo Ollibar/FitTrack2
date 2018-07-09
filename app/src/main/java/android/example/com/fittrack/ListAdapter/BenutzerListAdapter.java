@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Adapterhilfsklasse für die Verbindung zum ListView
+ */
+
 public class BenutzerListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelBenutzer> benutzerArrayList;

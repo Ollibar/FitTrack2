@@ -20,12 +20,17 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+/**
+ * Startseite der App: hat Menü für Test und Gesamtstatistik
+ * 2.Funktion: Motivationssprüche
+ */
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "UserActivity";
     private static final String LOG = MainActivity.class.getSimpleName();
-    public static int activeUserID;
+
     TextView nav_Arnisays;
     private DatabaseHelper db = new DatabaseHelper( this );
 
