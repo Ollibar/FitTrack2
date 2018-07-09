@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Adapterklasse für die Listview von Zielen
+ */
+
 public class TrainZielListAdapter extends BaseAdapter {
 
     private Context context;
@@ -55,7 +59,7 @@ public class TrainZielListAdapter extends BaseAdapter {
 
     /**
      * befüllen die layout datei mit den inhalt aus dem arraylist
-     * @param position
+     * @param position der daten im arraylist
      * @param convertView
      * @param parent xml datei
      * @return die befüllte layout datei

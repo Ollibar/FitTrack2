@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Adapterhilfsklasse für die Verbindung zum ListView
+ * Adapterhilfsklasse für die Verbindung zum Benutzer ListView
  */
 
 public class BenutzerListAdapter extends BaseAdapter {
@@ -21,6 +21,13 @@ public class BenutzerListAdapter extends BaseAdapter {
     private ArrayList<ModelBenutzer> benutzerArrayList;
     private LayoutInflater inf;
 
+    /**
+     * wir übergeben eine activity und ein arraylist im constructor des adapters
+     * anschließen können wir ein layout mit inhalt aus der arraylist befüllen
+     * mit hilfe eines LayoutInflater
+     * @param context
+     * @param benutzer
+     */
     public BenutzerListAdapter(Context context, ArrayList<ModelBenutzer> benutzer) {
         this.context = context;
         this.benutzerArrayList = benutzer;
@@ -42,6 +49,13 @@ public class BenutzerListAdapter extends BaseAdapter {
         return 0;
     }
 
+    /**
+     * befüllen die layout datei mit den inhalt aus dem arraylist
+     * @param position der daten im arraylist
+     * @param convertView
+     * @param parent
+     * @return befüllte layout
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
