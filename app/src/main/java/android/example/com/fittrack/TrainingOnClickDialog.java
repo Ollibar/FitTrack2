@@ -14,7 +14,7 @@ import android.widget.Button;
 public class TrainingOnClickDialog extends Dialog implements View.OnClickListener {
     public Activity c;
     public Dialog d;
-    public Button abbrechen, bearbeiten, löschen;
+    public Button abbrechen, bearbeiten, loeschen;
     public long trainingID;
     DatabaseHelper db = new DatabaseHelper( getContext() );
 
@@ -31,12 +31,16 @@ public class TrainingOnClickDialog extends Dialog implements View.OnClickListene
         setContentView( R.layout.trainingonclickdialog );
         bearbeiten = (Button) findViewById( R.id.bt_dialog_Bearbeiten );
         bearbeiten.setOnClickListener( this );
-        löschen = (Button) findViewById( R.id.bt_dialog_delete );
-        löschen.setOnClickListener( this );
+        loeschen = (Button) findViewById( R.id.bt_dialog_delete );
+        loeschen.setOnClickListener( this );
         abbrechen = (Button) findViewById( R.id.bt_dialog_abbrechen );
         abbrechen.setOnClickListener( this );
     }
 
+    /**
+     * OnClick handler für den Trainings Dialog, der sich beim klick auf ein Listitem öffnet
+     * @param v
+     */
     @Override
     public void onClick(View v) {
 

@@ -71,6 +71,9 @@ public class Training extends AppCompatActivity
 
     }
 
+    /**
+     * Ruft alle Benutzernamen aus der Datenbank ab, speichert sie in einem Array und setzt sie als Eintrag für den Spinner der Trainingsübersicht
+     */
     private void setSpinner() {
         spinnerBenutzer = (Spinner) findViewById( R.id.training_spinner_ );
 
@@ -82,6 +85,9 @@ public class Training extends AppCompatActivity
         spinnerBenutzer.setAdapter( spinnerArrayAdapter1 );
     }
 
+    /**
+     * Ruft alle Trainingsdaten zum im Spinner gewählten Benutzer aus der Datenbank ab und übergibt sie über den List Adapter an das ListView
+     */
     private void erzeugeTrainingListe() {
         String username = spinnerBenutzer.getSelectedItem().toString();
 
@@ -102,6 +108,9 @@ public class Training extends AppCompatActivity
 
     }
 
+    /**
+     * Methode startet das Formular zur Eingabe von Trainingsdaten.
+     */
     private void insertNewTraining() {
         Intent i = new Intent( this, form_training.class );
         startActivity( i );
@@ -132,7 +141,9 @@ public class Training extends AppCompatActivity
 
         return super.onOptionsItemSelected( item );
     }
-
+    /**
+     * Action-Handler für die Punkte des Navigationsmenüs
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

@@ -50,7 +50,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void getArnisquote() {
+    /**
+     * wählt einen zufälligen Sring aus dem quotearray und zeigt ihn auf der Hauptseite an.
+     * Methode wird per Buttonklick ausgelöst
+     */
+    public void getArnisquote(View view) {
         String[] quotearray = {
                 "Bodybuilding is much like any other sport. To be successful, you must dedicate yourself 100% to your training, diet and mental approach.",
                 "Failure is not an option. Everybody has to succeed.",
@@ -117,10 +121,11 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    // Navigation Drawer Menü Listner
+    /**
+     * Action-Handler für die Punkte des Navigationsmenüs
+     */
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+       int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             Intent i = new Intent( this, MainActivity.class );
@@ -148,7 +153,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    // Methode zum einfügen von Testdaten in die Datenbank
+    /**
+     * Methode zum einfügen von Testdaten in die Datenbank
+     * @param item
+     */
     public void testdaten(MenuItem item) {
         // Benutzer
         ModelBenutzer user = new ModelBenutzer( "Betty Kane", 25, 65 );
@@ -205,9 +213,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void getArnisquote(View view) {
-        getArnisquote();
-    }
+
 
 }
 
