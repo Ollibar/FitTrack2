@@ -63,7 +63,7 @@ public class StatistikListAdapter extends BaseAdapter {
      * @param position
      * @param convertView
      * @param parent
-     * @return
+     * @return befülltes layout
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

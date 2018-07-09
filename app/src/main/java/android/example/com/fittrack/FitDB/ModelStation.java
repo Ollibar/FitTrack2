@@ -52,7 +52,7 @@ public class ModelStation {
 
     /**
      * gibt den Staionsnamen zurück
-     * @return
+     * @return stationame
      */
     public String getStation_name() {
         return this.station_name;

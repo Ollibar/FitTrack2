@@ -130,7 +130,7 @@ public class form_training extends AppCompatActivity {
      * Methode holt sich den Typen des im Spinner ausgewählten Gerätes aus der Datenbank und gibt den Wert zurück
      * 1= Kraft
      * 2= Kardio
-     * @return
+     * @return typ der station
      */
     public int getStationtyp() {
         String name = spinnerStation.getSelectedItem().toString();
@@ -141,7 +141,7 @@ public class form_training extends AppCompatActivity {
     }
     /**
      * Methode holt sich die ID des im Spinner ausgewählten Gerätes aus der Datenbank und gibt den Wert zurück
-     * @return
+     * @return gerät ID
      */
     public int getStationID() {
         String name = spinnerStation.getSelectedItem().toString();
