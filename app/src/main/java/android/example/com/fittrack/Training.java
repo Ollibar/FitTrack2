@@ -23,6 +23,9 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+/**
+ * Training Activity
+ */
 public class Training extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseHelper db = new DatabaseHelper( this );

@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+/**
+ * Adapterklasse für die Listview von Zielen
+ */
 public class StatistikListAdapter extends BaseAdapter {
 
     private Context context;
@@ -22,11 +24,20 @@ public class StatistikListAdapter extends BaseAdapter {
 
     }
 
+    /**
+     *
+     * @return gibt die Anzahl zurück
+     */
     @Override
     public int getCount() {
         return c.getCount();
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt ein leeres Objekt zurück
+     */
     @Override
     public Object getItem(int position) {
         Object o = null;
@@ -34,6 +45,11 @@ public class StatistikListAdapter extends BaseAdapter {
 
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt immer 1 zurück
+     */
     @Override
     public long getItemId(int position) {
         long test = 1;
@@ -42,6 +58,13 @@ public class StatistikListAdapter extends BaseAdapter {
 
     }
 
+    /**
+     * übergibt die daten an die Felder des ListView Items
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         DatabaseHelper db = new DatabaseHelper( context );

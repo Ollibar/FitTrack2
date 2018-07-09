@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Adabpterklasse für die GeräteListe
+ */
 public class StationListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ModelStation> stationArrayList;
@@ -23,22 +26,43 @@ public class StationListAdapter extends BaseAdapter {
         this.stationArrayList = stations;
     }
 
+    /**
+     *
+     * @return gibt die größe des ListArrays zurück
+     */
     @Override
     public int getCount() {
         return stationArrayList.size();
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt item an der übergebenen Position zurück
+     */
     @Override
     public Object getItem(int position) {
         return stationArrayList.get( position );
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt die station ID zurück
+     */
     @Override
     public long getItemId(int position) {
 
         return stationArrayList.get( position ).getStation_id();
     }
 
+    /**
+     *  übergibt die daten an die Felder des ListView Items
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

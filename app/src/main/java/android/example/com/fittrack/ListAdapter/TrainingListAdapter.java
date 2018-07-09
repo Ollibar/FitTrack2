@@ -13,7 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+/**
+ * Adapterhilfsklasse für die Verbindung zum Benutzer ListView
+ */
 public class TrainingListAdapter extends BaseAdapter {
 
     private Context context;
@@ -24,21 +26,42 @@ public class TrainingListAdapter extends BaseAdapter {
         this.trainingArrayList = stations;
     }
 
+    /**
+     *
+     * @return gibt die größe der Liste zurück
+     */
     @Override
     public int getCount() {
         return trainingArrayList.size();
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt das Objekt an der Position zurück
+     */
     @Override
     public Object getItem(int position) {
         return trainingArrayList.get( position );
     }
 
+    /**
+     *
+     * @param position
+     * @return gibt die Trainings ID an der Position zurück
+     */
     @Override
     public long getItemId(int position) {
         return trainingArrayList.get( position ).getTraining_id();
     }
 
+    /**
+     * befüllen die layout datei mit den inhalt aus dem arraylist
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         DatabaseHelper db = new DatabaseHelper( context );

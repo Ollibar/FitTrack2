@@ -19,6 +19,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+/**
+ * Activity für die Auswertungen
+ */
 public class Statistik extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Spinner spinnerBenutzer;
@@ -63,6 +66,9 @@ public class Statistik extends AppCompatActivity
 
     }
 
+    /**
+     * holt die Daten für den SPinner aus der Datenbank
+     */
     private void getUserSpinner() {
         db = new DatabaseHelper( this );
         spinnerBenutzer = (Spinner) findViewById( R.id.spinnerStatisticUser );
@@ -85,6 +91,10 @@ public class Statistik extends AppCompatActivity
         }
     }
 
+    /**
+     * Methode zum erstellen der Trainingsliste
+     * ( wird nach dem gewählten benutzer gefiltert
+     */
     private void erzeugeTrainingListe() {
         String username = spinnerBenutzer.getSelectedItem().toString();
         ModelBenutzer benutzer = db.getBenutzer( username );

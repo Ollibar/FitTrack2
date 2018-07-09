@@ -73,10 +73,11 @@ public class form_training extends AppCompatActivity {
         } );
 
         i = getIntent();
-        // wenn aufruf über die Liste
+        // wenn aufruf über Navigation
         if (i.getLongExtra( "ID", -1 ) == -1) {
             Date strDate = Calendar.getInstance().getTime();
             datum.setText( dateFormat.format( strDate ) );
+         // wenn aufruf über ListView
         } else {
             long trainingID = i.getLongExtra( "ID", -1 );
             if (trainingID != -1) {
@@ -88,9 +89,11 @@ public class form_training extends AppCompatActivity {
 
 
                 beschreibung.setText( training.getTraining_beschreibung() );
+                //wenn stationstyp == 1 ( Kraft)
                 if (getStationtyp() == 1) {
                     wiederholung.setText( String.valueOf( training.getTraining_wiederholung() ) );
                     gewicht.setText( String.valueOf( training.getTraining_gewicht() ) );
+                    //wenn stationstyp == 2 ( Kardio)
                 } else if (getStationtyp() == 2) {
                     dauer.setText( String.valueOf( training.getTraining_dauer() ) );
                     geschwindigkeit.setText( String.valueOf( training.getTraining_geschwindigkeit() ) );
@@ -100,11 +103,13 @@ public class form_training extends AppCompatActivity {
         }
     }
 
+    /**
+     * Ruft die Daten (Namen) für die Spinner Benutzer und Geräte aus der Datenbank ab
+     */
     private void setSpinner() {
         // erzeugt Listen für die Spinner
         spinnerBenutzer = (Spinner) findViewById( R.id.spinner_user );
 
-        // DatabaseHelper db = new DatabaseHelper( this );
         String[] spinnerBenutzerArray = db.getAllBenutzerNamen();
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>
                 ( this, android.R.layout.simple_spinner_item, spinnerBenutzerArray );
@@ -121,6 +126,12 @@ public class form_training extends AppCompatActivity {
 
     }
 
+    /**
+     * Methode holt sich den Typen des im Spinner ausgewählten Gerätes aus der Datenbank und gibt den Wert zurück
+     * 1= Kraft
+     * 2= Kardio
+     * @return
+     */
     public int getStationtyp() {
         String name = spinnerStation.getSelectedItem().toString();
         ModelStation station = (ModelStation) db.getStation( name );
@@ -128,7 +139,10 @@ public class form_training extends AppCompatActivity {
 
         return stationtyp;
     }
-
+    /**
+     * Methode holt sich die ID des im Spinner ausgewählten Gerätes aus der Datenbank und gibt den Wert zurück
+     * @return
+     */
     public int getStationID() {
         String name = spinnerStation.getSelectedItem().toString();
         ModelStation station = (ModelStation) db.getStation( name );
@@ -137,7 +151,12 @@ public class form_training extends AppCompatActivity {
         return stationID;
     }
 
-
+    /**
+     * Methode wird per Knopfdruck aufgerufen.
+     * Es werden die Formularfelder in einem ModelTraining Objekt gespeichert und dann an den DatenbankHelper übergeben, um ein neues Training zu speichern.
+     * Danach wird die Training Klasse Aufgerufen
+     * @param view
+     */
     public void speicherTraining(View view) {
 
         training = new ModelTraining();
@@ -165,6 +184,12 @@ public class form_training extends AppCompatActivity {
 
     }
 
+    /**
+     * Methode um ein bestehendes Training in der Datenbank zu updaten.
+     * Es werden die Formularfelder in einem ModelTraining Objekt gespeichert und dann an den DatenbankHelper übergeben.
+     * Danach wird die Training Klasse Aufgerufen
+     * @param view
+     */
     public void aktualisiereTraining(View view) {
         training = new ModelTraining();
         training.setTraining_beschreibung( beschreibung.getText().toString() );

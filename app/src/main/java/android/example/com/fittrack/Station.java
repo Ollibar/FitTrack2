@@ -20,6 +20,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ *Activity Klasse für Stationen
+ */
 public class Station extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DatabaseHelper db = new DatabaseHelper( this );
@@ -52,6 +55,9 @@ public class Station extends AppCompatActivity
         erzeugeStationListe();
     }
 
+    /**
+     * Ruft alle Geräte aus der Datenbank ab und übergibt SIe mit Hilfe des ListAdapters an den ListView.
+     */
     private void erzeugeStationListe() {
         ArrayList<ModelStation> stationList = db.getAllStation();
         lv = findViewById( R.id.stationlist );
@@ -66,11 +72,17 @@ public class Station extends AppCompatActivity
         } );
     }
 
+    /**
+     * Ruft die Klasse FormStation auf, um ein neues GErät anzulegen
+     */
     private void openStationForm() {
         Intent i = new Intent( this, form_station.class );
         startActivity( i );
     }
-
+    /**
+     * Ruft die Klasse FormStation auf, um ein neues GErät anzulegen
+     * hinterlegt im intent die Geräte ID
+     */
     private void openStationForm(long id) {
         Intent i = new Intent( this, form_station.class );
         i.putExtra( "stationID", id );
@@ -132,13 +144,5 @@ public class Station extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
-    }
-
-    public void insertNewStation(View view) {
-        Intent i = new Intent( this, form_station.class );
-        startActivity( i );
-    }
-
-    public void erzeugeTestStation(View view) {
     }
 }

@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Activity für das Speichern und Updaten von Geräten
+ */
 public class form_station extends AppCompatActivity {
     DatabaseHelper db = new DatabaseHelper( this );
     EditText edTName;
@@ -27,7 +30,7 @@ public class form_station extends AppCompatActivity {
         statName = edTName.getText().toString();
         spTyp = (Spinner) findViewById( R.id.stationspinner );
         i = getIntent();
-
+        // Wenn Activity über ListView aufgerufen wurde
         if (i.getLongExtra( "stationID", -1 ) != -1) {
             ModelStation station = new ModelStation();
             station = db.getStation( i.getLongExtra( "stationID", -1 ) );
@@ -36,6 +39,10 @@ public class form_station extends AppCompatActivity {
         }
     }
 
+    /**
+     * Methode zum Speichern einer Station
+     * @param view
+     */
     public void speicherStation(View view) {
 
         int spinner_pos = spTyp.getSelectedItemPosition();
@@ -53,6 +60,10 @@ public class form_station extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Methode zum aktualisieren einer Station
+     * @param view
+     */
     public void aktualisiereStation(View view) {
         if (i.getLongExtra( "stationID", -1 ) != -1) {
             station = db.getStation( i.getLongExtra( "stationID", -1 ) );

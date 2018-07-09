@@ -250,7 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @return anzahl der benutzer in der app
+     * @return Anzahl der benutzer in der app
      */
 
     public int getBenutzerCount() {
@@ -264,6 +264,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// Methoden für die Tabelle training
 
+    /**
+     * übernimmt die Daten aus dem ModelTraining und speichert sie als neuen EIntrag in der Datenbank
+     * @param training
+     * @return ob die aktion erfolgreich war
+     */
     public long createTraining(ModelTraining training) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -280,6 +285,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insertOrThrow( "training", null, values );
     }
 
+    /**
+     * übernimmt die Daten aus dem Model Training um die Daten in der DB zu aktualisieren
+     * @param training
+     * @return
+     */
     public int updateTraining(ModelTraining training) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -296,16 +306,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update( "training", values, "training_id = ?", new String[]{String.valueOf( training.getTraining_id() )} );
     }
 
+    /**
+     * Methode zum Löschen eines Trainings aus der Datenbank
+     * @param training
+     * @return
+     */
     public int deleteTraining(ModelTraining training) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete( "training", "training_id = ?", new String[]{String.valueOf( training.getTraining_id() )} );
     }
 
+    /**
+     * Methode zum Löschen eines Trainings aus der Datenbank anhand der ID
+     * @param trainingID
+     */
     public void deleteTrainingbyID(long trainingID) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete( "training", "training_id = " + trainingID + ";", null );
     }
 
+    /**
+     * Methode übergibt Daten aus dem Cursor an das ModelTraining Objekt und gibt es zurück
+     * @param c
+     * @return
+     */
 	protected ModelTraining getModelTrainingFromCursor(Cursor c){
 		ModelTraining training = new ModelTraining();
 		training.setTraining_id(c.getInt(c.getColumnIndex("training_id")));
@@ -320,6 +344,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		training.setTraining_gewicht( c.getInt(c.getColumnIndex( "training_gewicht" )) );
 		return training;
 	}
+
+    /**
+     * Ruft ein Training anhand der ID aus der DAtenbank ab
+     * @param id
+     * @return
+     */
 	public ModelTraining getTraining(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM training Where training_id =  ?";
@@ -348,6 +378,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
     */
+
+    /**
+     * Ruft Trainingsdaten zur AUswertung aus der DB, gefiltert nach dem Benutzer
+     * @param benutzerId
+     * @return
+     */
 	public Cursor getPumperStats(long benutzerId){
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -357,6 +393,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    /**
+     * Methode um alle Trainingsdaten aus der DB abzurufen.
+     * Es wird eine Arrayliste mit ModelTraining- Objekten übergeben
+     * @return
+     */
     public ArrayList<ModelTraining> getAllTraining() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<ModelTraining> trainingList = new ArrayList<ModelTraining>();
@@ -370,7 +411,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return trainingList;
     }
-
+    /**
+     * Methode um alle Trainingsdaten eines Nutzers aus der DB abzurufen.
+     * Es wird eine Arrayliste mit ModelTraining-Objekten übergeben
+     * @return
+     */
     public ArrayList<ModelTraining> getTrainingByUserID(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<ModelTraining> trainingList = new ArrayList<ModelTraining>();
@@ -385,6 +430,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return trainingList;
     }
 
+    /**
+     * Methode zählt alle gespeicherten Trainings
+     * @return
+     */
     public int getTrainingCount() {
         String countQuery = "SELECT * FROM training";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -396,6 +445,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Methoden für die Tabelle station
 
+    /**
+     * Methode zum erstellen eines Gerätes
+     * @param station Model_objekt, das übergeben wird
+     * @return ob der Insert erfolgreich war
+     */
     public long createStation(ModelStation station) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -404,6 +458,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insertOrThrow( "station", null, values );
     }
 
+    /**
+     * Methode um ein Gerät zu updaten
+     * @param station
+     * @return
+     */
     public int updateStation(ModelStation station) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -413,16 +472,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update( "station", values, "station_id = ?", new String[]{String.valueOf( station.getStation_id() )} );
     }
 
+    /**
+     * Methode um ein GErät zu löschen
+     * @param station
+     * @return
+     */
     public int deleteStation(ModelStation station) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete( "station", "station_id = ?", new String[]{String.valueOf( station.getStation_id() )} );
     }
 
+    /**
+     * Methode um ein Gerät anhand seiner ID zu löschen
+     * @param id
+     */
     public void deleteStationbyID(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete( "station", "station_id = " + id + ";", null );
     }
 
+    /**
+     * Übergibt Daten aus dem Cursor an ein StationModel-Objekt
+     * @param c
+     * @return
+     */
     protected ModelStation getModelStationFromCursor(Cursor c) {
         ModelStation station = new ModelStation();
         station.setStation_id( c.getInt( c.getColumnIndex( "station_id" ) ) );
@@ -431,6 +504,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return station;
     }
 
+    /**
+     * Holt die Daten einer Station anhand der ID aus der Datenbak ab und übergibt sie an ein StationModel-Objekt.
+     * @param id
+     * @return
+     */
     public ModelStation getStation(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM station Where station_id =  ?";
@@ -439,6 +517,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return getModelStationFromCursor( c );
     }
 
+    /**
+     * Holt die Daten einer Station anhand Ihres Namens aus der Datenbank und übergibt sie an ein StationModel-Objekt.
+     * @param name
+     * @return
+     */
     public ModelStation getStation(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM station Where station_name =\"" + name + "\";";
@@ -447,6 +530,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return getModelStationFromCursor( c );
     }
 
+    /**
+     * Holt alle Geräte aus der Datenbank und übergibt die Objekte in eine ArrayList
+     * @return
+     */
     public ArrayList<ModelStation> getAllStation() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<ModelStation> stationList = new ArrayList<ModelStation>();
@@ -461,6 +548,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stationList;
     }
 
+    /**
+     * holt alle Gerätenamen und übergibt diese in einem Array
+     * @return
+     */
     public String[] getAllStationNamen() {
 
         ArrayList<ModelStation> stationAL = getAllStation();
@@ -474,6 +565,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stringarray;
     }
 
+    /**
+     * zählt alle Stationen in der Datenbank und gibt den Wert zurück
+     * @return
+     */
     public int getStationCount() {
         String countQuery = "SELECT * FROM station";
         SQLiteDatabase db = this.getReadableDatabase();
